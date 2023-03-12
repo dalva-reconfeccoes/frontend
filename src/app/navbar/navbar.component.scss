@@ -1,0 +1,98 @@
+
+:host {
+    ::ng-deep .p-toolbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        background-color: #ff86867a;
+        color: white;
+        font-weight: 600;
+    }
+}
+
+:host {
+    ::ng-deep .p-toolbar img {
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+        // right: 0;
+        // margin-left: 3%;
+        // margin-top: 15px;
+        background-color: white;
+        border-radius: 50%;
+
+    }
+}
+:host {
+    ::ng-deep .navbar{
+        background-color: #ff86867a;
+    }
+}
+
+:host {
+    ::ng-deep .navbar-collapse .navbar-nav>.nav-item>.nav-link{
+        margin: 10px;
+        color: red;
+
+    }
+    
+}
+
+
+
+:host {
+    ::ng-deep .navbar-collapse ul{
+        height: 100%;
+   
+    }
+    
+}
+
+
+
+:host {
+    ::ng-deep .navbar-collapse::after{
+        background-color: #ff86867a;
+        margin-left: 1%;
+        // width: 1200px;
+        
+    }
+}
+
+
+
+
+.navbar-logo{
+    max-width: 85px;
+    background-color: white;
+    border-radius: 50%;
+    width: 100%;
+    
+}
+
+
+.navbar-item-click{
+    cursor: pointer;
+    text-align: center;
+}
+
+.navbar-item-li{
+    //margin-left: 3%;
+    opacity: 0.4;
+}
+
+.navbar-item-li:hover{
+    opacity: 1;
+}
+
+.navbar-item-media{
+    opacity: 0.4;
+}
+
+.navbar-item-media:hover{
+    opacity: 1;
+}

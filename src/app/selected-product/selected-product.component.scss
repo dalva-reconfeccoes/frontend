@@ -1,0 +1,55 @@
+:host ::ng-deep {
+	.p-galleria-thumbnail-item{
+		height: 5rem;
+		overflow: hidden;
+	}
+	.p-image-preview-container>img {
+		height: 100%;
+	}
+	.p-galleria .p-galleria-item-nav .p-galleria-item-prev-icon, .p-galleria .p-galleria-item-nav .p-galleria-item-next-icon{
+		color: #ff86867a;
+	}
+
+
+	.p-galleria .p-galleria-thumbnail-container{
+		background: none
+	}
+	.p-galleria-thumbnail-prev span, .p-galleria-thumbnail-next span{
+		color: #ff86867a
+	}
+	.p-link:focus{
+		outline: none;
+		box-shadow: 0 0 0 0.2rem #ff86867a;
+	}
+	@media (max-width: 768px) {
+		.p-buttonset .p-button:not(:first-of-type):not(:last-of-type) {
+			font-size: 8px
+		}
+		.p-buttonset .p-button:first-of-type{
+			font-size: 8px
+		}
+		.p-buttonset .p-button:last-of-type{
+			font-size: 8px
+		}
+		
+	}
+
+	@media (max-width: 1200px) {
+		.p-buttonset .p-button:not(:first-of-type):not(:last-of-type) {
+			font-size: 9px
+		}
+		.p-buttonset .p-button:first-of-type{
+			font-size: 9px
+		}
+		.p-buttonset .p-button:last-of-type{
+			font-size: 9px
+		}
+		
+	}
+
+	
+}
+
+
+
+  
