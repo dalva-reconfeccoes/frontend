@@ -14,6 +14,7 @@ export class SelectedProductComponent {
   cep: string
   loadingCep: boolean = false
   isValidCep: boolean = false
+  selectedFreight: any
   quantitySelected: number = 1
   responsiveOptions: any[] = [
     {
@@ -38,6 +39,15 @@ export class SelectedProductComponent {
     {name: 'GG', code: 5},
     {name: 'XGG', code: 6}
   ];
+
+  freightOptions: any[] = [
+    {name: 'SEDEX', value: 32.11, deliveryTime: "3", arrivalDay: "17/03" },
+    {name: 'PAC', value: 21.34, deliveryTime: "6", arrivalDay: "20/03"}
+  ];
+
+  displayDialog: boolean=false
+
+
   constructor(private messageService: MessageService, private router: Router) {}
 
   ngOnInit() {
@@ -74,20 +84,40 @@ export class SelectedProductComponent {
     this.loadingCep = true
     
     var re = /^([\d]{2})\.*([\d]{3})-*([\d]{3})/; // Pode usar ? no lugar do *
-    
+    console.log(re.test(this.cep))
     if(re.test(this.cep)){
       console.log("CEP VALIDO", this.cep)
-      var clientCep = this.cep.replace(re,"$1$2$3");
+      var clientCep = this.cep.replace(re,"$1$2$3")
       this.isValidCep = true
       console.log(clientCep)
     }else{
       console.log("CEP inválido!", this.cep);
-    
+      this.messageService.add({severity:'error', summary:'CEP', detail:'Cep inválido!'})
     }
-    this.messageService.add({severity:'error', summary:'CEP', detail:'Cep inválido!'});
-    
     setTimeout(() => this.loadingCep = false, 1000);
-    
   }
   
+  buyProduct(){
+    if(this.validateSelection()){
+      this.displayDialog=true
+    }
+    console.log(this.selectedSize)
+    console.log(this.cep)
+    console.log(this.selectedFreight)
+    console.log(this.quantitySelected)
+  }
+
+  validateSelection(){
+    var isValid = true
+    if(!this.selectedSize){
+      this.showMessage("error", "Tamanho não informado","Selecione um tamanho pra continuar.")
+      isValid = false 
+    }
+    return isValid
+  }
+
+  showMessage(type: string, summary: string, detail: string){
+    this.messageService.add({severity:type, summary:summary, detail:detail})
+  }
+
 }

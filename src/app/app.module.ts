@@ -33,6 +33,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {InputMaskModule} from 'primeng/inputmask';
 import {ToastModule} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import {TableModule} from 'primeng/table';
+import {DialogModule} from 'primeng/dialog';
+
 
 
 @NgModule({
@@ -70,7 +73,9 @@ import { MessageService } from 'primeng/api';
     InputNumberModule,
     InputMaskModule,
     ToastModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule,
+    DialogModule
     
   ],
   providers: [MessageService],
