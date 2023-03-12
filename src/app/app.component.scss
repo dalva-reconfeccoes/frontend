@@ -1,84 +1,73 @@
 :host ::ng-deep {
     // BUTTONS
-    .p-button{
+    .p-button {
         background: #ff86867a;
         border: 1px solid #ff86867a;
     }
-    
-    .p-button:focus{
-		box-shadow:0 0 0 2px #fff, 0 0 0 4px #ff7171c5, 0 1px 2px #000
-	}
-	
-    .p-button:hover{
+
+    .p-button:focus {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff7171c5, 0 1px 2px #000;
+    }
+
+    .p-button:hover {
         background: #ff71712d;
         border: 1px solid #ff86867a;
         color: #ff86867a;
     }
-    .p-button.p-highlight{
+    .p-button.p-highlight {
         background: #ff7171c5;
         border: 1px solid #ff86867a;
-        color: white;    
+        color: white;
     }
-    
-    .p-button.p-highlight:hover{
+
+    .p-button.p-highlight:hover {
         background: #ff71712d;
         border: 1px solid #ff86867a;
-        color: #ff86867a;    
+        color: #ff86867a;
     }
 
     // INPUTS
     .p-inputnumber-buttons-vertical {
-		width: 4rem;
-	}
-	.p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-up {
-		background:#ff86867a;
-		border-color: #ff86867a;
-	}
-    
-    .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-up:hover{
+        width: 4rem;
+    }
+    .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-up {
+        background: #ff86867a;
+        border-color: #ff86867a;
+    }
+
+    .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-up:hover {
         border: 1px solid #ff86867a;
         background: #ff71712d;
         color: #ff86867a;
     }
 
-	.p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-down {
-		background:#ff86867a;
-		border-color: #ff86867a;
-	}
+    .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-down {
+        background: #ff86867a;
+        border-color: #ff86867a;
+    }
 
     .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-down:hover {
-		border: 1px solid #ff86867a;
+        border: 1px solid #ff86867a;
         background: #ff71712d;
         color: #ff86867a;
-	}
-    
-    .p-inputtext:enabled:focus{
-		border-color: #ff86867a;
-		box-shadow: 0 0 0 0.1rem #ff7171c5;
+    }
 
-	}
-	.p-inputtext:enabled:hover {
-		border-color: #ff86867a;
-
-	}
+    .p-inputtext:enabled:focus {
+        border-color: #ff86867a;
+        box-shadow: 0 0 0 0.1rem #ff7171c5;
+    }
+    .p-inputtext:enabled:hover {
+        border-color: #ff86867a;
+    }
 
     // SELECT BUTTONS
-    .p-selectbutton{
-		color:#ff86867a;
-		// border-color: #ff86867a;
-	}
-    .p-selectbutton .p-button:not(.p-disabled):not(.p-highlight):hover{
-		background: #ff71712d;
+    .p-selectbutton {
+        color: #ff86867a;
+        // border-color: #ff86867a;
+    }
+    .p-selectbutton .p-button:not(.p-disabled):not(.p-highlight):hover {
+        background: #ff71712d;
         border: 1px solid #ff86867a;
         color: black;
-	}
-    
-	
+    }
 }
-
-
-
-
-
-
-

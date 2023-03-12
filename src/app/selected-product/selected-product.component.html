@@ -1,109 +1,138 @@
 <p-toast position="top-right"></p-toast>
-    
-<div fxLayout="row" 
-    fxLayout.sm="column" 
-    fxLayout.xs="column" 
-    fxLayoutGap="3%"  
-    style="padding: 3%;">
-    <div  
-        fxFlex="50%" 
-        fxFlex.md="70%" 
-        fxFlex.sm="100%" 
-        fxFlex.xs="70%" >
-        <p-galleria [(value)]="product.images" 
-                    [responsiveOptions]="responsiveOptions" 
-                    [numVisible]="5"
-                    [circular]="true" 
-                    [showItemNavigators]="true" 
-                    [showItemNavigatorsOnHover]="true">
 
-
+<div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutGap="3%"
+    style="padding: 3%"
+>
+    <div fxFlex="50%" fxFlex.md="70%" fxFlex.sm="100%" fxFlex.xs="70%">
+        <p-galleria
+            [(value)]="product.images"
+            [responsiveOptions]="responsiveOptions"
+            [numVisible]="5"
+            [circular]="true"
+            [showItemNavigators]="true"
+            [showItemNavigatorsOnHover]="true"
+        >
             <ng-template pTemplate="item" let-item>
-                <div fxFlex="80%" fxFlex.md="70%" fxFlex.sm="80%" fxFlex.xs="60%"  
-                     fxLayoutAlign="space-around center">
-                    <p-image src="../../assets/layout/products/{{item}}" 
-                             alt="{{product.name}}" width="100%" height="50%" [preview]="true">
+                <div
+                    fxFlex="80%"
+                    fxFlex.md="70%"
+                    fxFlex.sm="80%"
+                    fxFlex.xs="60%"
+                    fxLayoutAlign="space-around center"
+                >
+                    <p-image
+                        src="../../assets/layout/products/{{ item }}"
+                        alt="{{ product.name }}"
+                        width="100%"
+                        height="50%"
+                        [preview]="true"
+                    >
                     </p-image>
                 </div>
-            </ng-template> 
+            </ng-template>
             <ng-template pTemplate="thumbnail" let-item>
-                <div fxFlex="60%" fxFlex.sm="60%" fxFlex.xs="60%" class="grid grid-nogutter justify-content-center">
-                    <p-image src="../../assets/layout/products/{{item}}" 
-                            alt="{{product.name}}" width="100%">
+                <div
+                    fxFlex="60%"
+                    fxFlex.sm="60%"
+                    fxFlex.xs="60%"
+                    class="grid grid-nogutter justify-content-center"
+                >
+                    <p-image
+                        src="../../assets/layout/products/{{ item }}"
+                        alt="{{ product.name }}"
+                        width="100%"
+                    >
                     </p-image>
                 </div>
             </ng-template>
         </p-galleria>
     </div>
-    <div fxFlex="25%" 
+    <div
+        fxFlex="25%"
         fxFlex.md="40%"
         fxFlex.xs="80%"
-        fxLayout="column" 
+        fxLayout="column"
         fxLayoutGap="3%"
         fxLayoutGap.xs="5%"
         fxLayoutGap.sm="5%"
         class="card"
-        style=" height: 100%;" >
-        <div fxFlex="15%"  class="container" fxLayoutAlign="center">
-            <h3>{{product.description}}</h3>
-        </div>  
+        style="height: 100%"
+    >
+        <div fxFlex="15%" class="container" fxLayoutAlign="center">
+            <h3>{{ product.description }}</h3>
+        </div>
         <div fxFlex="10%" fxFlex.xs="80%" fxLayoutAlign="space-around center">
-            <p-selectButton [options]="sizes" 
-                            [(ngModel)]="selectedSize"
-                            optionLabel="name">
+            <p-selectButton
+                [options]="sizes"
+                [(ngModel)]="selectedSize"
+                optionLabel="name"
+            >
             </p-selectButton>
-            
-        </div>   
+        </div>
         <div fxFlex="35%" fxLayout="row" fxLayoutAlign="space-around center">
             <div fxLayout="column">
                 <div fxLayoutAlign="center">
                     <span>Total disponivel</span>
                 </div>
                 <div>
-                    <p-knob [(ngModel)]="product.quantity" valueColor="#ff8686" disabled="true"></p-knob>
+                    <p-knob
+                        [(ngModel)]="product.quantity"
+                        valueColor="#ff8686"
+                        disabled="true"
+                    ></p-knob>
                 </div>
             </div>
             <div>
-                <p-inputNumber [(ngModel)]="quantitySelected" 
-                               [min]="1" [max]="product.quantity"
-                               [showButtons]="true" 
-                               buttonLayout="vertical" 
-                               spinnerMode="vertical" 
-                               inputId="vertical" 
-                               incrementButtonIcon="pi pi-plus" 
-                               decrementButtonIcon="pi pi-minus">
+                <p-inputNumber
+                    [(ngModel)]="quantitySelected"
+                    [min]="1"
+                    [max]="product.quantity"
+                    [showButtons]="true"
+                    buttonLayout="vertical"
+                    spinnerMode="vertical"
+                    inputId="vertical"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                >
                 </p-inputNumber>
             </div>
-        </div>   
-        <div fxFlex="20%"
-            fxLayout="column" 
-            style="padding: 1rem;">
-            <div fxLayoutAlign="center center" 
-                fxLayoutGap="3%"
-                fxLayout="row">
+        </div>
+        <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
+            <div fxLayoutAlign="center center" fxLayoutGap="3%" fxLayout="row">
                 <div>
                     <span>CEP</span>
                 </div>
                 <div>
-                    <p-inputMask mask="99999-999" 
-                                [(ngModel)]="cep" 
-                                placeholder="00000-000"></p-inputMask>
+                    <p-inputMask
+                        mask="99999-999"
+                        [(ngModel)]="cep"
+                        placeholder="00000-000"
+                    ></p-inputMask>
                 </div>
                 <div>
-                    <p-button icon="pi pi-search" 
-                    [loading]="loadingCep" 
-                    (onClick)="calculateFreight()"></p-button>
+                    <p-button
+                        icon="pi pi-search"
+                        [loading]="loadingCep"
+                        (onClick)="calculateFreight()"
+                    ></p-button>
                 </div>
             </div>
             <div>
-                <div *ngIf="isValidCep" 
-                    class="card" 
-                    style="margin-top: 9%; padding: 3%;">
-                    
-                    <p-table [value]="freightOptions"
-                        [(selection)]="selectedFreight" 
+                <div
+                    *ngIf="isValidCep"
+                    class="card"
+                    style="margin-top: 9%; padding: 3%"
+                >
+                    <p-table
+                        [value]="freightOptions"
+                        [(selection)]="selectedFreight"
                         selectionMode="single"
-                        [tableStyle]="{'font-size': '72%'}">
+                        [tableStyle]="{ 'font-size': '72%' }"
+                    >
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Opções</th>
@@ -114,64 +143,94 @@
                         <ng-template pTemplate="body" let-option>
                             <tr [pSelectableRow]="option">
                                 <td>{{ option.name }}</td>
-                                <td>Chegará em {{ option.deliveryTime }} dias, {{ option.arrivalDay }}</td>
-                                <td>{{ option.value | currency: 'R$' }}</td>
+                                <td>
+                                    Chegará em {{ option.deliveryTime }} dias,
+                                    {{ option.arrivalDay }}
+                                </td>
+                                <td>{{ option.value | currency : "R$" }}</td>
                             </tr>
                         </ng-template>
                     </p-table>
                 </div>
             </div>
-        </div> 
-        <div fxFlex="20%"
-        fxLayout="column" 
-        style="padding: 1rem;">
+        </div>
+        <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
             <div fxLayoutAlign="center">
-                <p-button (onClick)="buyProduct()" icon="pi pi-cart-plus"  label="Comprar"></p-button>
+                <p-button
+                    (onClick)="buyProduct()"
+                    icon="pi pi-cart-plus"
+                    label="Comprar"
+                ></p-button>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 
-<div class="card container" style="margin-top: 8%;">
+<div class="card container" style="margin-top: 8%">
     <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="2%">
         <div>
             <h5>CARACTERÍSTICAS</h5>
-            <p>Cor: {{product.color}}</p>
-            <p>Tecido: {{product.knitted}}</p>
+            <p>Cor: {{ product.color }}</p>
+            <p>Tecido: {{ product.knitted }}</p>
         </div>
         <div>
             <h5>DESCRIÇÃO</h5>
             <p>
-                Produto de alta qualidade, macia ao toque e 
-                resistente ao uso diário. A cor preta é elegante e versátil, 
-                combinando com diferentes estilos e ocasiões. Além disso, sua 
-                modelagem clássica garante um caimento perfeito no corpo.
+                Produto de alta qualidade, macia ao toque e resistente ao uso
+                diário. A cor preta é elegante e versátil, combinando com
+                diferentes estilos e ocasiões. Além disso, sua modelagem
+                clássica garante um caimento perfeito no corpo.
             </p>
         </div>
         <div>
-            <p-image src="../../assets/layout/products/tabela-dimencoes.jpg" 
-                    alt="Dimenções do produto" width="100%" [preview]="true">
+            <p-image
+                src="../../assets/layout/products/tabela-dimencoes.jpg"
+                alt="Dimenções do produto"
+                width="100%"
+                [preview]="true"
+            >
             </p-image>
         </div>
     </div>
 </div>
 
-<p-dialog [(visible)]="displayDialog" 
-    [breakpoints]="{'960px': '75vw'}" 
-    [style]="{width: '50vw'}"
-    [draggable]="false" [resizable]="false">
+<p-dialog
+    [(visible)]="displayDialog"
+    [breakpoints]="{ '960px': '85vw' }"
+    [style]="{ width: '35vw' }"
+    [draggable]="false"
+    [resizable]="false"
+>
     <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="3%">
-        <div>
+        <div fxLayout="row" fxLayoutAlign="center center">
             <p>Continuar comprando ou ir para o carrinho?</p>
         </div>
-        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="3%" fxFlex="20%">
+        <div
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            fxLayoutGap="3%"
+            fxFlex="20%"
+        >
             <div>
-                <button pButton type="button" label="Continuar" icon="pi pi-plus-circle" class="p-button-sm"></button>
+                <button
+                    pButton
+                    type="button"
+                    label="Continuar"
+                    icon="pi pi-plus-circle"
+                    class="p-button-sm"
+                    (click)="navigateToProducts()"
+                ></button>
             </div>
             <div>
-                <button pButton type="button" label="Carrinho" icon="pi pi-shopping-cart" class="p-button-sm"></button>
+                <button
+                    pButton
+                    type="button"
+                    label="Carrinho"
+                    icon="pi pi-shopping-cart"
+                    class="p-button-sm"
+                    (click)="navigateToCart()"
+                ></button>
             </div>
         </div>
     </div>
-        
 </p-dialog>
