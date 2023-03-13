@@ -97,6 +97,8 @@
                     inputId="vertical"
                     incrementButtonIcon="pi pi-plus"
                     decrementButtonIcon="pi pi-minus"
+                    (onInput)="calculatePrice()"
+                    (onBlur)="calculatePrice()"
                 >
                 </p-inputNumber>
             </div>
@@ -131,6 +133,7 @@
                         [value]="freightOptions"
                         [(selection)]="selectedFreight"
                         selectionMode="single"
+                        (onRowSelect)="calculatePrice()"
                         [tableStyle]="{ 'font-size': '72%' }"
                     >
                         <ng-template pTemplate="header">
@@ -154,7 +157,38 @@
                 </div>
             </div>
         </div>
-        <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
+        <div
+            fxFlex="20%"
+            fxLayout="column"
+            style="padding: 1rem"
+            fxLayoutGap="3%"
+        >
+            <div
+                fxLayout="column"
+                fxLayoutAlign="space-between left"
+                fxLayoutGap="2%"
+            >
+                <div *ngIf="selectedSize">
+                    <p>
+                        Item:
+                        {{ quantitySelected }}
+                        {{ selectedSize.name }} x
+                        {{ product.price | currency : "R$ " }}
+                    </p>
+                </div>
+                <div *ngIf="selectedFreight">
+                    <p>
+                        Entrega:
+                        {{ selectedFreight.name }}
+                        {{ selectedFreight.value | currency : "R$ " }},
+                        {{ selectedFreight.deliveryTime }} dias,
+                        {{ selectedFreight.arrivalDay }}
+                    </p>
+                </div>
+                <div>
+                    <p>Total: {{ totalValue | currency : "R$ " }}</p>
+                </div>
+            </div>
             <div fxLayoutAlign="center">
                 <p-button
                     (onClick)="buyProduct()"

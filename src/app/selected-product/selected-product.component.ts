@@ -47,6 +47,7 @@ export class SelectedProductComponent {
 
     displayDialog: boolean = false;
     budget: any;
+    totalValue: number;
 
     constructor(
         private messageService: MessageService,
@@ -59,7 +60,7 @@ export class SelectedProductComponent {
             name: 'tst6',
             description: 'Camiseta Comum Preta',
             color: 'Preto',
-            price: 121,
+            price: 42.42,
             images: [
                 'preto/camiseta-preta-frente-masc.png',
                 'preto/camiseta-preta-costas-masc.png',
@@ -75,6 +76,7 @@ export class SelectedProductComponent {
             sex: 'M',
             inventoryStatus: 'DISPONIVEL',
         };
+        this.calculatePrice();
     }
 
     onClick(event) {
@@ -99,6 +101,13 @@ export class SelectedProductComponent {
         }
         setTimeout(() => (this.loadingCep = false), 1000);
     }
+    calculatePrice() {
+        this.totalValue = this.product.price * this.quantitySelected;
+        if (this.selectedFreight) {
+            this.totalValue += this.selectedFreight.value;
+        }
+        console.log(this.totalValue);
+    }
 
     buyProduct() {
         if (this.validateSelection()) {
@@ -108,6 +117,7 @@ export class SelectedProductComponent {
                 cep: this.cep,
                 selectedFreight: this.selectedFreight,
                 quantitySelected: this.quantitySelected,
+                value: this.totalValue,
             };
             this.displayDialog = true;
         }
@@ -140,7 +150,7 @@ export class SelectedProductComponent {
 
     setProductLocalStorage() {
         var cart: Array<any> = JSON.parse(localStorage.getItem('cart'));
-        console.log(cart);
+        console.log(this.budget);
         if (!cart) {
             localStorage.setItem('cart', JSON.stringify([this.budget]));
             return;
