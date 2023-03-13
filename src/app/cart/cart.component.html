@@ -1,18 +1,70 @@
-<p-table [value]="cart">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Produto</th>
-            <th>Tamanho</th>
-            <th>Quantidade</th>
-            <th>Valor</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-item>
-        <tr>
-            <td>{{ item.product }}</td>
-            <td>{{ item.selectedSize.name }}</td>
-            <td>{{ item.quantitySelected }}</td>
-            <td>{{ item.value }}</td>
-        </tr>
-    </ng-template>
-</p-table>
+<div
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutGap="3%"
+    style="padding: 3%"
+>
+    <div fxFlex="50%" fxFlex.md="70%" fxFlex.sm="100%" fxFlex.xs="70%">
+        <p-table [value]="cart">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                    <th>Produto</th>
+                    <th>Tamanho</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>
+                        <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                    </td>
+                    <td>
+                        <p-image
+                            src="../../assets/layout/products/{{
+                                getImageProduct(item.product)
+                            }}"
+                            alt="{{ item.product.name }}"
+                            width="100%"
+                            height="25%"
+                            [preview]="true"
+                        >
+                        </p-image>
+                    </td>
+                    <td>{{ item.selectedSize.name }}</td>
+                    <td>{{ item.quantitySelected }}</td>
+                    <td>{{ item.value }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div
+        fxFlex="25%"
+        fxFlex.md="40%"
+        fxFlex.xs="80%"
+        fxLayout="column"
+        fxLayoutGap="3%"
+        fxLayoutGap.xs="5%"
+        fxLayoutGap.sm="5%"
+        class="card"
+        style="height: 100%"
+    >
+        <div>
+            <h3>Resumo:</h3>
+        </div>
+        <div *ngIf="selectedFreight">
+            <p>
+                Entrega:
+                {{ selectedFreight.name }}
+                {{ selectedFreight.value | currency : "R$ " }},
+                {{ selectedFreight.deliveryTime }} dias,
+                {{ selectedFreight.arrivalDay }}
+            </p>
+        </div>
+        <div>
+            <p>Total: {{ totalValue | currency : "R$ " }}</p>
+        </div>
+    </div>
+</div>

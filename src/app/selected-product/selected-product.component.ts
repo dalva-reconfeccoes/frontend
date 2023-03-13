@@ -117,7 +117,7 @@ export class SelectedProductComponent {
                 cep: this.cep,
                 selectedFreight: this.selectedFreight,
                 quantitySelected: this.quantitySelected,
-                value: this.totalValue,
+                value: this.product.price * this.quantitySelected,
             };
             this.displayDialog = true;
         }
@@ -154,6 +154,13 @@ export class SelectedProductComponent {
         if (!cart) {
             localStorage.setItem('cart', JSON.stringify([this.budget]));
             return;
+        }
+
+        if (this.selectedFreight) {
+            localStorage.setItem(
+                'selectedFreight',
+                JSON.stringify(this.selectedFreight)
+            );
         }
         cart.push(this.budget);
         localStorage.setItem('cart', JSON.stringify(cart));
