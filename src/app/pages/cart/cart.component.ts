@@ -9,15 +9,20 @@ export class CartComponent {
     cart: Array<any>;
     selectedFreight: any;
     totalValue: number;
+    cep: string
 
     ngOnInit() {
         this.cart = JSON.parse(localStorage.getItem('cart'));
         this.selectedFreight = JSON.parse(
             localStorage.getItem('selectedFreight')
         );
-        console.log(this.cart);
+        this.cep = localStorage.getItem('cep');
         console.log(this.selectedFreight);
         this.calculateTotalValue();
+    }
+    setSelectedFreight(event){
+        this.selectedFreight = event
+        this.calculateTotalValue()
     }
 
     getImageProduct(product) {
@@ -28,9 +33,7 @@ export class CartComponent {
         this.totalValue = 0;
         for (let index = 0; index < this.cart.length; index++) {
             var element = this.cart[index];
-            console.log(element.value);
             this.totalValue += element.value;
-            console.log(this.totalValue);
         }
 
         if (this.selectedFreight) {

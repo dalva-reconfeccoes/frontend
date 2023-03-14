@@ -5,11 +5,18 @@
     fxLayoutGap="3%"
     style="padding: 3%"
 >
-    <div fxFlex="50%" fxFlex.md="70%" fxFlex.sm="100%" fxFlex.xs="70%">
+    <div
+        fxFlex="50%"
+        fxFlex.md="70%"
+        fxFlex.sm="100%"
+        fxFlex.xs="70%"
+    >
         <p-table [value]="cart">
             <ng-template pTemplate="header">
                 <tr>
-                    <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                    <th>
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
                     <th>Produto</th>
                     <th>Tamanho</th>
                     <th>Quantidade</th>
@@ -35,13 +42,13 @@
                     </td>
                     <td>{{ item.selectedSize.name }}</td>
                     <td>{{ item.quantitySelected }}</td>
-                    <td>{{ item.value }}</td>
+                    <td>{{ item.value | currency : "R$" }}</td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
     <div
-        fxFlex="25%"
+        fxFlex="30%"
         fxFlex.md="40%"
         fxFlex.xs="80%"
         fxLayout="column"
@@ -49,20 +56,31 @@
         fxLayoutGap.xs="5%"
         fxLayoutGap.sm="5%"
         class="card"
-        style="height: 100%"
+        style="height: 100%; padding: 2%"
     >
         <div>
             <h3>Resumo:</h3>
         </div>
-        <div *ngIf="selectedFreight">
-            <p>
-                Entrega:
-                {{ selectedFreight.name }}
-                {{ selectedFreight.value | currency : "R$ " }},
-                {{ selectedFreight.deliveryTime }} dias,
-                {{ selectedFreight.arrivalDay }}
-            </p>
+        <hr>
+        <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
+            <app-cep-component [selected]="selectedFreight"
+                               (onRowSelect)="setSelectedFreight($event)"></app-cep-component>
         </div>
+        <div *ngIf="selectedFreight" fxFlex="30%" fxLayout="column"
+             fxLayoutAlign="space-between left"
+             fxLayoutGap="2%">
+            <div>
+                <p>Dados de entrega: </p>
+
+            </div>
+            <div class="freightData">
+                <div><p>Envio: {{ selectedFreight.name }}</p></div>
+                <div><p>Tempo: {{ selectedFreight.deliveryTime }} dias</p></div>
+                <div><p>Previsão: {{ selectedFreight.arrivalDay }}</p></div>
+                <div><p>Valor: {{ selectedFreight.value | currency : "R$ " }}</p></div>
+            </div>
+        </div>
+        <hr>
         <div>
             <p>Total: {{ totalValue | currency : "R$ " }}</p>
         </div>

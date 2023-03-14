@@ -1,0 +1,32 @@
+:host ::ng-deep {
+
+	.p-datatable .p-datatable-thead>tr>th{
+		text-align: center;
+	}
+
+	.p-datatable .p-datatable-thead>tr>th{
+		background-color: #ff86867a;
+	}
+
+	.p-datatable .p-datatable-tbody>tr:focus{
+		outline: .15rem solid #ff7171c5;
+		outline-offset: unset;
+		background: #ff86867a;
+        color: white;
+	}
+
+	.p-datatable .p-datatable-tbody>tr.p-highlight{
+		background: #ff7171c5;
+        border: 1px solid #ff86867a;
+        color: white;
+	}
+
+	.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody>tr:not(.p-highlight):hover{
+		background: #ff71712d;
+        border: 1px solid #ff86867a;
+        color: black;
+	}
+}
+
+
+

@@ -4,15 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './products/products.component';
+import { ProductsComponent } from './pages/products/products.component';
 import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ToolbarModule } from 'primeng/toolbar';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { CarouselModule } from 'primeng/carousel';
 import { DataViewModule } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
@@ -20,7 +18,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
-import { SelectedProductComponent } from './selected-product/selected-product.component';
 import { ImageModule } from 'primeng/image';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleriaModule } from 'primeng/galleria';
@@ -35,7 +32,12 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
-import { CartComponent } from './cart/cart.component';
+
+import { HomeComponent } from './pages/home/home.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { SelectedProductComponent } from './pages/selected-product/selected-product.component';
+import { CartComponent } from './pages/cart/cart.component';
+import {CepComponent} from "./shared/components/cep/cep.component";
 
 @NgModule({
     declarations: [
@@ -47,6 +49,7 @@ import { CartComponent } from './cart/cart.component';
         ContactComponent,
         SelectedProductComponent,
         CartComponent,
+        CepComponent,
     ],
     imports: [
         BrowserModule,

@@ -40,10 +40,6 @@ export class SelectedProductComponent {
         { name: 'XGG', code: 6 },
     ];
 
-    freightOptions: any[] = [
-        { name: 'SEDEX', value: 32.11, deliveryTime: '3', arrivalDay: '17/03' },
-        { name: 'PAC', value: 21.34, deliveryTime: '6', arrivalDay: '20/03' },
-    ];
 
     displayDialog: boolean = false;
     budget: any;
@@ -79,34 +75,18 @@ export class SelectedProductComponent {
         this.calculatePrice();
     }
 
-    onClick(event) {
-        console.log(event);
-    }
 
-    calculateFreight() {
-        this.loadingCep = true;
-        var re = /^([\d]{2})\.*([\d]{3})-*([\d]{3})/;
-        if (re.test(this.cep)) {
-            console.log('CEP VALIDO', this.cep);
-            var clientCep = this.cep.replace(re, '$1$2$3');
-            this.isValidCep = true;
-            console.log(clientCep);
-        } else {
-            console.log('CEP inválido!', this.cep);
-            this.messageService.add({
-                severity: 'error',
-                summary: 'CEP',
-                detail: 'Cep inválido!',
-            });
-        }
-        setTimeout(() => (this.loadingCep = false), 1000);
-    }
+
     calculatePrice() {
         this.totalValue = this.product.price * this.quantitySelected;
         if (this.selectedFreight) {
             this.totalValue += this.selectedFreight.value;
         }
-        console.log(this.totalValue);
+    }
+
+    setSelectedFreight(event){
+        this.selectedFreight = event
+        this.calculatePrice()
     }
 
     buyProduct() {
@@ -150,17 +130,16 @@ export class SelectedProductComponent {
 
     setProductLocalStorage() {
         var cart: Array<any> = JSON.parse(localStorage.getItem('cart'));
-        console.log(this.budget);
         if (!cart) {
             localStorage.setItem('cart', JSON.stringify([this.budget]));
             return;
         }
-
         if (this.selectedFreight) {
             localStorage.setItem(
                 'selectedFreight',
                 JSON.stringify(this.selectedFreight)
             );
+
         }
         cart.push(this.budget);
         localStorage.setItem('cart', JSON.stringify(cart));
