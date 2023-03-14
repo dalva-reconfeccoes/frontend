@@ -1,88 +1,119 @@
 <div
     fxLayout="row"
+    fxLayoutAlign="center top"
     fxLayout.sm="column"
     fxLayout.xs="column"
-    fxLayoutGap="3%"
-    style="padding: 3%"
+    fxLayoutGap="5%"
+    style="padding: 5%"
 >
-    <div
-        fxFlex="50%"
-        fxFlex.md="70%"
-        fxFlex.sm="100%"
-        fxFlex.xs="70%"
-    >
-        <p-table [value]="cart">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>
-                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                    </th>
-                    <th>Produto</th>
-                    <th>Tamanho</th>
-                    <th>Quantidade</th>
-                    <th>Valor</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="item"></p-tableCheckbox>
-                    </td>
-                    <td>
-                        <p-image
-                            src="../../assets/layout/products/{{
-                                getImageProduct(item.product)
-                            }}"
-                            alt="{{ item.product.name }}"
-                            width="100%"
-                            height="25%"
-                            [preview]="true"
-                        >
-                        </p-image>
-                    </td>
-                    <td>{{ item.selectedSize.name }}</td>
-                    <td>{{ item.quantitySelected }}</td>
-                    <td>{{ item.value | currency : "R$" }}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+    <div fxFlex.xl="85%" fxFlex.lg="67%" fxFlex.md="57%" fxLayout="column">
+        <div fxLayoutAlign="end start" style="padding: 2%">
+            <p-button
+                icon="pi pi-cart-plus"
+                label="Remover"
+                class="p-button-sm"
+            ></p-button>
+        </div>
+        <div>
+            <p-table [value]="cart" [scrollable]="true" scrollHeight="520px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th>Produto</th>
+                        <th>Tamanho</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                        </td>
+                        <td>
+                            <div>
+                                <p-image
+                                    src="../../assets/layout/products/{{
+                                        getImageProduct(item.product)
+                                    }}"
+                                    alt="{{ item.product.name }}"
+                                    width="100%"
+                                    [preview]="true"
+                                >
+                                </p-image>
+                            </div>
+                        </td>
+                        <td>{{ item.selectedSize.name }}</td>
+                        <td>{{ item.quantitySelected }}</td>
+                        <td>{{ item.value | currency : "R$" }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
     </div>
     <div
-        fxFlex="30%"
-        fxFlex.md="40%"
-        fxFlex.xs="80%"
-        fxLayout="column"
-        fxLayoutGap="3%"
-        fxLayoutGap.xs="5%"
+        fxFlex.xl="85%"
+        fxFlex.lg="40%"
+        fxFlex.sm="20%"
         fxLayoutGap.sm="5%"
+        fxLayout="column"
         class="card"
         style="height: 100%; padding: 2%"
     >
         <div>
-            <h3>Resumo:</h3>
+            <h2>Resumo</h2>
         </div>
-        <hr>
+        <hr />
         <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
-            <app-cep-component [selected]="selectedFreight"
-                               (onRowSelect)="setSelectedFreight($event)"></app-cep-component>
+            <app-cep-component
+                [selected]="selectedFreight"
+                (onRowSelect)="setSelectedFreight($event)"
+            ></app-cep-component>
         </div>
-        <div *ngIf="selectedFreight" fxFlex="30%" fxLayout="column"
-             fxLayoutAlign="space-between left"
-             fxLayoutGap="2%">
+        <div
+            *ngIf="selectedFreight"
+            fxFlex="30%"
+            fxLayout="column"
+            fxLayoutAlign="space-between left"
+            fxLayoutGap="2%"
+        >
             <div>
-                <p>Dados de entrega: </p>
-
+                <h5>Dados de entrega:</h5>
             </div>
             <div class="freightData">
-                <div><p>Envio: {{ selectedFreight.name }}</p></div>
-                <div><p>Tempo: {{ selectedFreight.deliveryTime }} dias</p></div>
-                <div><p>Previsão: {{ selectedFreight.arrivalDay }}</p></div>
-                <div><p>Valor: {{ selectedFreight.value | currency : "R$ " }}</p></div>
+                <div>
+                    <p>Envio: {{ selectedFreight.name }}</p>
+                </div>
+                <div>
+                    <p>Tempo: {{ selectedFreight.deliveryTime }} dias</p>
+                </div>
+                <div>
+                    <p>Previsão: {{ selectedFreight.arrivalDay }}</p>
+                </div>
+                <div>
+                    <p>Valor: {{ selectedFreight.value | currency : "R$ " }}</p>
+                </div>
             </div>
         </div>
-        <hr>
-        <div>
-            <p>Total: {{ totalValue | currency : "R$ " }}</p>
+        <hr />
+        <div
+            fxLayout="column"
+            fxLayoutAlign="space-between left"
+            fxLayoutGap="3%"
+        >
+            <div>
+                <h4>Total: {{ totalValue | currency : "R$ " }}</h4>
+            </div>
+            <div>
+                <button
+                    pButton
+                    type="button"
+                    label="Fechar pedido"
+                    styleClass="buy-button"
+                ></button>
+            </div>
         </div>
     </div>
 </div>

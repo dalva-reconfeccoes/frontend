@@ -51,10 +51,14 @@
             </ng-template>
         </p-galleria>
     </div>
+    <!--    fxFlex="25%"-->
+    <!--    fxFlex.md="40%"-->
+    <!--    fxFlex.xs="80%"-->
+
     <div
-        fxFlex="25%"
-        fxFlex.md="40%"
-        fxFlex.xs="80%"
+        fxFlex.xl="20%"
+        fxFlex.lg="40%"
+        fxFlex.sm="20%"
         fxLayout="column"
         fxLayoutGap="3%"
         fxLayoutGap.xs="5%"
@@ -104,7 +108,10 @@
             </div>
         </div>
         <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
-            <app-cep-component [selected]="selectedFreight" (onRowSelect)="setSelectedFreight($event)" ></app-cep-component>
+            <app-cep-component
+                [selected]="selectedFreight"
+                (onRowSelect)="setSelectedFreight($event)"
+            ></app-cep-component>
         </div>
         <div
             fxFlex="20%"
@@ -139,11 +146,18 @@
                 </div>
             </div>
             <div fxLayoutAlign="center">
-                <p-button
-                    (onClick)="buyProduct()"
-                    icon="pi pi-cart-plus"
+                <button
+                    pButton
+                    type="button"
                     label="Comprar"
-                ></p-button>
+                    styleClass="buy-button"
+                    (click)="buyProduct()"
+                ></button>
+                <!--                <p-button-->
+                <!--                    (onClick)="buyProduct()"-->
+                <!--                    styleClass="buy-button"-->
+                <!--                    label="Comprar"-->
+                <!--                ></p-button>-->
             </div>
         </div>
     </div>

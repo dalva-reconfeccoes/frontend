@@ -1,3 +1,11 @@
 .freightData{
     margin-left: 7%;
 }
+
+
+
+:host ::ng-deep{
+    .p-image-preview-container{
+        width: 6rem;
+    }
+}
