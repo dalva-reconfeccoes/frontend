@@ -1,3 +1,130 @@
+<div class="navbar" fxLayout="row" fxLayoutAlign="space-around center">
+    <div>
+        <div class="navbar-logo">
+            <a (click)="navigate('home')">
+                <img
+                    class="navbar-logo-img"
+                    src="../assets/layout/images/dalva-logo-01.png"
+                    alt=""
+                />
+            </a>
+        </div>
+    </div>
+    <div>
+        <div *ngIf="showMobileButton">
+            <app-mobile-button-menu></app-mobile-button-menu>
+        </div>
+    </div>
+    <div *ngIf="!showMobileButton" fxLayout="row" fxLayoutGap="3%">
+        <div>
+            <button
+                (click)="navigate('products')"
+                pButton
+                type="button"
+                label="Produtos"
+                class="card p-button-raised p-button-rounded"
+                styleClass="navbar-button"
+            ></button>
+        </div>
+        <div>
+            <button
+                (click)="navigate('contact')"
+                pButton
+                type="button"
+                label="Contato"
+                class="card p-button-raised p-button-rounded"
+                styleClass="navbar-button"
+            ></button>
+        </div>
+        <div>
+            <button
+                (click)="navigate('about')"
+                pButton
+                type="button"
+                label="Sobre"
+                class="card p-button-raised p-button-rounded"
+                styleClass="navbar-button"
+            ></button>
+        </div>
+    </div>
+</div>
+<!--    <div>-->
+<!--        <button-->
+<!--            (click)="sidebarVisible = true"-->
+<!--            pButton-->
+<!--            pRipple-->
+<!--            type="button"-->
+<!--            icon="pi pi-bars"-->
+<!--            class="p-button-rounded"-->
+<!--        ></button>-->
+<!--        <p-sidebar-->
+<!--            icon="pi pi-cart-plus"-->
+<!--            [baseZIndex]="5000"-->
+<!--            [(visible)]="sidebarVisible"-->
+<!--        >-->
+<!--            <div-->
+<!--                fxLayout="column"-->
+<!--                fxLayoutGap="5%"-->
+<!--                fxLayoutAlign="space-around start"-->
+<!--            >-->
+<!--                <div>-->
+<!--                    <button-->
+<!--                        (click)="sidebarToggle('home')"-->
+<!--                        pButton-->
+<!--                        type="button"-->
+<!--                        label="Home"-->
+<!--                        class="p-button-raised p-button-rounded"-->
+<!--                    ></button>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <button-->
+<!--                        (click)="sidebarToggle('products')"-->
+<!--                        pButton-->
+<!--                        type="button"-->
+<!--                        label="Produtos"-->
+<!--                        class="p-button-raised p-button-rounded"-->
+<!--                    ></button>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <button-->
+<!--                        (click)="sidebarToggle('contact')"-->
+<!--                        pButton-->
+<!--                        type="button"-->
+<!--                        label="Contato"-->
+<!--                        class="p-button-raised p-button-rounded"-->
+<!--                    ></button>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <button-->
+<!--                        (click)="sidebarToggle('about')"-->
+<!--                        pButton-->
+<!--                        type="button"-->
+<!--                        label="Sobre"-->
+<!--                        class="p-button-raised p-button-rounded"-->
+<!--                    ></button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </p-sidebar>-->
+<!--    </div>-->
+
+<!--
+    <button
+        (click)="sidebarToggle('buttonMenu')"
+        class="navbar-toggler navbar-burger"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggler"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+    </button>
+    -->
+
+<!--
 <nav class="navbar navbar-expand-lg" color-on-scroll="500">
 <div class="container">
     <a class="navbar-brand" style="cursor: pointer;" (click)="sidebarToggle('home')">
@@ -10,7 +137,7 @@
     </button>
     <div fxLayout="row"  fxFlex="100%" fxFlex.gt-sm="40%" fxHide.md fxLayoutAlign="space-between end" class="navbar-collapse" id="navbarToggler">
         <ul fxFlex="100%" fxFlex.gt-sm="40%" class="navbar-nav ml-auto" >
-            
+
             <li class="nav-item navbar-item-li" >
                 <a class="card nav-link navbar-item-click" (click)="sidebarToggle('products')" >Produtos</a>
             </li>
@@ -36,3 +163,4 @@
     </div>
 </div>
 </nav>
+-->

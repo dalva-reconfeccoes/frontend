@@ -1,0 +1,61 @@
+<div>
+    <button
+        (click)="sidebarVisible = true"
+        pButton
+        pRipple
+        type="button"
+        icon="pi pi-bars"
+        class="p-button-rounded"
+    ></button>
+    <p-sidebar
+        icon="pi pi-cart-plus"
+        [baseZIndex]="5000"
+        [(visible)]="sidebarVisible"
+    >
+        <div
+            fxLayout="column"
+            fxLayoutGap="5%"
+            fxLayoutAlign="space-around start"
+        >
+            <div>
+                <a (click)="sidebarToggle('home')">
+                    <img
+                        class="logo-img"
+                        src="../assets/layout/images/dalva-logo-01.png"
+                        alt=""
+                    />
+                </a>
+            </div>
+            <div class="div-button">
+                <button
+                    (click)="sidebarToggle('products')"
+                    pButton
+                    type="button"
+                    label="Produtos"
+                    class="p-button-raised p-button-rounded"
+                    styleClass="mobile-button"
+                ></button>
+            </div>
+            <div class="div-button">
+                <button
+                    (click)="sidebarToggle('contact')"
+                    pButton
+                    type="button"
+                    label="Contato"
+                    class="p-button-raised p-button-rounded"
+                    styleClass="mobile-button"
+                ></button>
+            </div>
+            <div class="div-button">
+                <button
+                    (click)="sidebarToggle('about')"
+                    pButton
+                    type="button"
+                    label="Sobre"
+                    class="p-button-raised p-button-rounded"
+                    styleClass="mobile-button"
+                ></button>
+            </div>
+        </div>
+    </p-sidebar>
+</div>

@@ -1,28 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ProductsComponent } from './pages/products/products.component';
 import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { InputTextModule } from 'primeng/inputtext';
 import { ToolbarModule } from 'primeng/toolbar';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { CarouselModule } from 'primeng/carousel';
 import { DataViewModule } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
 import { ImageModule } from 'primeng/image';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GalleriaModule } from 'primeng/galleria';
-
-import { CommonModule } from '@angular/common';
 import { TabViewModule } from 'primeng/tabview';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { KnobModule } from 'primeng/knob';
@@ -32,12 +26,19 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { SidebarModule } from 'primeng/sidebar';
 
+import { ProductsComponent } from './pages/products/products.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SelectedProductComponent } from './pages/selected-product/selected-product.component';
 import { CartComponent } from './pages/cart/cart.component';
-import {CepComponent} from "./shared/components/cep/cep.component";
+import { CepComponent } from './shared/components/cep/cep.component';
+import { MobileButtonMenuComponent } from './shared/components/mobile-button-menu/mobile-button-menu.component';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import {CepComponent} from "./shared/components/cep/cep.component";
         SelectedProductComponent,
         CartComponent,
         CepComponent,
+        MobileButtonMenuComponent,
     ],
     imports: [
         BrowserModule,
@@ -78,6 +80,7 @@ import {CepComponent} from "./shared/components/cep/cep.component";
         HttpClientModule,
         TableModule,
         DialogModule,
+        SidebarModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],
