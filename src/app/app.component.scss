@@ -8,6 +8,7 @@
     .p-button {
         background: #ff86867a;
         border: 1px solid #ff86867a;
+        color: white;
     }
 
     .p-button:focus {
@@ -16,8 +17,8 @@
 
     .p-button:hover {
         background: #ff71712d;
-        border: 1px solid #ff86867a;
-        color: #ff86867a;
+        border: 1px solid #ff7171c5;
+        color: #ff7171c5;
     }
     .p-button.p-highlight {
         background: #ff7171c5;
@@ -27,20 +28,21 @@
 
     .p-button.p-highlight:hover {
         background: #ff71712d;
-        border: 1px solid #ff86867a;
-        color: #ff86867a;
+        border: 3px solid #ff7171c5;
+        color: #ff7171c5;
     }
 
     button[styleClass="buy-button"] {
         width: 100%;
-        background: #22C55E;
+        background: #22C558B5;
+
     }
 
     button[styleClass="buy-button"]:hover {
         background: #22C55E;
         border: 1px solid #22C55E;
-        opacity: 0.7;
         color: white;
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #22C55E, 0 1px 2px #000;
     }
 
     button[styleClass="buy-button"]:focus {
@@ -58,9 +60,9 @@
     }
 
     .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-up:hover {
-        border: 1px solid #ff86867a;
         background: #ff71712d;
-        color: #ff86867a;
+        border: 1px solid #ff7171c5;
+        color: #ff7171c5;
     }
 
     .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-down {
@@ -69,9 +71,9 @@
     }
 
     .p-inputnumber-buttons-vertical .p-button.p-inputnumber-button-down:hover {
-        border: 1px solid #ff86867a;
         background: #ff71712d;
-        color: #ff86867a;
+        border: 1px solid #ff7171c5;
+        color: #ff7171c5;
     }
 
     .p-inputtext:enabled:focus {
@@ -89,7 +91,7 @@
     }
     .p-selectbutton .p-button:not(.p-disabled):not(.p-highlight):hover {
         background: #ff71712d;
-        border: 1px solid #ff86867a;
-        color: black;
+        border: 1px solid #ff7171c5;
+        color: #ff7171c5;
     }
 }

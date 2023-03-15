@@ -1,126 +1,149 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+    selector: 'app-products',
+    templateUrl: './products.component.html',
+    styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  products: any;
+    products: any;
 
-  sortOptions: any;
+    constructor(private router: Router) {}
 
-  sortOrder: number;
+    ngOnInit() {
+        this.products = [
+            {
+                uuid: '5ccc2df9-107f-4b63-82a4-5c5ae17cf658',
+                header: 'Camiseta Preta',
+                description:
+                    'Produto de alta qualidade, macia ao toque e resistente ao uso diário. A cor preta é elegante e versátil, combinando com diferentes estilos e ocasiões. Além disso, sua modelagem clássica garante um caimento perfeito no corpo.',
+                color: 'Preto',
+                price: 42.42,
+                images: [
+                    'preto/camiseta-preta-frente-masc.png',
+                    'preto/camiseta-preta-costas-masc.png',
+                    'preto/camiseta-preta-modelo-masc.png',
+                    'preto/camiseta-preta-frente-masc.png',
+                    'preto/camiseta-preta-costas-masc.png',
+                    'preto/camiseta-preta-modelo-masc.png',
+                ],
+                knitted: '100% Algodão',
+                type: 'Camiseta',
+                subType: 'Comum',
+                quantity: 77,
+                sex: 'M',
+                inventoryStatus: 'DISPONIVEL',
+            },
 
-  sortField: string;
+            {
+                uuid: '95974ea0-c634-4ccb-9b97-d1324ff833cb',
+                header: 'Camiseta Branca',
+                color: 'Branco',
+                price: 22.12,
+                images: [
+                    'branco/camiseta-branca-frente-masc.png',
+                    'branco/camiseta-branca-costas-masc.png',
+                    'branco/camiseta-branca-modelo-masc.png',
+                    'branco/camiseta-branca-frente-masc.png',
+                    'branco/camiseta-branca-costas-masc.png',
+                    'branco/camiseta-branca-modelo-masc.png',
+                ],
+                knitted: '100% Algodão',
+                type: 'Camiseta',
+                subType: 'Comum',
+                quantity: 30,
+                sex: 'M',
+                inventoryStatus: 'DISPONIVEL',
+            },
 
-  sortKey: any
+            {
+                uuid: 'b7c48c9d-48b2-48ee-88e4-ce716946602d',
+                header: 'Camiseta Cinza',
+                color: 'Cinza',
+                price: 35.1,
+                images: [
+                    'cinza/camiseta-cinza-frente-masc.png',
+                    'cinza/camiseta-cinza-costas-masc.png',
+                    'cinza/camiseta-cinza-modelo-masc.png',
+                    'cinza/camiseta-cinza-frente-masc.png',
+                    'cinza/camiseta-cinza-costas-masc.png',
+                    'cinza/camiseta-cinza-modelo-masc.png',
+                ],
+                knitted: '100% Algodão',
+                type: 'Camiseta',
+                subType: 'Comum',
+                quantity: 42,
+                sex: 'M',
+                inventoryStatus: 'DISPONIVEL',
+            },
+            {
+                uuid: '5ccc2df9-107f-4b63-82a4-5c5ae17cf658',
+                header: 'Camiseta Preta',
+                color: 'Preto',
+                price: 25.19,
+                images: [
+                    'preto/camiseta-preta-frente-masc.png',
+                    'preto/camiseta-preta-costas-masc.png',
+                    'preto/camiseta-preta-modelo-masc.png',
+                    'preto/camiseta-preta-frente-masc.png',
+                    'preto/camiseta-preta-costas-masc.png',
+                    'preto/camiseta-preta-modelo-masc.png',
+                ],
+                knitted: '100% Algodão',
+                type: 'Camiseta',
+                subType: 'Comum',
+                quantity: 77,
+                sex: 'M',
+                inventoryStatus: 'DISPONIVEL',
+            },
 
-	constructor(private router: Router) {
+            {
+                uuid: '95974ea0-c634-4ccb-9b97-d1324ff833cb',
+                header: 'Camiseta Branca',
+                color: 'Branco',
+                price: 31.33,
+                images: [
+                    'branco/camiseta-branca-frente-masc.png',
+                    'branco/camiseta-branca-costas-masc.png',
+                    'branco/camiseta-branca-modelo-masc.png',
+                    'branco/camiseta-branca-frente-masc.png',
+                    'branco/camiseta-branca-costas-masc.png',
+                    'branco/camiseta-branca-modelo-masc.png',
+                ],
+                knitted: '100% Algodão',
+                type: 'Camiseta',
+                subType: 'Comum',
+                quantity: 30,
+                sex: 'M',
+                inventoryStatus: 'DISPONIVEL',
+            },
 
-	}
-
-	ngOnInit() {
-    this.products = [
-      {
-        uuid: "95974ea0-c634-4ccb-9b97-d1324ff833cb",
-        price: 123,
-        image: "camiseta-amarela-frente-costa-masc.jpg",
-        knitted: "100% Algodão",
-        type: "Camiseta",
-        subType: "Comum",
-        quantity: 100,
-        sex: "M",
-        inventoryStatus: "DISPONIVEL"
-      },
-      {
-        uuid: "b7c48c9d-48b2-48ee-88e4-ce716946602d",
-        name: "tst2",
-        price: 321,
-        image: "camiseta-azul-frente-costa-masc.jpg",
-        knitted: "100% Algodão",
-        type: "Camiseta",
-        subType: "Comum",
-        quantity: 43,
-        sex: "M",
-        inventoryStatus: "DISPONIVEL"
-      },
-
-      {
-        uuid: "52242525-2f55-4c98-8f6d-c2588023f5a4",
-        name: "tst3",
-        price: 231,
-        image: "camiseta-azul-roial-frente-costa-masc.jpg",
-        knitted: "100% Algodão",
-        type: "Camiseta",
-        subType: "Comum",
-        quantity: 23,
-        sex: "M",
-        inventoryStatus: "DISPONIVEL"
-      },
-
-      {
-        uuid: "580176c8-e865-4214-94c5-fc39e935c1a9",
-        name: "tst4",
-        price: 421,
-        image: "camiseta-branca-frente-costa-masc.jpg",
-        knitted: "100% Algodão",
-        type: "Camiseta",
-        subType: "Comum",
-        quantity: 22,
-        sex: "M",
-        inventoryStatus: "DISPONIVEL"
-      },
-
-      {
-        uuid: "832f96ce-b222-4aa5-96e0-0f883ebfe42c",
-        name: "tst5",
-        price: 121,
-        image: "camiseta-laranja-frente-costa-masc.jpg",
-        knitted: "100% Algodão",
-        type: "Camiseta",
-        subType: "Comum",
-        quantity: 11,
-        sex: "M",
-        inventoryStatus: "DISPONIVEL"
-      }
-      ,
-
-      {
-        uuid: "5ccc2df9-107f-4b63-82a4-5c5ae17cf658",
-        name: "tst6",
-        price: 121,
-        image: "camiseta-preta-frente-costa-masc.jpg",
-        knitted: "100% Algodão",
-        type: "Camiseta",
-        subType: "Comum",
-        quantity: 72,
-        sex: "M",
-        inventoryStatus: "DISPONIVEL"
-      }
-    ];
-    this.sortOptions = [
-      { label: 'Price High to Low', value: '!price' },
-      { label: 'Price Low to High', value: 'price' },
-    ];
-  }
-
-  onSortChange(event) {
-    let value = event.value;
-
-    if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
-    } else {
-      this.sortOrder = 1;
-      this.sortField = value;
+            {
+                uuid: 'b7c48c9d-48b2-48ee-88e4-ce716946602d',
+                header: 'Camiseta Cinza',
+                color: 'Cinza',
+                price: 55.11,
+                images: [
+                    'cinza/camiseta-cinza-frente-masc.png',
+                    'cinza/camiseta-cinza-costas-masc.png',
+                    'cinza/camiseta-cinza-modelo-masc.png',
+                    'cinza/camiseta-cinza-frente-masc.png',
+                    'cinza/camiseta-cinza-costas-masc.png',
+                    'cinza/camiseta-cinza-modelo-masc.png',
+                ],
+                knitted: '100% Algodão',
+                type: 'Camiseta',
+                subType: 'Comum',
+                quantity: 42,
+                sex: 'M',
+                inventoryStatus: 'DISPONIVEL',
+            },
+        ];
     }
-  }
 
-  navigateToProduct(product){
-    console.log(product)
-    this.router.navigate([`/product/`,  product.uuid]);
-  }
+    navigateToProduct(product) {
+        console.log(product);
+        this.router.navigate([`/product/`, product.uuid]);
+    }
 }
