@@ -120,7 +120,10 @@ export class SelectedProductComponent {
     }
 
     navigateToProducts() {
-        this.router.navigate([`/products/`]);
+        this.setProductLocalStorage();
+        this.router.navigate([`/products/`]).then(() => {
+            window.location.reload();
+        });
     }
 
     setProductLocalStorage() {
@@ -141,6 +144,8 @@ export class SelectedProductComponent {
 
     navigateToCart() {
         this.setProductLocalStorage();
-        this.router.navigate([`/cart/`]);
+        this.router.navigate([`/cart/`]).then(() => {
+            window.location.reload();
+        });
     }
 }

@@ -37,7 +37,7 @@ export class NavbarComponent {
 
     getTotalItemsCart() {
         this.cart = JSON.parse(this.getLocalStorageData('cart'));
-        if (this.cart) {
+        if (this.cart && this.cart.length > 0) {
             return this.cart.length.toString();
         }
         return;

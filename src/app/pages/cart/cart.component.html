@@ -7,50 +7,65 @@
     style="padding: 5%"
 >
     <div fxFlex.xl="85%" fxFlex.lg="67%" fxFlex.md="57%" fxLayout="column">
-        <div fxLayoutAlign="end start" style="padding: 2%">
-            <p-button
-                icon="pi pi-cart-plus"
-                label="Remover"
-                class="p-button-sm"
-            ></p-button>
+        <div *ngIf="!isShowItems">
+            <p>Carrinho vazio</p>
         </div>
-        <div>
-            <p-table [value]="cart" [scrollable]="true" scrollHeight="520px">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                        </th>
-                        <th>Produto</th>
-                        <th>Tamanho</th>
-                        <th>Quantidade</th>
-                        <th>Valor</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-item>
-                    <tr>
-                        <td>
-                            <p-tableCheckbox [value]="item"></p-tableCheckbox>
-                        </td>
-                        <td>
-                            <div>
-                                <p-image
-                                    src="../../assets/layout/products/{{
-                                        getImageProduct(item.product)
-                                    }}"
-                                    alt="{{ item.product.name }}"
-                                    width="100%"
-                                    [preview]="true"
-                                >
-                                </p-image>
-                            </div>
-                        </td>
-                        <td>{{ item.selectedSize.name }}</td>
-                        <td>{{ item.quantitySelected }}</td>
-                        <td>{{ item.value | currency : "R$" }}</td>
-                    </tr>
-                </ng-template>
-            </p-table>
+
+        <div *ngIf="isShowItems">
+            <div fxLayoutAlign="end start" style="padding: 2%">
+                <p-button
+                    label="Remover"
+                    class="p-button-sm"
+                    (click)="removeSelectedItems()"
+                ></p-button>
+            </div>
+            <div>
+                <p-table
+                    [value]="cart"
+                    [scrollable]="true"
+                    scrollHeight="520px"
+                >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>
+                                <p-tableHeaderCheckbox
+                                    (click)="selectAllItems()"
+                                ></p-tableHeaderCheckbox>
+                            </th>
+                            <th>Produto</th>
+                            <th>Tamanho</th>
+                            <th>Quantidade</th>
+                            <th>Valor</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>
+                                <p-tableCheckbox
+                                    [value]="item"
+                                    (click)="selectItem(item)"
+                                ></p-tableCheckbox>
+                            </td>
+                            <td>
+                                <div>
+                                    <p-image
+                                        src="../../assets/layout/products/{{
+                                            getImageProduct(item.product)
+                                        }}"
+                                        alt="{{ item.product.name }}"
+                                        width="100%"
+                                        [preview]="true"
+                                    >
+                                    </p-image>
+                                </div>
+                            </td>
+                            <td>{{ item.selectedSize.name }}</td>
+                            <td>{{ item.quantitySelected }}</td>
+                            <td>{{ item.value | currency : "R$" }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
     </div>
     <div
