@@ -9,20 +9,44 @@ export class CartComponent {
     cart: Array<any>;
     selectedFreight: any;
     totalValue: number;
-    cep: string
+    cep: string;
 
     ngOnInit() {
-        this.cart = JSON.parse(localStorage.getItem('cart'));
-        this.selectedFreight = JSON.parse(
-            localStorage.getItem('selectedFreight')
+        this.setCart(JSON.parse(this.getLocalStorageData('cart')));
+        this.setSelectedFreight(
+            JSON.parse(this.getLocalStorageData('selectedFreight'))
         );
-        this.cep = localStorage.getItem('cep');
-        console.log(this.selectedFreight);
         this.calculateTotalValue();
     }
-    setSelectedFreight(event){
-        this.selectedFreight = event
-        this.calculateTotalValue()
+
+    setCart(value) {
+        if (value) {
+            this.cart = value;
+        }
+    }
+
+    setSelectedFreight(value: any) {
+        if (value) {
+            this.selectedFreight = value;
+            this.setCepValue(this.selectedFreight.cep);
+        }
+    }
+    setCepValue(value: string) {
+        if (value) {
+            this.cep = value;
+        }
+    }
+
+    getLocalStorageData(key: string) {
+        let item = localStorage.getItem(key);
+        if (item) {
+            return item;
+        }
+        return undefined;
+    }
+    setSelectedFreightFromEvent(event) {
+        this.selectedFreight = event;
+        this.calculateTotalValue();
     }
 
     getImageProduct(product) {

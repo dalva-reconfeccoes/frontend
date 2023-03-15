@@ -1,5 +1,5 @@
-<div class="navbar" fxLayout="row" fxLayoutAlign="space-around center">
-    <div>
+<div class="navbar" fxLayout="row">
+    <div fxFlex="50%">
         <div class="navbar-logo">
             <a (click)="navigate('home')">
                 <img
@@ -10,41 +10,62 @@
             </a>
         </div>
     </div>
-    <div>
-        <div *ngIf="showMobileButton">
-            <app-mobile-button-menu></app-mobile-button-menu>
+
+    <div fxFlex="50%" fxLayout="row" fxLayoutAlign="end center">
+        <div style="margin-right: 6%">
+            <i
+                (click)="navigate('cart')"
+                class="card pi pi-shopping-cart mr-4 p-text-secondary"
+                pBadge
+                style="font-size: 2rem"
+                [value]="totalItemsCart"
+                severity="danger"
+                styleClass="navbar-cart-icon"
+            ></i>
         </div>
-    </div>
-    <div *ngIf="!showMobileButton" fxLayout="row" fxLayoutGap="3%">
-        <div>
-            <button
-                (click)="navigate('products')"
-                pButton
-                type="button"
-                label="Produtos"
-                class="card p-button-raised p-button-rounded"
-                styleClass="navbar-button"
-            ></button>
+
+        <div
+            *ngIf="!showMobileButton"
+            fxLayout="row"
+            fxLayoutGap="5%"
+            style="margin-right: 25%"
+        >
+            <div>
+                <button
+                    (click)="navigate('products')"
+                    pButton
+                    type="button"
+                    label="Produtos"
+                    class="card p-button-raised p-button-rounded"
+                    styleClass="navbar-button"
+                ></button>
+            </div>
+            <div>
+                <button
+                    (click)="navigate('contact')"
+                    pButton
+                    type="button"
+                    label="Contato"
+                    class="card p-button-raised p-button-rounded"
+                    styleClass="navbar-button"
+                ></button>
+            </div>
+            <div>
+                <button
+                    (click)="navigate('about')"
+                    pButton
+                    type="button"
+                    label="Sobre"
+                    class="card p-button-raised p-button-rounded"
+                    styleClass="navbar-button"
+                ></button>
+            </div>
         </div>
+
         <div>
-            <button
-                (click)="navigate('contact')"
-                pButton
-                type="button"
-                label="Contato"
-                class="card p-button-raised p-button-rounded"
-                styleClass="navbar-button"
-            ></button>
-        </div>
-        <div>
-            <button
-                (click)="navigate('about')"
-                pButton
-                type="button"
-                label="Sobre"
-                class="card p-button-raised p-button-rounded"
-                styleClass="navbar-button"
-            ></button>
+            <div *ngIf="showMobileButton">
+                <app-mobile-button-menu></app-mobile-button-menu>
+            </div>
         </div>
     </div>
 </div>

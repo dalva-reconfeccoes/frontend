@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MessageService} from 'primeng/api';
-import {Router} from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cep-component',
@@ -15,35 +15,51 @@ export class CepComponent {
     @Input() selected: any;
     @Output() onRowSelect = new EventEmitter<any>();
 
-    constructor(
-        private messageService: MessageService,
-
-    ) {
-
-    }
+    constructor(private messageService: MessageService) {}
     ngOnInit() {
-        console.log(this.selected)
-        this.cep = this.selected.cep
+        this.setCepValueFromSelected();
     }
     onClickRow() {
         this.onRowSelect.emit(this.selected);
     }
 
+    setCepValueFromSelected() {
+        if (this.selected) {
+            this.setCepValue(this.selected.cep);
+        }
+    }
 
+    setCepValue(value: string) {
+        if (value) {
+            this.cep = value;
+        }
+    }
 
     calculateFreight() {
-        this.options = undefined
+        this.options = undefined;
 
-        var re = /^([\d]{2})\.*([\d]{3})-*([\d]{3})/;
+        let re = /^([\d]{2})\.*([\d]{3})-*([\d]{3})/;
         if (re.test(this.cep)) {
             console.log('CEP VALIDO', this.cep);
             this.loadingCep = true;
             var clientCep = this.cep.replace(re, '$1$2$3');
             setTimeout(() => (this.loadingCep = false), 1000);
             this.options = [
-                { name: 'SEDEX', value: 32.11, deliveryTime: '3', arrivalDay: '17/03',cep:'71982-780' },
-                { name: 'PAC', value: 21.34, deliveryTime: '6', arrivalDay: '20/03',cep:'71982-780' },
-            ]
+                {
+                    name: 'SEDEX',
+                    value: 32.11,
+                    deliveryTime: '3',
+                    arrivalDay: '17/03',
+                    cep: '71982-780',
+                },
+                {
+                    name: 'PAC',
+                    value: 21.34,
+                    deliveryTime: '6',
+                    arrivalDay: '20/03',
+                    cep: '71982-780',
+                },
+            ];
             this.isValidCep = true;
             console.log(clientCep);
         } else {
@@ -54,7 +70,5 @@ export class CepComponent {
                 detail: 'Cep inválido!',
             });
         }
-
     }
-
 }

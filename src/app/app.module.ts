@@ -27,6 +27,7 @@ import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
+import { BadgeModule } from 'primeng/badge';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -81,6 +82,7 @@ import { MobileButtonMenuComponent } from './shared/components/mobile-button-men
         TableModule,
         DialogModule,
         SidebarModule,
+        BadgeModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

@@ -40,7 +40,6 @@ export class SelectedProductComponent {
         { name: 'XGG', code: 6 },
     ];
 
-
     displayDialog: boolean = false;
     budget: any;
     totalValue: number;
@@ -75,8 +74,6 @@ export class SelectedProductComponent {
         this.calculatePrice();
     }
 
-
-
     calculatePrice() {
         this.totalValue = this.product.price * this.quantitySelected;
         if (this.selectedFreight) {
@@ -84,9 +81,9 @@ export class SelectedProductComponent {
         }
     }
 
-    setSelectedFreight(event){
-        this.selectedFreight = event
-        this.calculatePrice()
+    setSelectedFreight(event) {
+        this.selectedFreight = event;
+        this.calculatePrice();
     }
 
     buyProduct() {
@@ -94,8 +91,6 @@ export class SelectedProductComponent {
             this.budget = {
                 product: this.product,
                 selectedSize: this.selectedSize,
-                cep: this.cep,
-                selectedFreight: this.selectedFreight,
                 quantitySelected: this.quantitySelected,
                 value: this.product.price * this.quantitySelected,
             };
@@ -104,7 +99,7 @@ export class SelectedProductComponent {
     }
 
     validateSelection() {
-        var isValid = true;
+        let isValid = true;
         if (!this.selectedSize) {
             this.showMessage(
                 'error',
@@ -129,17 +124,16 @@ export class SelectedProductComponent {
     }
 
     setProductLocalStorage() {
-        var cart: Array<any> = JSON.parse(localStorage.getItem('cart'));
-        if (!cart) {
-            localStorage.setItem('cart', JSON.stringify([this.budget]));
-            return;
-        }
         if (this.selectedFreight) {
             localStorage.setItem(
                 'selectedFreight',
                 JSON.stringify(this.selectedFreight)
             );
-
+        }
+        let cart: Array<any> = JSON.parse(localStorage.getItem('cart'));
+        if (!cart) {
+            localStorage.setItem('cart', JSON.stringify([this.budget]));
+            return;
         }
         cart.push(this.budget);
         localStorage.setItem('cart', JSON.stringify(cart));

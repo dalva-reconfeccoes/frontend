@@ -8,14 +8,15 @@ import { PrimeNGConfig } from 'primeng/api';
     styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-    private toggleButton: any;
-    sidebarVisible: boolean = false;
+    cart: Array<any>;
     showMobileButton: boolean = false;
+    totalItemsCart: string;
 
     constructor(private router: Router) {}
 
     ngOnInit() {
         this.verifyScreenSize();
+        this.totalItemsCart = this.getTotalItemsCart();
     }
 
     verifyScreenSize() {
@@ -34,38 +35,19 @@ export class NavbarComponent {
         this.router.navigate(['/', id]);
     }
 
-    // sidebarToggle(id: string) {
-    //     console.log(id);
-    //     if (id == 'buttonMenu') {
-    //         if (this.sidebarVisible === false) {
-    //             this.sidebarOpen();
-    //         } else {
-    //             this.sidebarClose();
-    //         }
-    //     } else {
-    //         this.sidebarClose();
-    //         this.router.navigate(['/', id]);
-    //     }
-    // }
-    //
-    // sidebarOpen() {
-    //     const toggleButton = this.toggleButton;
-    //     const html = document.getElementsByTagName('html')[0];
-    //
-    //     setTimeout(function () {
-    //         toggleButton.classList.add('toggled');
-    //     }, 500);
-    //     html.classList.add('nav-open');
-    //
-    //     this.sidebarVisible = true;
-    // }
-    //
-    // sidebarClose() {
-    //     const html = document.getElementsByTagName('html')[0];
-    //     if (this.toggleButton) {
-    //         this.toggleButton.classList.remove('toggled');
-    //     }
-    //     this.sidebarVisible = false;
-    //     html.classList.remove('nav-open');
-    // }
+    getTotalItemsCart() {
+        this.cart = JSON.parse(this.getLocalStorageData('cart'));
+        if (this.cart) {
+            return this.cart.length.toString();
+        }
+        return;
+    }
+
+    getLocalStorageData(key: string) {
+        let item = localStorage.getItem(key);
+        if (item) {
+            return item;
+        }
+        return undefined;
+    }
 }
