@@ -15,11 +15,16 @@ button[styleClass="navbar-button"]:hover{
 }
 
 i[styleClass="navbar-cart-icon"]{
-    margin-top: 55%;
+    margin-top: 50%;
     background-color: transparent;
     box-shadow: none;
+    cursor:pointer;
+    color:white;
 }
 
+i[styleClass="navbar-cart-icon"]:hover{
+    color: #ff7171c5
+}
 
 .navbar-logo{
     padding: 3%;
@@ -30,5 +35,6 @@ i[styleClass="navbar-cart-icon"]{
     background-color: white;
     border-radius: 50%;
     width: 100%;
+    cursor:pointer;
 }
 

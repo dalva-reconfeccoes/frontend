@@ -1,6 +1,11 @@
 <div class="navbar" fxLayout="row">
-    <div fxFlex="50%">
-        <div class="navbar-logo">
+    <div fxFlex="50%" fxLayoutAlign="center">
+        <div
+            fxFlex.xl="30%"
+            fxFlex.lg="55%"
+            fxFlex.sm="100%"
+            class="navbar-logo"
+        >
             <a (click)="navigate('home')">
                 <img
                     class="navbar-logo-img"
@@ -28,7 +33,7 @@
             *ngIf="!showMobileButton"
             fxLayout="row"
             fxLayoutGap="5%"
-            style="margin-right: 25%"
+            style="margin-right: 8%"
         >
             <div>
                 <button
@@ -62,7 +67,7 @@
             </div>
         </div>
 
-        <div>
+        <div style="margin-right: 15%">
             <div *ngIf="showMobileButton">
                 <app-mobile-button-menu></app-mobile-button-menu>
             </div>
