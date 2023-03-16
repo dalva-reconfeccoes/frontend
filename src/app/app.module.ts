@@ -42,6 +42,8 @@ import { CartComponent } from './pages/cart/cart.component';
 import { CepComponent } from './shared/components/cep/cep.component';
 import { MobileButtonMenuComponent } from './shared/components/mobile-button-menu/mobile-button-menu.component';
 import { LoginComponent } from './pages/login/login.component';
+import { DeashboardComponent } from './pages/deashboard/deashboard.component';
+import { PurchaseStepsComponent } from './pages/purchase-steps/purchase-steps.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +58,8 @@ import { LoginComponent } from './pages/login/login.component';
         CepComponent,
         MobileButtonMenuComponent,
         LoginComponent,
+        DeashboardComponent,
+        PurchaseStepsComponent,
     ],
     imports: [
         BrowserModule,

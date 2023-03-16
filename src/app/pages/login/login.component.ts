@@ -5,7 +5,8 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
-import { Login } from './login.model';
+import { Login } from '../../shared/models/login.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -17,17 +18,16 @@ export class LoginComponent {
     submitted = false;
     login: Login = new Login();
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: FormBuilder, private router: Router) {}
 
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
-            email: [this.login.email, [Validators.email, Validators.required]],
-            password: [this.login.password, [Validators.required]],
+            email: ['', [Validators.email, Validators.required]],
+            password: ['', [Validators.required]],
         });
     }
 
     get formControl() {
-        console.log(this.loginForm.controls);
         return this.loginForm.controls;
     }
 
@@ -35,7 +35,13 @@ export class LoginComponent {
         this.submitted = true;
         console.log(this.formControl.email.errors);
         if (this.loginForm.valid) {
-            console.log(this.login);
+            this.login.email = this.formControl.email.value;
+            this.login.password = this.formControl.password.value;
+            this.navigate('dashboard');
         }
+    }
+
+    navigate(id: string) {
+        this.router.navigate(['/', id]);
     }
 }
