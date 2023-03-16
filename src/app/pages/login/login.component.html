@@ -1,0 +1,54 @@
+<div fxLayoutAlign="center center" style="height: 700px">
+    <div
+        fxFlex="50%"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="3%"
+        class="card card-login"
+    >
+        <form
+            class="user-login"
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmitLogin()"
+        >
+            <div class="field">
+                <div>
+                    <label for="email" class="block">E-mail</label>
+                </div>
+                <div>
+                    <input
+                        id="email"
+                        type="email"
+                        aria-describedby="email-help"
+                        pInputText
+                    />
+                </div>
+                <div>
+                    <small
+                        id="email-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.email.errors"
+                        >E-mail inválido.</small
+                    >
+                </div>
+            </div>
+            <div class="field">
+                <label for="password" class="block">Senha</label>
+                <input
+                    id="password"
+                    type="password"
+                    aria-describedby="email-help"
+                    pInputText
+                />
+            </div>
+            <div>
+                <button
+                    pButton
+                    type="submit"
+                    label="Login"
+                    styleClass="buy-button"
+                ></button>
+            </div>
+        </form>
+    </div>
+</div>

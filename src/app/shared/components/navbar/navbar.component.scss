@@ -14,6 +14,13 @@ button[styleClass="navbar-button"]:hover{
     color:white;
 }
 
+button[styleClass="navbar-user-button"]{
+    background-color: transparent;
+    box-shadow: none;
+    color:white;
+}
+
+
 i[styleClass="navbar-cart-icon"]{
     margin-top: 50%;
     background-color: transparent;

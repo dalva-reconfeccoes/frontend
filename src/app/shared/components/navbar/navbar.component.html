@@ -17,7 +17,17 @@
     </div>
 
     <div fxFlex="50%" fxLayout="row" fxLayoutAlign="end center">
-        <div style="margin-right: 6%">
+        <div style="margin-right: 1%">
+            <i
+                (click)="navigate('login')"
+                class="card pi pi-user mr-4 p-text-secondary"
+                pRipple
+                style="font-size: 2rem"
+                severity="danger"
+                styleClass="navbar-cart-icon"
+            ></i>
+        </div>
+        <div style="margin-right: 1%">
             <i
                 (click)="navigate('cart')"
                 class="card pi pi-shopping-cart mr-4 p-text-secondary"

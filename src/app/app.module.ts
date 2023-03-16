@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 
@@ -41,6 +41,7 @@ import { SelectedProductComponent } from './pages/selected-product/selected-prod
 import { CartComponent } from './pages/cart/cart.component';
 import { CepComponent } from './shared/components/cep/cep.component';
 import { MobileButtonMenuComponent } from './shared/components/mobile-button-menu/mobile-button-menu.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
     declarations: [
@@ -54,6 +55,7 @@ import { MobileButtonMenuComponent } from './shared/components/mobile-button-men
         CartComponent,
         CepComponent,
         MobileButtonMenuComponent,
+        LoginComponent,
     ],
     imports: [
         BrowserModule,
@@ -85,6 +87,7 @@ import { MobileButtonMenuComponent } from './shared/components/mobile-button-men
         SidebarModule,
         BadgeModule,
         CardModule,
+        ReactiveFormsModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],
