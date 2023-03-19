@@ -94,4 +94,18 @@
         border: 1px solid #ff7171c5;
         color: #ff7171c5;
     }
+
+    button[styleClass="next-step-button"]{
+        height: 3rem;
+        width: 10rem;
+        background: #ff86867a;
+        border: 1px solid #ff86867a;
+        color: white;
+    }
+
+    .icon-next-step{
+        font-size: 3rem;
+        margin-left: 30%;
+    }
 }
+

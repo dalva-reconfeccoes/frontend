@@ -1,0 +1,130 @@
+<div fxLayout="column" fxLayoutGap="10%">
+    <div fxLayoutAlign="center">
+        <h3>Dados de Entrega</h3>
+    </div>
+    <div>
+        <form
+            class="user-address"
+            [formGroup]="addressForm"
+            (ngSubmit)="onSubmitAddress()"
+        >
+            <div
+                fxLayout="column"
+                fxLayoutGap="3%"
+                fxLayoutAlign="center center"
+            >
+                <div
+                    fxLayout="row"
+                    fxLayoutGap="3%"
+                    fxLayout.sm="column"
+                    fxLayout.xs="column"
+                >
+                    <div>
+                        <div>
+                            <label for="cep" class="block">Cep</label>
+                        </div>
+                        <div>
+                            <input
+                                id="cep"
+                                type="cep"
+                                formControlName="cep"
+                                pInputText
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="streetName" class="block"
+                                >Logradouro</label
+                            >
+                        </div>
+                        <div>
+                            <input
+                                id="streetName"
+                                type="streetName"
+                                formControlName="streetName"
+                                pInputText
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="state" class="block">Localidade</label>
+                        </div>
+                        <div>
+                            <input
+                                id="state"
+                                type="state"
+                                formControlName="state"
+                                pInputText
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    fxLayout="row"
+                    fxLayoutGap="3%"
+                    fxLayout.sm="column"
+                    fxLayout.xs="column"
+                >
+                    <div>
+                        <div>
+                            <label for="neighborhood" class="block"
+                                >Bairro</label
+                            >
+                        </div>
+                        <div>
+                            <input
+                                id="neighborhood"
+                                type="neighborhood"
+                                formControlName="neighborhood"
+                                pInputText
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <label for="cep" class="block">Numero</label>
+                        </div>
+                        <div>
+                            <input
+                                id="number"
+                                type="number"
+                                formControlName="number"
+                                pInputText
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="complement" class="block"
+                                >Complemento</label
+                            >
+                        </div>
+                        <div>
+                            <input
+                                id="complement"
+                                type="complement"
+                                formControlName="complement"
+                                pInputText
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div fxLayout="column">
+        <div fxLayoutAlign="end" style="margin-right: 15%">
+            <button
+                icon="pi pi-check"
+                type="submit"
+                class="p-button"
+                styleClass="next-step-button"
+            >
+                <i class="icon-next-step pi pi-angle-right"></i>
+            </button>
+        </div>
+    </div>
+</div>

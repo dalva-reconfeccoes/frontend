@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { cloneDeep } from 'lodash';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cart',
@@ -16,10 +18,15 @@ export class CartComponent {
 
     selectedItems: Array<any> = [];
 
+    constructor(private router: Router) {}
+
     ngOnInit() {
         this.serializerDataFromLocalStorage();
         this.calculateTotalValue();
         this.isAllSelected = false;
+    }
+    goPurchaseSteps() {
+        this.navigate('purchase-steps');
     }
 
     serializerDataFromLocalStorage() {
@@ -120,5 +127,9 @@ export class CartComponent {
         if (this.selectedFreight) {
             this.totalValue += this.selectedFreight.value;
         }
+    }
+
+    navigate(id: string) {
+        this.router.navigate(['/', id]);
     }
 }

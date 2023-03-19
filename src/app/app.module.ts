@@ -29,6 +29,8 @@ import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { BadgeModule } from 'primeng/badge';
 import { CardModule } from 'primeng/card';
+import { StepsModule } from 'primeng/steps';
+import { PanelModule } from 'primeng/panel';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +46,10 @@ import { MobileButtonMenuComponent } from './shared/components/mobile-button-men
 import { LoginComponent } from './pages/login/login.component';
 import { DeashboardComponent } from './pages/deashboard/deashboard.component';
 import { PurchaseStepsComponent } from './pages/purchase-steps/purchase-steps.component';
+import { FirstPurchaseStepsComponent } from './pages/purchase-steps/steps/first-purchase-steps/first-purchase-steps.component';
+import { SecondPurchaseStepsComponent } from './pages/purchase-steps/steps/second-purchase-steps/second-purchase-steps.component';
+import { ThirdPurchaseStepsComponent } from './pages/purchase-steps/steps/third-purchase-steps/third-purchase-steps.component';
+import { CreditCardComponent } from './shared/components/credit-card/credit-card.component';
 
 @NgModule({
     declarations: [
@@ -60,6 +66,10 @@ import { PurchaseStepsComponent } from './pages/purchase-steps/purchase-steps.co
         LoginComponent,
         DeashboardComponent,
         PurchaseStepsComponent,
+        FirstPurchaseStepsComponent,
+        SecondPurchaseStepsComponent,
+        ThirdPurchaseStepsComponent,
+        CreditCardComponent,
     ],
     imports: [
         BrowserModule,
@@ -92,6 +102,8 @@ import { PurchaseStepsComponent } from './pages/purchase-steps/purchase-steps.co
         BadgeModule,
         CardModule,
         ReactiveFormsModule,
+        StepsModule,
+        PanelModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

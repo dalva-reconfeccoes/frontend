@@ -1,0 +1,121 @@
+<div fxLayout="column" fxLayoutGap="10%">
+    <div fxLayoutAlign="center">
+        <h3>Cadastro de cartão</h3>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15%">
+        <div fxFlex="30%">
+            <div fxLayout="row" fxLayoutGap="3%">
+                <div>
+                    <div>
+                        <label for="card-number" class="block"
+                            >Numéro do cartão</label
+                        >
+                    </div>
+                    <div>
+                        <p-inputMask
+                            id="card-number"
+                            name="card-number"
+                            type="credit-card-number"
+                            mask="9999.9999.9999.9999"
+                            placeholder="0000.0000.0000.0000"
+                            [(ngModel)]="number"
+                            (click)="focusedInput('number')"
+                            (keydown.tab)="focusedInput('name')"
+                        ></p-inputMask>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label for="nome" class="block">Nome</label>
+                    </div>
+                    <div>
+                        <input
+                            id="nome"
+                            type="nome"
+                            pInputText
+                            [(ngModel)]="name"
+                            (click)="focusedInput('name')"
+                            (keydown.tab)="focusedInput('cvc')"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap="3%">
+                <div>
+                    <div>
+                        <label for="card-cvc" class="block">CVC</label>
+                    </div>
+                    <div>
+                        <p-inputMask
+                            id="card-cvc"
+                            name="card-expiry"
+                            type="credit-card-expiry"
+                            mask="999"
+                            placeholder="000"
+                            [(ngModel)]="cvc"
+                            (click)="focusedInput('cvc')"
+                            (keydown.tab)="focusedInput('expiry')"
+                        ></p-inputMask>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <label for="card-expiry" class="block">Validade</label>
+                    </div>
+                    <div>
+                        <p-inputMask
+                            id="card-expiry"
+                            name="card-expiry"
+                            type="credit-card-expiry"
+                            mask="99/99"
+                            placeholder="00/00"
+                            [(ngModel)]="expiry"
+                            (click)="focusedInput('expiry')"
+                            (keydown.tab)="focusedInput('cpf')"
+                        ></p-inputMask>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <label for="cpf" class="block">CPF</label>
+                    </div>
+                    <div>
+                        <p-inputMask
+                            id="cpf"
+                            type="cpf"
+                            mask="999.999.999-99"
+                            placeholder="000.000.000-00"
+                            [(ngModel)]="cpf"
+                        ></p-inputMask>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="35%">
+            <app-credit-card
+                [name]="name"
+                [number]="number"
+                [expiry]="expiry"
+                [cvc]="cvc"
+                [focused]="focused"
+            ></app-credit-card>
+        </div>
+    </div>
+    <div fxLayout="column">
+        <div fxLayoutAlign="end" style="margin-right: 15%">
+            <button
+                icon="pi pi-check"
+                type="submit"
+                class="p-button"
+                styleClass="next-step-button"
+            >
+                <i class="icon-next-step pi pi-angle-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
