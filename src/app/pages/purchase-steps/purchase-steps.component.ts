@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -12,14 +12,20 @@ import { PurchaseStepModel } from '../../shared/models/purchase-step.model';
 export class PurchaseStepsComponent {
     items: MenuItem[];
     stepClient: number = 0;
-    listSteps: Array<number> = [0, 1, 2];
-    constructor(private router: Router) {}
+    isValidStep: boolean = false;
+    listSteps: Array<PurchaseStepModel> = this.initSteps();
+    constructor(private renderer: Renderer2, private el: ElementRef) {}
 
     ngOnInit() {
         this.stepClient = 0;
     }
 
-    getSteps() {
+    ngAfterViewChecked(): void {
+        // console.log('Entrou');
+        //console.log(this.purchaseStep);
+    }
+
+    initSteps() {
         return [
             new PurchaseStepModel(0, false, 'delivery'),
             new PurchaseStepModel(1, false, 'registerPaymentMethod'),
@@ -27,13 +33,45 @@ export class PurchaseStepsComponent {
         ];
     }
 
-    updateStepClient(selectedStep: number) {
+    classLineSteps(step: number) {
+        if (this.listSteps[step].isValid) {
+            return 'valid-step-hr';
+        }
+        return 'step-hr';
+    }
+    classButtonSteps(step: number) {
+        if (this.listSteps[step].isValid) {
+            return 'valid-step-button';
+        }
+        return 'step-button';
+    }
+
+    updateFinishStep(stepIsValid) {
+        console.log('-->', stepIsValid);
+        console.log('type->', this.purchaseStep.type);
+        const elementButton = this.el.nativeElement.querySelector(
+            '#' + this.purchaseStep.type
+        );
+        elementButton.className = 'valid-step-button';
+        this.purchaseStep.isValid = stepIsValid;
+        this.showSelectedStep(this.stepClient + 1);
+    }
+
+    get purchaseStep() {
+        for (let step of this.listSteps) {
+            if (step.id == this.stepClient) {
+                return step;
+            }
+        }
+    }
+
+    updateSelectedStepClient(selectedStep: number) {
         if (selectedStep < this.listSteps.length) {
             this.stepClient = selectedStep;
         }
     }
 
-    showForm(selectedStep: number) {
-        this.updateStepClient(selectedStep);
+    showSelectedStep(selectedStep: number) {
+        this.updateSelectedStepClient(selectedStep);
     }
 }

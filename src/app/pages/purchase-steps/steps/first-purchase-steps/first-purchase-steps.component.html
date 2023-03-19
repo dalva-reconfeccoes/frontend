@@ -3,11 +3,7 @@
         <h3>Dados de Entrega</h3>
     </div>
     <div>
-        <form
-            class="user-address"
-            [formGroup]="addressForm"
-            (ngSubmit)="onSubmitAddress()"
-        >
+        <form class="user-address" [formGroup]="addressForm">
             <div
                 fxLayout="column"
                 fxLayoutGap="3%"
@@ -122,6 +118,7 @@
                 type="submit"
                 class="p-button"
                 styleClass="next-step-button"
+                (click)="onSubmitAddress()"
             >
                 <i class="icon-next-step pi pi-angle-right"></i>
             </button>

@@ -13,4 +13,46 @@ button[styleClass="step-button"]{
     color: white;
 }
 
+button[styleClass="valid-step-button"]{
+}
+
+
+.step-button{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    background: #ff86867a;
+    border: 1px solid #ff86867a;
+    color: white;
+}
+
+
+.step-button i{
+    margin-left: -25%;
+    font-size: 2rem;
+}
+
+
+.valid-step-button{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    background: #22C558B5;
+    border: 1px solid #22C55E;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #22C55E, 0 1px 2px #000;
+    color: white;
+
+}
+
+.valid-step-button i{
+    margin-left: unset;
+    font-size: 2rem;
+}
+
+.valid-step-hr{
+    border-color: #22C558B5;
+    opacity: unset;
+}
 

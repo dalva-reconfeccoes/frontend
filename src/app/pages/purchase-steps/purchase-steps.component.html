@@ -3,24 +3,23 @@
         <div fxLayout="row" fxLayoutAlign="space-around center">
             <div fxFlex fxLayoutAlign="center">
                 <button
+                    id="{{ listSteps[0].type }}"
                     pButton
                     type="button"
-                    styleClass="step-button"
-                    (click)="showForm(0)"
+                    [ngClass]="classButtonSteps(0)"
+                    (click)="showSelectedStep(0)"
                 >
-                    <i
-                        class="pi pi-truck"
-                        style="font-size: 2rem; margin-left: -25%"
-                    ></i>
+                    <i class="pi pi-truck"></i>
                 </button>
             </div>
-            <div fxFlex="50%"><hr /></div>
+            <div fxFlex="50%"><hr [ngClass]="classLineSteps(0)" /></div>
             <div fxFlex fxLayoutAlign="center">
                 <button
                     pButton
                     type="button"
                     styleClass="step-button"
-                    (click)="showForm(1)"
+                    [ngClass]="classButtonSteps(1)"
+                    (click)="showSelectedStep(1)"
                 >
                     <i
                         class="pi pi-credit-card"
@@ -28,13 +27,14 @@
                     ></i>
                 </button>
             </div>
-            <div fxFlex="50%"><hr /></div>
+            <div fxFlex="50%"><hr [ngClass]="classLineSteps(1)" /></div>
             <div fxFlex fxLayoutAlign="center">
                 <button
                     pButton
                     type="button"
                     styleClass="step-button"
-                    (click)="showForm(2)"
+                    [ngClass]="classButtonSteps(2)"
+                    (click)="showSelectedStep(2)"
                 >
                     <i
                         class="pi pi-wallet"
@@ -49,10 +49,14 @@
 <div fxLayoutAlign="center">
     <div fxFlex="95%" class="card" style="padding: 2%">
         <div *ngIf="stepClient === 0">
-            <app-first-purchase-steps></app-first-purchase-steps>
+            <app-first-purchase-steps
+                (isValid)="updateFinishStep($event)"
+            ></app-first-purchase-steps>
         </div>
         <div *ngIf="stepClient === 1">
-            <app-second-purchase-steps></app-second-purchase-steps>
+            <app-second-purchase-steps
+                (isValid)="updateFinishStep($event)"
+            ></app-second-purchase-steps>
         </div>
         <div *ngIf="stepClient === 2">
             <app-third-purchase-steps></app-third-purchase-steps>

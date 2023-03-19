@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class FirstPurchaseStepsComponent {
     addressForm: FormGroup;
-    @Output() isValid: boolean = false;
+    @Output() isValid = new EventEmitter<boolean>();
     submitted = false;
 
     constructor(private formBuilder: FormBuilder, private router: Router) {}
@@ -35,8 +35,8 @@ export class FirstPurchaseStepsComponent {
         this.submitted = true;
         console.log(this.formControl);
         if (this.addressForm.valid) {
-            console.log(this.formControl);
-            this.isValid = true;
+            console.log('valid->', this.formControl);
+            this.isValid.emit(true);
         }
     }
 }

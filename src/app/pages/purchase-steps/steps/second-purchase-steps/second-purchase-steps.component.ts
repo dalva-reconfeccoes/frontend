@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ export class SecondPurchaseStepsComponent {
     cvc: string = '';
     expiry: string = '';
     cpf: string = '';
+    @Output() isValid = new EventEmitter<boolean>();
 
     focused: string = '';
     creditCardForm: FormGroup;
