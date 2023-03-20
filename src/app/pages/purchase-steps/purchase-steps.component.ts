@@ -17,12 +17,7 @@ export class PurchaseStepsComponent {
     constructor(private renderer: Renderer2, private el: ElementRef) {}
 
     ngOnInit() {
-        this.stepClient = 0;
-    }
-
-    ngAfterViewChecked(): void {
-        // console.log('Entrou');
-        //console.log(this.purchaseStep);
+        this.stepClient = 1;
     }
 
     initSteps() {
@@ -47,14 +42,17 @@ export class PurchaseStepsComponent {
     }
 
     updateFinishStep(stepIsValid) {
-        console.log('-->', stepIsValid);
-        console.log('type->', this.purchaseStep.type);
-        const elementButton = this.el.nativeElement.querySelector(
-            '#' + this.purchaseStep.type
+        this.updateElementClassName(
+            '#' + this.purchaseStep.type,
+            'valid-step-button'
         );
-        elementButton.className = 'valid-step-button';
         this.purchaseStep.isValid = stepIsValid;
         this.showSelectedStep(this.stepClient + 1);
+    }
+
+    updateElementClassName(id: string, newClassName: string) {
+        const elementButton = this.el.nativeElement.querySelector(id);
+        elementButton.className = newClassName;
     }
 
     get purchaseStep() {

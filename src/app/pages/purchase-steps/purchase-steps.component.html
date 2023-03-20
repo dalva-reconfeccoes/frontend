@@ -15,31 +15,27 @@
             <div fxFlex="50%"><hr [ngClass]="classLineSteps(0)" /></div>
             <div fxFlex fxLayoutAlign="center">
                 <button
+                    id="{{ listSteps[1].type }}"
                     pButton
                     type="button"
-                    styleClass="step-button"
                     [ngClass]="classButtonSteps(1)"
                     (click)="showSelectedStep(1)"
+                    [disabled]="!listSteps[1].isValid"
                 >
-                    <i
-                        class="pi pi-credit-card"
-                        style="font-size: 2rem; margin-left: -25%"
-                    ></i>
+                    <i class="pi pi-credit-card"></i>
                 </button>
             </div>
             <div fxFlex="50%"><hr [ngClass]="classLineSteps(1)" /></div>
             <div fxFlex fxLayoutAlign="center">
                 <button
+                    id="{{ listSteps[2].type }}"
                     pButton
                     type="button"
-                    styleClass="step-button"
                     [ngClass]="classButtonSteps(2)"
                     (click)="showSelectedStep(2)"
+                    [disabled]="!listSteps[2].isValid"
                 >
-                    <i
-                        class="pi pi-wallet"
-                        style="font-size: 2rem; margin-left: -25%"
-                    ></i>
+                    <i class="pi pi-wallet"></i>
                 </button>
             </div>
         </div>

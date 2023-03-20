@@ -2,99 +2,143 @@
     <div fxLayoutAlign="center">
         <h3>Cadastro de cartão</h3>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15%">
-        <div fxFlex="30%">
-            <div fxLayout="row" fxLayoutGap="3%">
-                <div>
-                    <div>
-                        <label for="card-number" class="block"
-                            >Numéro do cartão</label
+    <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap.xs="10%"
+    >
+        <div fxFlex.xl="25%" fxFlex.lg="40%" fxFlex.sm="40%" fxFlex.xs="40%">
+            <form [formGroup]="creditCardForm">
+                <div fxLayoutGap="5%" fxLayout="column">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="3%">
+                        <div fxFlex>
+                            <div>
+                                <label for="cc-name" class="block">Nome</label>
+                            </div>
+                            <div>
+                                <input
+                                    id="cc-name"
+                                    type="cc-name"
+                                    class="cc-name-input"
+                                    autocomplete="cc-name"
+                                    pInputText
+                                    formControlName="name"
+                                    [(ngModel)]="name"
+                                    (click)="focusedInput('name')"
+                                    (keydown.tab)="focusedInput('number')"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        fxLayout="row"
+                        fxLayout.xs="column"
+                        fxLayoutGap.xs="3%"
+                    >
+                        <div
+                            fxFlex.xl="40%"
+                            fxFlex.lg="40%"
+                            fxFlex.sm="40%"
+                            fxFlex.xs="60%"
                         >
-                    </div>
-                    <div>
-                        <p-inputMask
-                            id="card-number"
-                            name="card-number"
-                            type="credit-card-number"
-                            mask="9999.9999.9999.9999"
-                            placeholder="0000.0000.0000.0000"
-                            [(ngModel)]="number"
-                            (click)="focusedInput('number')"
-                            (keydown.tab)="focusedInput('name')"
-                        ></p-inputMask>
-                    </div>
-                </div>
+                            <div>
+                                <label for="cc-number" class="block"
+                                    >Numéro do cartão</label
+                                >
+                            </div>
+                            <div>
+                                <p-inputMask
+                                    id="cc-number"
+                                    name="cc-number"
+                                    class="cc-number-input"
+                                    autocomplete="cc-number"
+                                    type="credit-card-number"
+                                    mask="9999.9999.9999.9?999"
+                                    placeholder="0000.0000.0000.0000"
+                                    formControlName="number"
+                                    [(ngModel)]="number"
+                                    (click)="focusedInput('number')"
+                                    (keydown.tab)="focusedInput('cvc')"
+                                ></p-inputMask>
+                            </div>
+                        </div>
 
-                <div>
-                    <div>
-                        <label for="nome" class="block">Nome</label>
+                        <div
+                            fxFlex
+                            fxLayoutAlign="center center"
+                            fxLayoutAlign.xs="start"
+                            fxLayoutGap="3%"
+                        >
+                            <div fxFlex="30%">
+                                <div>
+                                    <label for="cc-cvc" class="block"
+                                        >CVC</label
+                                    >
+                                </div>
+                                <div>
+                                    <p-inputMask
+                                        id="cc-cvc"
+                                        name="cc-cvc"
+                                        autocomplete="cc-cvc"
+                                        class="cc-cvc-input"
+                                        type="cc-cvc"
+                                        mask="999?9"
+                                        placeholder="***"
+                                        formControlName="cvc"
+                                        [(ngModel)]="cvc"
+                                        (click)="focusedInput('cvc')"
+                                        (keydown.tab)="focusedInput('expiry')"
+                                    >
+                                    </p-inputMask>
+                                </div>
+                            </div>
+                            <div fxFlex="30%">
+                                <div>
+                                    <label for="cc-expiry" class="block"
+                                        >Validade</label
+                                    >
+                                </div>
+                                <div>
+                                    <p-inputMask
+                                        id="cc-expiry"
+                                        name="cc-expiry"
+                                        type="cc-expiry"
+                                        class="cc-expired-input"
+                                        autocomplete="cc-expiry"
+                                        mask="99/99"
+                                        placeholder="00/00"
+                                        formControlName="expiry"
+                                        [(ngModel)]="expiry"
+                                        (click)="focusedInput('expiry')"
+                                        (keydown.tab)="focusedInput('cpf')"
+                                    ></p-inputMask>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <input
-                            id="nome"
-                            type="nome"
-                            pInputText
-                            [(ngModel)]="name"
-                            (click)="focusedInput('name')"
-                            (keydown.tab)="focusedInput('cvc')"
-                        />
-                    </div>
-                </div>
-            </div>
 
-            <div fxLayout="row" fxLayoutGap="3%">
-                <div>
                     <div>
-                        <label for="card-cvc" class="block">CVC</label>
-                    </div>
-                    <div>
-                        <p-inputMask
-                            id="card-cvc"
-                            name="card-expiry"
-                            type="credit-card-expiry"
-                            mask="999"
-                            placeholder="000"
-                            [(ngModel)]="cvc"
-                            (click)="focusedInput('cvc')"
-                            (keydown.tab)="focusedInput('expiry')"
-                        ></p-inputMask>
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        <label for="card-expiry" class="block">Validade</label>
-                    </div>
-                    <div>
-                        <p-inputMask
-                            id="card-expiry"
-                            name="card-expiry"
-                            type="credit-card-expiry"
-                            mask="99/99"
-                            placeholder="00/00"
-                            [(ngModel)]="expiry"
-                            (click)="focusedInput('expiry')"
-                            (keydown.tab)="focusedInput('cpf')"
-                        ></p-inputMask>
+                        <div>
+                            <div>
+                                <label for="cpf" class="block">CPF</label>
+                            </div>
+                            <div>
+                                <p-inputMask
+                                    id="cpf"
+                                    type="cpf"
+                                    class="cc-cpf-input"
+                                    autocomplete="cpf"
+                                    mask="999.999.999-99"
+                                    placeholder="000.000.000-00"
+                                    formControlName="cpf"
+                                    [(ngModel)]="cpf"
+                                ></p-inputMask>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div>
-                    <div>
-                        <label for="cpf" class="block">CPF</label>
-                    </div>
-                    <div>
-                        <p-inputMask
-                            id="cpf"
-                            type="cpf"
-                            mask="999.999.999-99"
-                            placeholder="000.000.000-00"
-                            [(ngModel)]="cpf"
-                        ></p-inputMask>
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
         <div fxFlex="35%">
             <app-credit-card
@@ -113,6 +157,7 @@
                 type="submit"
                 class="p-button"
                 styleClass="next-step-button"
+                (click)="onSubmitCreditCard()"
             >
                 <i class="icon-next-step pi pi-angle-right"></i>
             </button>

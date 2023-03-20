@@ -31,6 +31,7 @@ import { BadgeModule } from 'primeng/badge';
 import { CardModule } from 'primeng/card';
 import { StepsModule } from 'primeng/steps';
 import { PanelModule } from 'primeng/panel';
+import { PasswordModule } from 'primeng/password';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -104,6 +105,7 @@ import { CreditCardComponent } from './shared/components/credit-card/credit-card
         ReactiveFormsModule,
         StepsModule,
         PanelModule,
+        PasswordModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

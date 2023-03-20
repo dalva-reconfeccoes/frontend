@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
     styleUrls: ['./second-purchase-steps.component.scss'],
 })
 export class SecondPurchaseStepsComponent {
-    name: string;
+    name: string = '';
     number: string = '';
     cvc: string = '';
+    maskCvc: string = '';
     expiry: string = '';
     cpf: string = '';
     @Output() isValid = new EventEmitter<boolean>();
@@ -19,31 +20,35 @@ export class SecondPurchaseStepsComponent {
     creditCardForm: FormGroup;
     submitted = false;
 
-    constructor(private formBuilder: FormBuilder, private router: Router) {}
-
-    ngOnInit(): void {
+    constructor(private formBuilder: FormBuilder, private router: Router) {
         this.creditCardForm = this.getFormBuilder();
     }
+
+    ngOnInit(): void {}
 
     focusedInput(input: string) {
         this.focused = input;
     }
     getFormBuilder() {
         return this.formBuilder.group({
-            name: ['', [Validators.required]],
-            number: ['', [Validators.required]],
-            cvc: ['', [Validators.required]],
-            expiry: ['', [Validators.required]],
+            name: [this.name, [Validators.required]],
+            number: [this.number, [Validators.required]],
+            cvc: [this.cvc, [Validators.required]],
+            maskCvc: [this.maskCvc, [Validators.required]],
+            expiry: [this.expiry, [Validators.required]],
+            cpf: [this.cpf, [Validators.required]],
         });
     }
     get formControl() {
         return this.creditCardForm.controls;
     }
-    onSubmitAddress(): void {
+
+    onSubmitCreditCard(): void {
         this.submitted = true;
         console.log(this.formControl);
         if (this.creditCardForm.valid) {
             console.log(this.formControl);
+            this.isValid.emit(true);
         }
     }
 }

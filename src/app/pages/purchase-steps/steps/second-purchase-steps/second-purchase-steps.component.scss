@@ -1,0 +1,17 @@
+:host ::ng-deep {
+    .cc-cvc-input input{
+        width: 64px;
+    }
+    .cc-expired-input input{
+        width: 75px;
+    }
+    .cc-number-input input{
+        width: 188px;
+    }
+    .cc-name-input{
+        width: 86%;
+    }
+    .cc-cpf-input input{
+        width: 145px
+    }
+}
