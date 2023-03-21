@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class FirstPurchaseStepsComponent {
     addressForm: FormGroup;
+    selectedFreight: any;
+
     @Output() isValid = new EventEmitter<boolean>();
     submitted = false;
 
@@ -18,9 +20,12 @@ export class FirstPurchaseStepsComponent {
         this.addressForm = this.getFormBuilder();
     }
 
+    setSelectedFreight(event) {
+        this.selectedFreight = event;
+    }
+
     getFormBuilder() {
         return this.formBuilder.group({
-            cep: ['', [Validators.required]],
             streetName: ['', [Validators.required]],
             neighborhood: ['', [Validators.required]],
             state: ['', [Validators.required]],
@@ -34,7 +39,7 @@ export class FirstPurchaseStepsComponent {
     onSubmitAddress(): void {
         this.submitted = true;
         console.log(this.formControl);
-        if (this.addressForm.valid) {
+        if (this.addressForm.valid && this.selectedFreight) {
             console.log('valid->', this.formControl);
             this.isValid.emit(true);
         }

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cep-component',

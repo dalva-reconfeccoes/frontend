@@ -17,7 +17,7 @@ export class PurchaseStepsComponent {
     constructor(private renderer: Renderer2, private el: ElementRef) {}
 
     ngOnInit() {
-        this.stepClient = 1;
+        this.stepClient = 0;
     }
 
     initSteps() {
