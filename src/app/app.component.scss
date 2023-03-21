@@ -107,5 +107,23 @@
         font-size: 3rem;
         margin-left: 30%;
     }
+
+    //CECK BOX
+    .p-checkbox .p-checkbox-box.p-highlight {
+        border-color: red;
+        background: #ff7171c5;
+    }
+
+    .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover{
+        background: #ff86867a;
+        border: 1px solid #ff86867a;
+    }
+    .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus{
+        box-shadow: 0 0 0 0.2rem #ff86867a;
+        border-color: #ff7171c5;
+    }
+    .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover{
+        border-color: red;
+    }
 }
 

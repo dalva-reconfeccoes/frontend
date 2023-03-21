@@ -32,6 +32,8 @@ import { CardModule } from 'primeng/card';
 import { StepsModule } from 'primeng/steps';
 import { PanelModule } from 'primeng/panel';
 import { PasswordModule } from 'primeng/password';
+import { DividerModule } from 'primeng/divider';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -110,6 +112,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
         StepsModule,
         PanelModule,
         PasswordModule,
+        DividerModule,
+        CheckboxModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

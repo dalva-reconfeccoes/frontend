@@ -1,1 +1,165 @@
-<p>register-client works!</p>
+<div fxLayoutAlign="center center" class="register-client-page">
+    <div
+        class="card"
+        style="padding: 5%"
+        fxFlex.xl="30%"
+        fxFlex.lg="38%"
+        fxFlex.sm="65%"
+        fxFlex.xs="80%"
+        fxLayout="column"
+        fxLayoutGap="20%"
+    >
+        <div fxLayoutAlign="center"><h3>Crie sua conta</h3></div>
+        <div fxLayoutGap="5%" fxFlex="80%" class="card-register-client">
+            <form
+                class="user-login"
+                [formGroup]="registerClientForm"
+                (ngSubmit)="onSubmitRegisterClient()"
+            >
+                <div fxLayout="column" fxLayoutGap="15%">
+                    <div fxLayout="column" fxLayoutGap="5%">
+                        <div>
+                            <div>
+                                <label for="name" class="block"
+                                    >Nome completo</label
+                                >
+                            </div>
+                            <div>
+                                <input
+                                    id="name"
+                                    type="name"
+                                    class="register-client-input"
+                                    aria-describedby="name-help"
+                                    formControlName="name"
+                                    pInputText
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <small
+                                    id="name-help"
+                                    class="p-error blo"
+                                    *ngIf="submitted && formControl.name.errors"
+                                    >Nome inválido.</small
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="email" class="block">E-mail</label>
+                            </div>
+                            <div>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    class="register-client-input"
+                                    aria-describedby="email-help"
+                                    formControlName="email"
+                                    pInputText
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <small
+                                    id="email-help"
+                                    class="p-error blo"
+                                    *ngIf="
+                                        submitted && formControl.email.errors
+                                    "
+                                    >E-mail inválido.</small
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="password" class="block"
+                                    >Senha de acesso</label
+                                >
+                                <p-password
+                                    id="password"
+                                    class="register-client-password"
+                                    weakLabel="Fraca"
+                                    mediumLabel="Mediana"
+                                    strongLabel="Forte!"
+                                    formControlName="password"
+                                    [toggleMask]="true"
+                                    [feedback]="true"
+                                >
+                                    <ng-template pTemplate="header">
+                                        <h6>Digite sua senha</h6>
+                                    </ng-template>
+                                    <ng-template pTemplate="footer">
+                                        <p-divider></p-divider>
+                                        <p class="mt-2">Sugestões</p>
+                                        <ul
+                                            class="pl-2 ml-2 mt-0"
+                                            style="line-height: 1.5"
+                                        >
+                                            <li>Uma letra minuscula</li>
+                                            <li>Uma letra maiúscula</li>
+                                            <li>Um número</li>
+                                            <li>No mínimo 8 caracteres</li>
+                                        </ul>
+                                    </ng-template>
+                                </p-password>
+                            </div>
+                            <div>
+                                <small
+                                    id="password-help"
+                                    class="p-error blo"
+                                    *ngIf="
+                                        submitted && formControl.password.errors
+                                    "
+                                    >Senha inválida.</small
+                                >
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <label for="verification-password" class="block"
+                                    >Confirme sua senha</label
+                                >
+                                <p-password
+                                    id="verification-password"
+                                    class="register-client-password"
+                                    formControlName="verificationPassword"
+                                    [toggleMask]="true"
+                                    [feedback]="false"
+                                >
+                                </p-password>
+                            </div>
+                            <div>
+                                <small
+                                    id="verification-password-help"
+                                    class="p-error blo"
+                                    *ngIf="
+                                        submitted && formControl.password.errors
+                                    "
+                                    >Senha inválida.</small
+                                >
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="3%">
+                            <div><label>Pessoa Jurídica?</label></div>
+                            <div>
+                                <p-checkbox
+                                    formControlName="isJuridical"
+                                    [binary]="true"
+                                    inputId="binary"
+                                ></p-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button
+                            pButton
+                            type="submit"
+                            label="Criar"
+                            styleClass="buy-button"
+                        ></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
