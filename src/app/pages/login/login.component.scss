@@ -1,6 +1,21 @@
+.login-page{
+    height: 1000px;
+}
+
+@media (max-width: 768px) {
+    .login-page{
+        height: 768px;
+    }
+}
+
 .card-login{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5%;
+}
+.email-input{
+    width:260px
+}
+.register-client-button{
+    width:232px
 }

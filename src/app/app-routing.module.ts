@@ -9,6 +9,8 @@ import { CartComponent } from './pages/cart/cart.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DeashboardComponent } from './pages/deashboard/deashboard.component';
 import { PurchaseStepsComponent } from './pages/purchase-steps/purchase-steps.component';
+import { RegisterClientComponent } from './pages/register-client/register-client.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +21,8 @@ const routes: Routes = [
     { path: 'cart', component: CartComponent },
     { path: 'dashboard', component: DeashboardComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'register-client', component: RegisterClientComponent },
     { path: 'purchase-steps', component: PurchaseStepsComponent },
 ];
 
