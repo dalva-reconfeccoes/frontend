@@ -1,5 +1,12 @@
 <div fxLayoutAlign="center" style="margin-top: 2rem">
-    <div fxFlex="95%" class="card" style="padding: 2%">
+    <div
+        fxFlex.xl="50%"
+        fxFlex.lg="75%"
+        fxFlex.sm="90%"
+        fxFlex.xs="95%"
+        class="card"
+        style="padding: 2%"
+    >
         <div fxLayout="row" fxLayoutAlign="space-around center">
             <div fxFlex fxLayoutAlign="center">
                 <button
@@ -8,6 +15,7 @@
                     type="button"
                     [ngClass]="classButtonSteps(0)"
                     (click)="showSelectedStep(0)"
+                    [disabled]="true"
                 >
                     <i class="pi pi-truck"></i>
                 </button>
@@ -20,7 +28,7 @@
                     type="button"
                     [ngClass]="classButtonSteps(1)"
                     (click)="showSelectedStep(1)"
-                    [disabled]="!listSteps[1].isValid"
+                    [disabled]="true"
                 >
                     <i class="pi pi-credit-card"></i>
                 </button>
@@ -33,7 +41,7 @@
                     type="button"
                     [ngClass]="classButtonSteps(2)"
                     (click)="showSelectedStep(2)"
-                    [disabled]="!listSteps[2].isValid"
+                    [disabled]="true"
                 >
                     <i class="pi pi-wallet"></i>
                 </button>
@@ -43,7 +51,14 @@
 </div>
 
 <div fxLayoutAlign="center">
-    <div fxFlex="95%" class="card" style="padding: 2%">
+    <div
+        fxFlex.xl="50%"
+        fxFlex.lg="75%"
+        fxFlex.sm="90%"
+        fxFlex.xs="95%"
+        class="card"
+        style="padding: 2%"
+    >
         <div *ngIf="stepClient === 0">
             <app-first-purchase-steps
                 (isValid)="updateFinishStep($event)"
