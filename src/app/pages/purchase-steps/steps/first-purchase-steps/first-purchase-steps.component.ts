@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-first-purchase-steps',
@@ -13,8 +14,13 @@ export class FirstPurchaseStepsComponent {
 
     @Output() isValid = new EventEmitter<boolean>();
     submitted = false;
-
-    constructor(private formBuilder: FormBuilder, private router: Router) {}
+    isValidCep: boolean;
+    msgErroCep: string;
+    constructor(
+        private formBuilder: FormBuilder,
+        private router: Router,
+        private messageService: MessageService
+    ) {}
 
     ngOnInit(): void {
         this.addressForm = this.getFormBuilder();
@@ -38,10 +44,29 @@ export class FirstPurchaseStepsComponent {
     }
     onSubmitAddress(): void {
         this.submitted = true;
+        this.isValidCep = true;
         console.log(this.formControl);
+
+        if (!this.selectedFreight) {
+            this.isValidCep = false;
+            this.msgErroCep = 'Selecione uma opção de entrega.';
+            this.showMessage(
+                'error',
+                'Frete não informado',
+                'Selecione uma opção de entrega pra continuar.'
+            );
+        }
+
         if (this.addressForm.valid && this.selectedFreight) {
             console.log('valid->', this.formControl);
             this.isValid.emit(true);
         }
+    }
+    showMessage(type: string, summary: string, detail: string) {
+        this.messageService.add({
+            severity: type,
+            summary: summary,
+            detail: detail,
+        });
     }
 }

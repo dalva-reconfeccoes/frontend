@@ -31,12 +31,12 @@ export class SecondPurchaseStepsComponent {
     }
     getFormBuilder() {
         return this.formBuilder.group({
-            name: [this.name, [Validators.required]],
-            number: [this.number, [Validators.required]],
-            cvc: [this.cvc, [Validators.required]],
-            maskCvc: [this.maskCvc, [Validators.required]],
-            expiry: [this.expiry, [Validators.required]],
-            cpf: [this.cpf, [Validators.required]],
+            name: ['', [Validators.required]],
+            number: ['', [Validators.required]],
+            cvc: ['', [Validators.required]],
+            maskCvc: ['', [Validators.required]],
+            expiry: ['', [Validators.required]],
+            cpf: ['', [Validators.required]],
         });
     }
     get formControl() {

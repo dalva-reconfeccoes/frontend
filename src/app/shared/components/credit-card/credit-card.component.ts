@@ -33,9 +33,13 @@ export class CreditCardComponent {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['number']) this.valideNumber();
+        console.log(1);
         if (changes['name']) this.valideName();
+        console.log(2);
         if (changes['expiry']) this.valideExpiry();
+        console.log(3);
         if (changes['cvc']) this.valideCVC();
+        console.log(4);
     }
 
     valideName(): void {
