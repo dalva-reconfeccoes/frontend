@@ -1,0 +1,140 @@
+<form
+    class="user-login"
+    [formGroup]="registerClientForm"
+    (ngSubmit)="onSubmitRegisterClient()"
+>
+    <div fxLayout="column" fxLayoutGap="15%">
+        <div fxLayout="column" fxLayoutGap="5%">
+            <div>
+                <div>
+                    <label for="name" class="block">Nome completo</label>
+                </div>
+                <div>
+                    <input
+                        id="name"
+                        type="name"
+                        class="register-client-input"
+                        aria-describedby="name-help"
+                        formControlName="name"
+                        [(ngModel)]="newClient.name"
+                        pInputText
+                        required
+                    />
+                </div>
+                <div>
+                    <small
+                        id="name-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.name.errors"
+                        >{{ clientFormErrors.name }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="email" class="block">E-mail</label>
+                </div>
+                <div>
+                    <input
+                        id="email"
+                        type="email"
+                        class="register-client-input"
+                        aria-describedby="email-help"
+                        formControlName="email"
+                        [(ngModel)]="newClient.email"
+                        pInputText
+                        required
+                    />
+                </div>
+                <div>
+                    <small
+                        id="email-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.email.errors"
+                        >{{ clientFormErrors.email }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="password" class="block">Senha de acesso</label>
+                    <p-password
+                        id="password"
+                        class="register-client-password"
+                        weakLabel="Fraca"
+                        mediumLabel="Mediana"
+                        strongLabel="Forte!"
+                        formControlName="password"
+                        [(ngModel)]="newClient.password"
+                        [toggleMask]="true"
+                        [feedback]="true"
+                    >
+                        <ng-template pTemplate="header">
+                            <h6>Digite sua senha</h6>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <p-divider></p-divider>
+                            <p class="mt-2">Sugestões</p>
+                            <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                <li>Uma letra minuscula</li>
+                                <li>Uma letra maiúscula</li>
+                                <li>Um número</li>
+                                <li>No mínimo 8 caracteres</li>
+                            </ul>
+                        </ng-template>
+                    </p-password>
+                </div>
+                <div>
+                    <small
+                        id="password-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.password.errors"
+                        >{{ clientFormErrors.password }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="verification-password" class="block"
+                        >Confirme sua senha</label
+                    >
+                    <p-password
+                        id="verification-password"
+                        class="register-client-password"
+                        formControlName="confirmPassword"
+                        [toggleMask]="true"
+                        [feedback]="false"
+                    >
+                    </p-password>
+                </div>
+                <div>
+                    <small
+                        id="verification-password-help"
+                        class="p-error blo"
+                        *ngIf="passwordMatchError"
+                        >{{ clientFormErrors.confirmPassword }}</small
+                    >
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="3%">
+                <div><label>Pessoa Jurídica?</label></div>
+                <div>
+                    <p-checkbox
+                        [(ngModel)]="newClient.isJuridical"
+                        formControlName="isJuridical"
+                        [binary]="true"
+                        inputId="binary"
+                    ></p-checkbox>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button
+                pButton
+                type="submit"
+                label="Criar"
+                styleClass="buy-button"
+            ></button>
+        </div>
+    </div>
+</form>

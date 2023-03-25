@@ -55,6 +55,8 @@ import { ThirdPurchaseStepsComponent } from './pages/purchase-steps/steps/third-
 import { CreditCardComponent } from './shared/components/credit-card/credit-card.component';
 import { RegisterClientComponent } from './pages/register-client/register-client.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { RegisterClientFormComponent } from './shared/components/forms/register-client-form/register-client-form.component';
+import { LoginFormComponent } from './shared/components/forms/login-form/login-form.component';
 
 @NgModule({
     declarations: [
@@ -77,6 +79,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
         CreditCardComponent,
         RegisterClientComponent,
         ForgotPasswordComponent,
+        RegisterClientFormComponent,
+        LoginFormComponent,
     ],
     imports: [
         BrowserModule,

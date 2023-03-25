@@ -1,0 +1,66 @@
+<form class="user-login" [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+    <div fxLayout="column" fxLayoutGap="15%">
+        <div fxLayout="column" fxLayoutGap="6%">
+            <div>
+                <div>
+                    <label for="email" class="block">E-mail</label>
+                </div>
+                <div>
+                    <input
+                        id="email"
+                        type="email"
+                        [(ngModel)]="newLogin.email"
+                        class="email-input"
+                        aria-describedby="email-help"
+                        formControlName="email"
+                        pInputText
+                        required
+                    />
+                </div>
+                <div>
+                    <small
+                        id="email-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.email.errors"
+                        >{{ loginFormErrors.email }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="password" class="block">Senha</label>
+                </div>
+                <div>
+                    <p-password
+                        id="password"
+                        [(ngModel)]="newLogin.password"
+                        formControlName="password"
+                        [toggleMask]="true"
+                        [feedback]="false"
+                    ></p-password>
+                </div>
+                <div>
+                    <small
+                        id="password-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.password.errors"
+                        >{{ loginFormErrors.password }}</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <button
+                    pButton
+                    type="submit"
+                    label="Acessar"
+                    styleClass="buy-button"
+                ></button>
+            </div>
+            <div fxLayoutAlign="end">
+                <a [routerLink]="['/forgot-password']">Esqueceu a senha?</a>
+            </div>
+        </div>
+    </div>
+</form>

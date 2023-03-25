@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterClientModel } from '../../shared/models/register-client.model';
+import { CustomValidators } from '../../shared/validators/custom-validators';
+import { cl } from '@fullcalendar/core/internal-common';
 
 @Component({
     selector: 'app-register-client',
@@ -9,36 +16,15 @@ import { RegisterClientModel } from '../../shared/models/register-client.model';
     styleUrls: ['./register-client.component.scss'],
 })
 export class RegisterClientComponent {
-    registerClientForm: FormGroup;
-    newClient: RegisterClientModel = new RegisterClientModel();
-    submitted = false;
+    client: RegisterClientModel;
 
-    constructor(private formBuilder: FormBuilder, private router: Router) {}
-    ngOnInit(): void {
-        this.registerClientForm = this.initRegisterClientForm(this.newClient);
-    }
+    constructor() {}
+    ngOnInit(): void {}
 
-    initRegisterClientForm(newClient: RegisterClientModel) {
-        return this.formBuilder.group({
-            email: [newClient.email, [Validators.email, Validators.required]],
-            name: [newClient.name, [Validators.required]],
-            password: [newClient.password, [Validators.required]],
-            verificationPassword: [
-                newClient.verificationPassword,
-                [Validators.required],
-            ],
-            isJuridical: [newClient.isJuridical, [Validators.required]],
-        });
-    }
-    get formControl() {
-        return this.registerClientForm.controls;
-    }
-    onSubmitRegisterClient(): void {
-        this.submitted = true;
-        console.log(this.formControl);
-        if (this.registerClientForm.valid) {
-            console.log(this.formControl);
-            console.log('-->', this.newClient);
+    setNewClientData(newClient) {
+        if (newClient) {
+            this.client = newClient;
+            console.log(this.client);
         }
     }
 }

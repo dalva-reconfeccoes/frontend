@@ -1,4 +1,10 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
 import * as Payment from 'payment';
 
 @Component({
@@ -16,11 +22,12 @@ export class CreditCardComponent {
         name: 'NOME',
         valid: 'validade',
     };
-    issuer: string = 'unknown';
     @Input() focused: string = '';
+    @Output() type = new EventEmitter<string>();
+    issuer: string = 'unknown';
     maxLength: number = 16;
     nextNumber: string = '';
-    expirylabel: string = '';
+
     constructor() {}
 
     ngOnInit(): void {
@@ -33,13 +40,9 @@ export class CreditCardComponent {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['number']) this.valideNumber();
-        console.log(1);
         if (changes['name']) this.valideName();
-        console.log(2);
         if (changes['expiry']) this.valideExpiry();
-        console.log(3);
         if (changes['cvc']) this.valideCVC();
-        console.log(4);
     }
 
     valideName(): void {
@@ -61,7 +64,6 @@ export class CreditCardComponent {
     }
 
     valideCVC(): void {
-        console.log('--->', this.cvc);
         if (this.cvc.length > 4) {
             this.cvc = this.cvc?.slice(0, 4);
         }
@@ -84,7 +86,11 @@ export class CreditCardComponent {
     }
 
     issuerCard(): void {
+        this.type.emit(undefined);
         this.issuer = Payment.fns.cardType(this.number) || 'unknown';
+        if (this.issuer !== 'unknown') {
+            this.type.emit(this.issuer);
+        }
     }
 
     optionsCard(): void {

@@ -1,0 +1,25 @@
+.register-client-page{
+    height: 1000px;
+}
+
+@media (max-width: 768px) {
+    .register-client-page{
+        height: 768px;
+    }
+}
+
+.card-register-client{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-client-input{
+    width: 270px;
+}
+
+:host ::ng-deep {
+    .register-client-password input{
+        width: 270px;
+    }
+}
