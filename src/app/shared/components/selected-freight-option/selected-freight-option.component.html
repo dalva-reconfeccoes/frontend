@@ -1,0 +1,66 @@
+<div>
+    <form class="user-login" [formGroup]="cepForm" (ngSubmit)="onSubmit()">
+        <div fxLayoutAlign="center end" fxLayoutGap="3%" fxLayout="row">
+            <div>
+                <div>
+                    <span>CEP</span>
+                </div>
+                <div>
+                    <p-inputMask
+                        id="cep"
+                        name="cep"
+                        mask="99999-999"
+                        [(ngModel)]="cep"
+                        (ngModelChange)="updateCepValue()"
+                        formControlName="cep"
+                        placeholder="00000-000"
+                    ></p-inputMask>
+                </div>
+                <div>
+                    <small
+                        id="cep-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.cep.errors"
+                        >Cep inválido</small
+                    >
+                </div>
+            </div>
+            <div fxLayoutAlign="start">
+                <p-button
+                    icon="pi pi-search"
+                    [loading]="loadingCep"
+                    type="submit"
+                ></p-button>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <div *ngIf="isValidCep" class="card" style="margin-top: 9%; padding: 3%">
+        <p-table
+            [value]="options"
+            [(selection)]="selected"
+            (onRowSelect)="onClickRow()"
+            selectionMode="single"
+            [tableStyle]="{ 'font-size': '72%' }"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Opções</th>
+                    <th>Prazo</th>
+                    <th>Valor</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-option>
+                <tr [pSelectableRow]="option">
+                    <td>{{ option.name }}</td>
+                    <td>
+                        Chegará em {{ option.deliveryTime }} dias,
+                        {{ option.arrivalDay }}
+                    </td>
+                    <td>{{ option.value | currency : "R$" }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

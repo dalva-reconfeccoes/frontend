@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { AddressModel } from '../../../../shared/models/address.model';
 
 @Component({
     selector: 'app-first-purchase-steps',
@@ -9,58 +10,71 @@ import { MessageService } from 'primeng/api';
     styleUrls: ['./first-purchase-steps.component.scss'],
 })
 export class FirstPurchaseStepsComponent {
-    addressForm: FormGroup;
-    selectedFreight: any;
-
     @Output() isValid = new EventEmitter<boolean>();
+    address: AddressModel;
+    addressFormIsValid: boolean;
+
     submitted = false;
-    isValidCep: boolean;
-    msgErroCep: string;
+
+    selectedFreight: any;
+    // addressForm: FormGroup;
+    isSelectedFreight: boolean;
     constructor(
-        private formBuilder: FormBuilder,
         private router: Router,
         private messageService: MessageService
     ) {}
 
     ngOnInit(): void {
-        this.addressForm = this.getFormBuilder();
+        this.address = new AddressModel();
+    }
+    addCepAddress(cep) {
+        if (cep) {
+            this.address.cep = cep;
+        }
     }
 
     setSelectedFreight(event) {
         this.selectedFreight = event;
     }
 
-    getFormBuilder() {
-        return this.formBuilder.group({
-            streetName: ['', [Validators.required]],
-            neighborhood: ['', [Validators.required]],
-            state: ['', [Validators.required]],
-            number: ['', [Validators.required]],
-            complement: ['', [Validators.required]],
-        });
+    setAddressFormIsValid(isValid) {
+        this.addressFormIsValid = isValid;
     }
-    get formControl() {
-        return this.addressForm.controls;
-    }
+
     onSubmitAddress(): void {
         this.submitted = true;
-        this.isValidCep = true;
-        console.log(this.formControl);
+        this.isSelectedFreight = true;
+        if (this.validValues()) {
+            console.log(this.address);
+            this.isValid.emit(true);
+        }
+    }
 
-        if (!this.selectedFreight) {
-            this.isValidCep = false;
-            this.msgErroCep = 'Selecione uma opção de entrega.';
+    validValues() {
+        let isValid = true;
+
+        if (!this.addressFormIsValid || this.address.cep === '') {
+            this.showMessage(
+                'error',
+                'Endereço não informado',
+                'Favor, informe seus dados de entrega.'
+            );
+            isValid = false;
+        }
+        if (!this.selectedFreight && this.address.cep !== '') {
+            this.isSelectedFreight = false;
             this.showMessage(
                 'error',
                 'Frete não informado',
                 'Selecione uma opção de entrega pra continuar.'
             );
+            isValid = false;
         }
 
-        if (this.addressForm.valid && this.selectedFreight) {
-            console.log('valid->', this.formControl);
-            this.isValid.emit(true);
+        if (!this.address) {
+            isValid = false;
         }
+        return isValid;
     }
     showMessage(type: string, summary: string, detail: string) {
         this.messageService.add({

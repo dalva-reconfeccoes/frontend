@@ -1,13 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Login } from '../../../models/login.model';
-import { Router } from '@angular/router';
-import { RegisterClientFormErrors } from '../register-client-form/register-client-form-errors';
 import { LoginFormErrors } from './login-form-errors';
 
 @Component({

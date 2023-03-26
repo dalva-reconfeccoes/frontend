@@ -1,4 +1,7 @@
 :host ::ng-deep {
+    .p-error{
+        position: absolute;
+    }
 
 	.p-datatable .p-datatable-thead>tr>th{
 		text-align: center;
@@ -27,6 +30,7 @@
         color: black;
 	}
 }
+
 
 
 

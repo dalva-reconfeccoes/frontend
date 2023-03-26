@@ -13,167 +13,32 @@
         <div fxFlex.xl="40%" fxFlex.lg="40%" fxLayoutAlign="center">
             <div>
                 <div style="margin-top: 4%">
-                    <app-cep-component
+                    <app-selected-freight-option-component
                         id="cep"
                         type="cep"
+                        [submitted]="submitted"
+                        (validCep)="addCepAddress($event)"
                         [selected]="selectedFreight"
                         (onRowSelect)="setSelectedFreight($event)"
-                    ></app-cep-component>
+                    ></app-selected-freight-option-component>
                 </div>
                 <div>
                     <small
                         id="cep-help"
                         class="p-error blo"
-                        *ngIf="submitted && !isValidCep"
-                        >{{ msgErroCep }}</small
+                        *ngIf="submitted && !isSelectedFreight"
+                        >Selecione uma opção de entrega.</small
                     >
                 </div>
             </div>
         </div>
 
         <div fxFlex.xl="50%" fxFlex.lg="55%">
-            <form class="user-address" [formGroup]="addressForm">
-                <div
-                    fxLayout="column"
-                    fxLayoutGap="3%"
-                    fxLayoutAlign="center center"
-                >
-                    <div
-                        fxLayout="row wrap"
-                        fxLayoutGap="3%"
-                        fxLayout.sm="column"
-                        fxLayout.xs="column"
-                    >
-                        <div>
-                            <div>
-                                <label for="streetName" class="block"
-                                    >Logradouro</label
-                                >
-                            </div>
-                            <div>
-                                <input
-                                    id="streetName"
-                                    type="streetName"
-                                    formControlName="streetName"
-                                    pInputText
-                                />
-                            </div>
-
-                            <div>
-                                <small
-                                    id="streetName-help"
-                                    class="p-error blo"
-                                    *ngIf="
-                                        submitted &&
-                                        formControl.streetName.errors
-                                    "
-                                    >Logradouro inválido.</small
-                                >
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <label for="state" class="block"
-                                    >Localidade</label
-                                >
-                            </div>
-                            <div>
-                                <input
-                                    id="state"
-                                    type="state"
-                                    formControlName="state"
-                                    pInputText
-                                />
-                            </div>
-                            <div>
-                                <small
-                                    id="state-help"
-                                    class="p-error blo"
-                                    *ngIf="
-                                        submitted && formControl.state.errors
-                                    "
-                                    >Localidade inválida.</small
-                                >
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <label for="neighborhood" class="block"
-                                    >Bairro</label
-                                >
-                            </div>
-                            <div>
-                                <input
-                                    id="neighborhood"
-                                    type="neighborhood"
-                                    formControlName="neighborhood"
-                                    pInputText
-                                />
-                            </div>
-                            <div>
-                                <small
-                                    id="neighborhood-help"
-                                    class="p-error blo"
-                                    *ngIf="
-                                        submitted &&
-                                        formControl.neighborhood.errors
-                                    "
-                                    >Bairro inválido.</small
-                                >
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <label for="number" class="block">Numero</label>
-                            </div>
-                            <div>
-                                <input
-                                    id="number"
-                                    type="number"
-                                    formControlName="number"
-                                    pInputText
-                                />
-                            </div>
-                            <div>
-                                <small
-                                    id="number-help"
-                                    class="p-error blo"
-                                    *ngIf="
-                                        submitted && formControl.number.errors
-                                    "
-                                    >Numero inválido.</small
-                                >
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <label for="complement" class="block"
-                                    >Complemento</label
-                                >
-                            </div>
-                            <div>
-                                <input
-                                    id="complement"
-                                    type="complement"
-                                    formControlName="complement"
-                                    pInputText
-                                />
-                            </div>
-                            <div>
-                                <small
-                                    id="complement-help"
-                                    class="p-error blo"
-                                    *ngIf="
-                                        submitted &&
-                                        formControl.complement.errors
-                                    "
-                                    >Complemento inválido.</small
-                                >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <app-address-form
+                [submitted]="submitted"
+                [newAddress]="address"
+                (addressFormEvent)="setAddressFormIsValid($event)"
+            ></app-address-form>
         </div>
     </div>
     <div fxLayoutAlign="end">
@@ -190,129 +55,3 @@
         </div>
     </div>
 </div>
-<!--
-    <div fxLayout="column" fxLayoutGap="10%">
-        <div fxLayoutAlign="center">
-            <h3>Dados de Entrega</h3>
-        </div>
-        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center start">
-            <div fxFlex="100%">
-                <app-cep-component
-                    id="cep"
-                    type="cep"
-                    formControlName="cep"
-                    [selected]="selectedFreight"
-                    (onRowSelect)="setSelectedFreight($event)"
-                ></app-cep-component>
-            </div>
-            <div>
-                <div>
-                    <form class="user-address" [formGroup]="addressForm">
-                        <div
-                            fxLayout="column"
-                            fxLayoutGap="3%"
-                            fxLayoutAlign="center center"
-                        >
-                            <div
-                                fxLayout="row wrap"
-                                fxLayoutGap="3%"
-                                fxLayout.sm="column"
-                                fxLayout.xs="column"
-                            >
-                                <div>
-                                    <div>
-                                        <label for="streetName" class="block"
-                                            >Logradouro</label
-                                        >
-                                    </div>
-                                    <div>
-                                        <input
-                                            id="streetName"
-                                            type="streetName"
-                                            formControlName="streetName"
-                                            pInputText
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <label for="state" class="block"
-                                            >Localidade</label
-                                        >
-                                    </div>
-                                    <div>
-                                        <input
-                                            id="state"
-                                            type="state"
-                                            formControlName="state"
-                                            pInputText
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <label for="neighborhood" class="block"
-                                            >Bairro</label
-                                        >
-                                    </div>
-                                    <div>
-                                        <input
-                                            id="neighborhood"
-                                            type="neighborhood"
-                                            formControlName="neighborhood"
-                                            pInputText
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <label for="number" class="block"
-                                            >Numero</label
-                                        >
-                                    </div>
-                                    <div>
-                                        <input
-                                            id="number"
-                                            type="number"
-                                            formControlName="number"
-                                            pInputText
-                                        />
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <label for="complement" class="block"
-                                            >Complemento</label
-                                        >
-                                    </div>
-                                    <div>
-                                        <input
-                                            id="complement"
-                                            type="complement"
-                                            formControlName="complement"
-                                            pInputText
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div fxLayout="column">
-            <div fxLayoutAlign="end" style="margin-right: 15%">
-                <button
-                    icon="pi pi-check"
-                    type="submit"
-                    class="p-button"
-                    styleClass="next-step-button"
-                    (click)="onSubmitAddress()"
-                >
-                    <i class="icon-next-step pi pi-angle-right"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    -->

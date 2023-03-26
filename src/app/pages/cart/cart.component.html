@@ -82,10 +82,10 @@
         </div>
         <hr />
         <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
-            <app-cep-component
+            <app-selected-freight-option-component
                 [selected]="selectedFreight"
                 (onRowSelect)="setSelectedFreightFromEvent($event)"
-            ></app-cep-component>
+            ></app-selected-freight-option-component>
         </div>
         <div
             *ngIf="selectedFreight"

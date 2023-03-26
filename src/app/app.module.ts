@@ -44,7 +44,6 @@ import { HomeComponent } from './pages/home/home.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { SelectedProductComponent } from './pages/selected-product/selected-product.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { CepComponent } from './shared/components/cep/cep.component';
 import { MobileButtonMenuComponent } from './shared/components/mobile-button-menu/mobile-button-menu.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DeashboardComponent } from './pages/deashboard/deashboard.component';
@@ -57,6 +56,8 @@ import { RegisterClientComponent } from './pages/register-client/register-client
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { RegisterClientFormComponent } from './shared/components/forms/register-client-form/register-client-form.component';
 import { LoginFormComponent } from './shared/components/forms/login-form/login-form.component';
+import { SelectedFreightOptionComponent } from './shared/components/selected-freight-option/selected-freight-option.component';
+import { AddressFormComponent } from './shared/components/forms/address-form/address-form.component';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,6 @@ import { LoginFormComponent } from './shared/components/forms/login-form/login-f
         ContactComponent,
         SelectedProductComponent,
         CartComponent,
-        CepComponent,
         MobileButtonMenuComponent,
         LoginComponent,
         DeashboardComponent,
@@ -81,6 +81,8 @@ import { LoginFormComponent } from './shared/components/forms/login-form/login-f
         ForgotPasswordComponent,
         RegisterClientFormComponent,
         LoginFormComponent,
+        SelectedFreightOptionComponent,
+        AddressFormComponent,
     ],
     imports: [
         BrowserModule,

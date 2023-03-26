@@ -1,0 +1,126 @@
+<form class="user-address" [formGroup]="addressForm">
+    <div fxLayout="column" fxLayoutGap="3%" fxLayoutAlign="center center">
+        <div
+            fxLayout="row wrap"
+            fxLayoutGap="3%"
+            fxLayout.sm="column"
+            fxLayout.xs="column"
+        >
+            <div>
+                <div>
+                    <label for="streetName" class="block">Logradouro</label>
+                </div>
+                <div>
+                    <input
+                        id="streetName"
+                        type="streetName"
+                        formControlName="streetName"
+                        [(ngModel)]="newAddress.streetName"
+                        (ngModelChange)="checkFormIsValid()"
+                        pInputText
+                    />
+                </div>
+                <div>
+                    <small
+                        id="streetName-help"
+                        class="p-error blo"
+                        *ngIf="formControl.streetName.errors && submitted"
+                        >{{ addressErros.streetName }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="state" class="block">Localidade</label>
+                </div>
+                <div>
+                    <input
+                        id="state"
+                        type="state"
+                        formControlName="state"
+                        [(ngModel)]="newAddress.state"
+                        (ngModelChange)="checkFormIsValid()"
+                        pInputText
+                    />
+                </div>
+                <div>
+                    <small
+                        id="state-help"
+                        class="p-error blo"
+                        *ngIf="formControl.state.errors && submitted"
+                        >{{ addressErros.state }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="neighborhood" class="block">Bairro</label>
+                </div>
+                <div>
+                    <input
+                        id="neighborhood"
+                        type="neighborhood"
+                        formControlName="neighborhood"
+                        [(ngModel)]="newAddress.neighborhood"
+                        (ngModelChange)="checkFormIsValid()"
+                        pInputText
+                    />
+                </div>
+                <div>
+                    <small
+                        id="neighborhood-help"
+                        class="p-error blo"
+                        *ngIf="formControl.neighborhood.errors && submitted"
+                        >{{ addressErros.neighborhood }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="number" class="block">Número</label>
+                </div>
+                <div>
+                    <input
+                        id="number"
+                        type="number"
+                        formControlName="number"
+                        [(ngModel)]="newAddress.number"
+                        (ngModelChange)="checkFormIsValid()"
+                        pInputText
+                    />
+                </div>
+                <div>
+                    <small
+                        id="number-help"
+                        class="p-error blo"
+                        *ngIf="formControl.number.errors && submitted"
+                        >{{ addressErros.number }}</small
+                    >
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="complement" class="block">Complemento</label>
+                </div>
+                <div>
+                    <input
+                        id="complement"
+                        type="complement"
+                        formControlName="complement"
+                        [(ngModel)]="newAddress.complement"
+                        (ngModelChange)="checkFormIsValid()"
+                        pInputText
+                    />
+                </div>
+                <div>
+                    <small
+                        id="complement-help"
+                        class="p-error blo"
+                        *ngIf="formControl.complement.errors && submitted"
+                        >{{ addressErros.complement }}</small
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
