@@ -58,6 +58,7 @@ import { RegisterClientFormComponent } from './shared/components/forms/register-
 import { LoginFormComponent } from './shared/components/forms/login-form/login-form.component';
 import { SelectedFreightOptionComponent } from './shared/components/selected-freight-option/selected-freight-option.component';
 import { AddressFormComponent } from './shared/components/forms/address-form/address-form.component';
+import { CreditCardFormComponent } from './shared/components/forms/credit-card-form/credit-card-form.component';
 
 @NgModule({
     declarations: [
@@ -83,6 +84,7 @@ import { AddressFormComponent } from './shared/components/forms/address-form/add
         LoginFormComponent,
         SelectedFreightOptionComponent,
         AddressFormComponent,
+        CreditCardFormComponent,
     ],
     imports: [
         BrowserModule,

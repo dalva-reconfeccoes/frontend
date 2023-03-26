@@ -1,0 +1,141 @@
+<form [formGroup]="creditCardForm">
+    <div fxLayoutGap="8%" fxLayout="column">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="6%">
+            <div fxFlex>
+                <div>
+                    <label for="cc-name" class="block">Nome</label>
+                </div>
+                <div>
+                    <input
+                        id="cc-name"
+                        type="cc-name"
+                        class="cc-name-input"
+                        autocomplete="cc-name"
+                        pInputText
+                        formControlName="name"
+                        [(ngModel)]="creditCard.name"
+                        (ngModelChange)="checkFormIsValid()"
+                        (click)="focusedInput('name')"
+                        (keydown.tab)="focusedInput('number')"
+                    />
+                </div>
+                <div>
+                    <small
+                        id="cc-name-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.name.errors"
+                        >Nome inválido.</small
+                    >
+                </div>
+            </div>
+        </div>
+        <div
+            fxLayout="row"
+            fxLayout.xs="column"
+            fxLayoutGap.xl="2%"
+            fxLayoutGap.lg="2%"
+            fxLayoutGap.xs="7%"
+        >
+            <div
+                fxFlex.xl="40%"
+                fxFlex.lg="40%"
+                fxFlex.sm="40%"
+                fxFlex.xs="60%"
+            >
+                <div>
+                    <label for="cc-number" class="block"
+                        >Numéro do cartão</label
+                    >
+                </div>
+                <div>
+                    <p-inputMask
+                        id="cc-number"
+                        class="cc-number-input"
+                        autocomplete="cc-number"
+                        type="credit-card-number"
+                        mask="9999.9999.9999.9?999"
+                        placeholder="0000.0000.0000.0000"
+                        formControlName="number"
+                        [(ngModel)]="creditCard.number"
+                        (ngModelChange)="checkFormIsValid()"
+                        (click)="focusedInput('number')"
+                        (keydown.tab)="focusedInput('cvc')"
+                    ></p-inputMask>
+                </div>
+                <div>
+                    <small
+                        id="cc-number-help"
+                        class="p-error blo"
+                        *ngIf="submitted && formControl.number.errors"
+                        >Numero de cartão inválido.</small
+                    >
+                </div>
+            </div>
+
+            <div
+                fxFlex
+                fxLayoutAlign="center center"
+                fxLayoutAlign.xs="start"
+                fxLayoutGap="5%"
+            >
+                <div fxFlex="30%">
+                    <div>
+                        <label for="cc-cvc" class="block">CVC</label>
+                    </div>
+                    <div>
+                        <p-inputMask
+                            id="cc-cvc"
+                            autocomplete="cc-cvc"
+                            class="cc-cvc-input"
+                            type="cc-cvc"
+                            mask="999?9"
+                            placeholder="***"
+                            formControlName="cvc"
+                            [(ngModel)]="creditCard.cvc"
+                            (ngModelChange)="checkFormIsValid()"
+                            (click)="focusedInput('cvc')"
+                            (keydown.tab)="focusedInput('expiry')"
+                        >
+                        </p-inputMask>
+                    </div>
+                    <div>
+                        <small
+                            id="cc-cvc-help"
+                            class="p-error blo"
+                            *ngIf="submitted && formControl.cvc.errors"
+                            >CVC inválido.</small
+                        >
+                    </div>
+                </div>
+                <div fxFlex="30%">
+                    <div>
+                        <label for="cc-expiry" class="block">Validade</label>
+                    </div>
+                    <div>
+                        <p-inputMask
+                            id="cc-expiry"
+                            type="cc-expiry"
+                            class="cc-expired-input"
+                            autocomplete="cc-expiry"
+                            mask="99/99"
+                            placeholder="00/00"
+                            formControlName="expiry"
+                            [(ngModel)]="creditCard.expiry"
+                            (ngModelChange)="checkFormIsValid()"
+                            (click)="focusedInput('expiry')"
+                            (keydown.tab)="focusedInput('cpf')"
+                        ></p-inputMask>
+                    </div>
+                    <div>
+                        <small
+                            id="cc-expiry-help"
+                            class="p-error blo"
+                            *ngIf="submitted && formControl.expiry.errors"
+                            >Data inválida.</small
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -24,6 +24,7 @@
     "@fullcalendar/core": "^6.1.4",
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
     "bootstrap": "^5.2.3",
+    "cpf-cnpj-validator": "^1.0.3",
     "payment": "^2.4.6",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",

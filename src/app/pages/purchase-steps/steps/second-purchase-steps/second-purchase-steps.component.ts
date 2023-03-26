@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { CreditCardModel } from '../../../../shared/models/credit-card.model';
+import { CustomValidators } from '../../../../shared/validators/custom-validators';
 
 @Component({
     selector: 'app-second-purchase-steps',
@@ -9,66 +10,72 @@ import { MessageService } from 'primeng/api';
     styleUrls: ['./second-purchase-steps.component.scss'],
 })
 export class SecondPurchaseStepsComponent {
-    name: string = '';
-    number: string = '';
-    cvc: string = '';
-    maskCvc: string = '';
-    expiry: string = '';
-    cpf: string = '';
-
-    type: string = '';
     @Output() isValid = new EventEmitter<boolean>();
-
+    creditCard: CreditCardModel;
+    cpf: string = '';
     focused: string = '';
-    creditCardForm: FormGroup;
     submitted = false;
+    creditCardFormIsValid = false;
+    isValidCPF = false;
 
     constructor(
-        private formBuilder: FormBuilder,
         private router: Router,
         private messageService: MessageService
-    ) {
-        this.creditCardForm = this.getFormBuilder();
+    ) {}
+
+    ngOnInit(): void {
+        this.creditCard = new CreditCardModel();
     }
 
-    ngOnInit(): void {}
+    validCPF() {
+        this.isValidCPF = CustomValidators.validateCpf(this.cpf);
+    }
+
+    setCreditCardFormIsValid(isValid) {
+        this.creditCardFormIsValid = isValid;
+    }
 
     focusedInput(input: string) {
         this.focused = input;
     }
-    getFormBuilder() {
-        return this.formBuilder.group({
-            name: ['', [Validators.required]],
-            number: ['', [Validators.required]],
-            cvc: ['', [Validators.required]],
-            expiry: ['', [Validators.required]],
-            cpf: ['', [Validators.required]],
-        });
-    }
 
     onTypeCardFound(event) {
-        this.type = event;
-        console.log('->', this.type);
-    }
-    get formControl() {
-        return this.creditCardForm.controls;
+        this.creditCard.type = event;
     }
 
     onSubmitCreditCard(): void {
         this.submitted = true;
-        console.log(this.formControl);
-        if (this.formControl.number.valid && !this.type) {
-            this.showMessage(
-                'error',
-                'Operadora de cartão inválida.',
-                'Por favor, informe um numero de cartão aceito.'
-            );
-        }
-        if (this.creditCardForm.valid) {
-            console.log(this.creditCardForm.valid, this.formControl);
+        if (this.validValues()) {
+            console.log(this.creditCard);
             this.isValid.emit(true);
         }
     }
+
+    validValues() {
+        let isValid = true;
+        if (!this.creditCardFormIsValid) {
+            isValid = false;
+        }
+        if (this.creditCard.type === undefined) {
+            this.showMessage(
+                'error',
+                'Operadora de cartão inválida.',
+                'Por favor, informe um número de cartão aceito.'
+            );
+            isValid = false;
+        }
+
+        if (!this.isValidCPF) {
+            this.showMessage(
+                'error',
+                'CPF inválido.',
+                'Por favor, informe um CPF valido.'
+            );
+            isValid = false;
+        }
+        return isValid;
+    }
+
     showMessage(type: string, summary: string, detail: string) {
         this.messageService.add({
             severity: type,

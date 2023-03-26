@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { cpf } from 'cpf-cnpj-validator';
 
 export class CustomValidators {
     static MatchValidator(source: string, target: string): ValidatorFn {
@@ -11,5 +12,8 @@ export class CustomValidators {
                 ? { mismatch: true }
                 : null;
         };
+    }
+    static validateCpf(num: string): boolean {
+        return cpf.isValid(num);
     }
 }

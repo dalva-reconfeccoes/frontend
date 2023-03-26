@@ -10,192 +10,53 @@
         fxLayoutGap.xs="10%"
     >
         <div fxFlex.xl="42%" fxFlex.lg="40%" fxFlex.sm="40%" fxFlex.xs="40%">
-            <form [formGroup]="creditCardForm">
-                <div fxLayoutGap="5%" fxLayout="column">
-                    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="3%">
-                        <div fxFlex>
-                            <div>
-                                <label for="cc-name" class="block">Nome</label>
-                            </div>
-                            <div>
-                                <input
-                                    id="cc-name"
-                                    type="cc-name"
-                                    class="cc-name-input"
-                                    autocomplete="cc-name"
-                                    pInputText
-                                    formControlName="name"
-                                    [(ngModel)]="name"
-                                    (click)="focusedInput('name')"
-                                    (keydown.tab)="focusedInput('number')"
-                                />
-                            </div>
-                            <div>
-                                <small
-                                    id="cc-name-help"
-                                    class="p-error blo"
-                                    *ngIf="submitted && formControl.name.errors"
-                                    >Nome inválido.</small
-                                >
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        fxLayout="row"
-                        fxLayout.xs="column"
-                        fxLayoutGap.xl="2%"
-                        fxLayoutGap.lg="2%"
-                        fxLayoutGap.xs="3%"
-                    >
-                        <div
-                            fxFlex.xl="40%"
-                            fxFlex.lg="40%"
-                            fxFlex.sm="40%"
-                            fxFlex.xs="60%"
-                        >
-                            <div>
-                                <label for="cc-number" class="block"
-                                    >Numéro do cartão</label
-                                >
-                            </div>
-                            <div>
-                                <p-inputMask
-                                    id="cc-number"
-                                    class="cc-number-input"
-                                    autocomplete="cc-number"
-                                    type="credit-card-number"
-                                    mask="9999.9999.9999.9?999"
-                                    placeholder="0000.0000.0000.0000"
-                                    formControlName="number"
-                                    [(ngModel)]="number"
-                                    (click)="focusedInput('number')"
-                                    (keydown.tab)="focusedInput('cvc')"
-                                ></p-inputMask>
-                            </div>
-                            <div>
-                                <small
-                                    id="cc-number-help"
-                                    class="p-error blo"
-                                    *ngIf="
-                                        submitted && formControl.number.errors
-                                    "
-                                    >Numero de cartão inválido.</small
-                                >
-                            </div>
-                        </div>
-
-                        <div
-                            fxFlex
-                            fxLayoutAlign="center center"
-                            fxLayoutAlign.xs="start"
-                            fxLayoutGap="5%"
-                        >
-                            <div fxFlex="30%">
-                                <div>
-                                    <label for="cc-cvc" class="block"
-                                        >CVC</label
-                                    >
-                                </div>
-                                <div>
-                                    <p-inputMask
-                                        id="cc-cvc"
-                                        autocomplete="cc-cvc"
-                                        class="cc-cvc-input"
-                                        type="cc-cvc"
-                                        mask="999?9"
-                                        placeholder="***"
-                                        formControlName="cvc"
-                                        [(ngModel)]="cvc"
-                                        (click)="focusedInput('cvc')"
-                                        (keydown.tab)="focusedInput('expiry')"
-                                    >
-                                    </p-inputMask>
-                                </div>
-                                <div>
-                                    <small
-                                        id="cc-cvc-help"
-                                        class="p-error blo"
-                                        *ngIf="
-                                            submitted && formControl.cvc.errors
-                                        "
-                                        >CVC inválido.</small
-                                    >
-                                </div>
-                            </div>
-                            <div fxFlex="30%">
-                                <div>
-                                    <label for="cc-expiry" class="block"
-                                        >Validade</label
-                                    >
-                                </div>
-                                <div>
-                                    <p-inputMask
-                                        id="cc-expiry"
-                                        type="cc-expiry"
-                                        class="cc-expired-input"
-                                        autocomplete="cc-expiry"
-                                        mask="99/99"
-                                        placeholder="00/00"
-                                        formControlName="expiry"
-                                        [(ngModel)]="expiry"
-                                        (click)="focusedInput('expiry')"
-                                        (keydown.tab)="focusedInput('cpf')"
-                                    ></p-inputMask>
-                                </div>
-                                <div>
-                                    <small
-                                        id="cc-expiry-help"
-                                        class="p-error blo"
-                                        *ngIf="
-                                            submitted &&
-                                            formControl.expiry.errors
-                                        "
-                                        >Data inválida.</small
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+            <div fxLayout="column" fxLayoutGap="8%">
+                <div>
+                    <app-credit-card-form
+                        [creditCard]="creditCard"
+                        (focusedEvent)="focusedInput($event)"
+                        [submitted]="submitted"
+                        (isValidFormEvent)="setCreditCardFormIsValid($event)"
+                    ></app-credit-card-form>
+                </div>
+                <div>
                     <div>
-                        <div>
-                            <div>
-                                <label for="cpf" class="block">CPF</label>
-                            </div>
-                            <div>
-                                <p-inputMask
-                                    id="cpf"
-                                    type="cpf"
-                                    class="cc-cpf-input"
-                                    autocomplete="cpf"
-                                    mask="999.999.999-99"
-                                    placeholder="000.000.000-00"
-                                    formControlName="cpf"
-                                    [(ngModel)]="cpf"
-                                ></p-inputMask>
-                            </div>
-                            <div>
-                                <small
-                                    id="cc-cpf-help"
-                                    class="p-error blo"
-                                    *ngIf="submitted && formControl.cpf.errors"
-                                    >CPF inválido.</small
-                                >
-                            </div>
-                        </div>
+                        <label for="cpf" class="block">CPF</label>
+                    </div>
+                    <div>
+                        <p-inputMask
+                            id="cpf"
+                            type="cpf"
+                            class="cc-cpf-input"
+                            autocomplete="cpf"
+                            mask="999.999.999-99"
+                            placeholder="000.000.000-00"
+                            [(ngModel)]="cpf"
+                            (ngModelChange)="validCPF()"
+                        ></p-inputMask>
+                    </div>
+                    <div>
+                        <small
+                            id="cc-cpf-help"
+                            class="p-error blo"
+                            *ngIf="submitted && !isValidCPF"
+                            >CPF inválido.</small
+                        >
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-        <div fxFlex="35%">
-            <app-credit-card
-                [name]="name"
-                [number]="number"
-                [expiry]="expiry"
-                [cvc]="cvc"
-                [focused]="focused"
-                (type)="onTypeCardFound($event)"
-            ></app-credit-card>
+        <div fxFlex="35%" fxLayout="column" fxLayoutAlign="start">
+            <div>
+                <app-credit-card
+                    [name]="creditCard.name"
+                    [number]="creditCard.number"
+                    [expiry]="creditCard.expiry"
+                    [cvc]="creditCard.cvc"
+                    [focused]="focused"
+                    (type)="onTypeCardFound($event)"
+                ></app-credit-card>
+            </div>
         </div>
     </div>
     <div fxLayoutAlign="end" style="margin-right: 15%">
