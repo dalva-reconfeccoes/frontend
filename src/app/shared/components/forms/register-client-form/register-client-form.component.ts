@@ -27,14 +27,54 @@ export class RegisterClientFormComponent {
     initRegisterClientForm() {
         return new FormGroup(
             {
-                email: new FormControl('', [Validators.required]),
                 name: new FormControl('', [Validators.required]),
-                password: new FormControl('', [Validators.required]),
+                email: new FormControl('', [
+                    Validators.required,
+                    Validators.email,
+                ]),
+                password: new FormControl('', [
+                    Validators.required,
+                    Validators.minLength(8),
+                ]),
                 confirmPassword: new FormControl('', [Validators.required]),
                 isJuridical: new FormControl(false, [Validators.required]),
             },
-            [CustomValidators.MatchValidator('password', 'confirmPassword')]
+            [
+                CustomValidators.MatchValidator('password', 'confirmPassword'),
+                CustomValidators.OnlyStringValidator('name'),
+                CustomValidators.WordsQuantityValidator('name', 2),
+            ]
         );
+    }
+
+    get nameMatchError() {
+        let isInvalidName = false;
+        let touched = this.registerClientForm.get('name')?.touched;
+        if (!touched && this.submitted) {
+            isInvalidName = true;
+        }
+        if (touched) {
+            isInvalidName = this.validOnlyString(isInvalidName, touched);
+            isInvalidName = this.validQuantityWords(isInvalidName, touched);
+        }
+        return isInvalidName;
+    }
+
+    validOnlyString(isInvalid: boolean, touched: boolean) {
+        const errors = this.registerClientForm.getError('invalidOnlyStrings');
+        if (errors && touched) {
+            this.clientFormErrors.name = 'Nome não pode conter numeros.';
+            isInvalid = true;
+        }
+        return isInvalid;
+    }
+    validQuantityWords(isInvalid: boolean, touched: boolean) {
+        const errors = this.registerClientForm.getError('invalidWordsQuantity');
+        if (errors && touched) {
+            this.clientFormErrors.name = 'Informe seu nome completo.';
+            isInvalid = true;
+        }
+        return isInvalid;
     }
 
     get passwordMatchError() {
@@ -55,6 +95,7 @@ export class RegisterClientFormComponent {
     }
     onSubmitRegisterClient(): void {
         this.submitted = true;
+        this.nameMatchError;
         if (this.registerClientForm.valid) {
             this.client.emit(this.newClient);
         }
