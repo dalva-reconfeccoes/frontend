@@ -1,0 +1,29 @@
+.verification-code-page{
+    height: 1000px;
+}
+
+
+@media (max-width: 768px) {
+    .verification-code-page{
+        height: 768px;
+    }
+
+}
+
+.code-input{
+    font-size: 25px;
+    width: 210px;
+    letter-spacing: 0.3em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.resend-code{
+    color: #00bbff;
+    cursor:pointer;
+}
+
+
+b, strong{
+    font-weight: unset;
+}

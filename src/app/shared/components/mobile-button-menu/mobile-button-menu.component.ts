@@ -14,7 +14,6 @@ export class MobileButtonMenuComponent {
     constructor(private router: Router, private primengConfig: PrimeNGConfig) {}
 
     sidebarToggle(id: string) {
-        console.log(id);
         if (id == 'buttonMenu') {
             if (this.sidebarVisible === false) {
                 this.sidebarOpen();

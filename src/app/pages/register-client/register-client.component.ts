@@ -18,13 +18,18 @@ import { cl } from '@fullcalendar/core/internal-common';
 export class RegisterClientComponent {
     client: RegisterClientModel;
 
-    constructor() {}
+    constructor(private router: Router) {}
     ngOnInit(): void {}
 
     setNewClientData(newClient) {
         if (newClient) {
             this.client = newClient;
             console.log(this.client);
+            this.navigate('verification-code');
         }
+    }
+
+    navigate(id: string) {
+        this.router.navigate(['/', id]);
     }
 }

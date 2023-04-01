@@ -34,6 +34,9 @@ import { PanelModule } from 'primeng/panel';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { CheckboxModule } from 'primeng/checkbox';
+import { AvatarModule } from 'primeng/avatar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -59,6 +62,7 @@ import { LoginFormComponent } from './shared/components/forms/login-form/login-f
 import { SelectedFreightOptionComponent } from './shared/components/selected-freight-option/selected-freight-option.component';
 import { AddressFormComponent } from './shared/components/forms/address-form/address-form.component';
 import { CreditCardFormComponent } from './shared/components/forms/credit-card-form/credit-card-form.component';
+import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
 
 @NgModule({
     declarations: [
@@ -85,6 +89,7 @@ import { CreditCardFormComponent } from './shared/components/forms/credit-card-f
         SelectedFreightOptionComponent,
         AddressFormComponent,
         CreditCardFormComponent,
+        VerificationCodeComponent,
     ],
     imports: [
         BrowserModule,
@@ -122,6 +127,9 @@ import { CreditCardFormComponent } from './shared/components/forms/credit-card-f
         PasswordModule,
         DividerModule,
         CheckboxModule,
+        AvatarModule,
+        ProgressSpinnerModule,
+        ProgressBarModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

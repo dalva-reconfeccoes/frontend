@@ -11,6 +11,8 @@ import { DeashboardComponent } from './pages/deashboard/deashboard.component';
 import { PurchaseStepsComponent } from './pages/purchase-steps/purchase-steps.component';
 import { RegisterClientComponent } from './pages/register-client/register-client.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
+import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,11 +21,20 @@ const routes: Routes = [
     { path: `product/:uuid`, component: SelectedProductComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'cart', component: CartComponent },
-    { path: 'dashboard', component: DeashboardComponent },
     { path: 'login', component: LoginComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: 'register-client', component: RegisterClientComponent },
-    { path: 'purchase-steps', component: PurchaseStepsComponent },
+    { path: 'verification-code', component: VerificationCodeComponent },
+    {
+        path: 'purchase-steps',
+        component: PurchaseStepsComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: 'dashboard',
+        component: DeashboardComponent,
+        canActivate: [AuthGuardService],
+    },
 ];
 
 @NgModule({

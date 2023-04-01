@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { Login } from '../../shared/models/login.model';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
+import { AuthService } from '../../auth.service';
 
 @Component({
     selector: 'app-login',
@@ -16,15 +18,18 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     login: Login;
 
-    constructor(private router: Router) {}
+    constructor(private authService: AuthService, private router: Router) {}
 
     ngOnInit(): void {}
 
     setNewLoginData(newLogin) {
         if (newLogin) {
             this.login = newLogin;
-            console.log(this.login);
-            this.navigate('dashboard');
+            this.authService
+                .login(this.login.email, this.login.password)
+                .subscribe((response) => {
+                    this.navigate('dashboard');
+                });
         }
     }
 

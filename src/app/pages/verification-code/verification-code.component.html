@@ -1,0 +1,63 @@
+<div fxLayoutAlign="center center" class="verification-code-page">
+    <div
+        class="card"
+        style="padding: 5%"
+        fxFlex.xl="30%"
+        fxFlex.lg="38%"
+        fxFlex.sm="65%"
+        fxFlex.xs="80%"
+        fxLayout="column"
+        fxLayoutGap="20%"
+    >
+        <div fxLayoutAlign="center"><h3>Verificação de e-mail</h3></div>
+        <div>
+            <p>
+                E-mail com código de verificação enviado para
+                <strong>"teste@teste@gmail.com"</strong>
+            </p>
+        </div>
+        <div
+            fxLayoutGap="10%"
+            fxFlex="80%"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+        >
+            <div fxLayout="column" fxLayoutGap="5%">
+                <div>
+                    <input class="code-input" maxlength="6" pInputText />
+                </div>
+                <div class="code-input">
+                    <button
+                        pButton
+                        type="submit"
+                        label="Verificar"
+                        styleClass="buy-button"
+                    ></button>
+                </div>
+                <div>
+                    <p>
+                        <a
+                            class="resend-code"
+                            (click)="resendVerificationCode()"
+                            >Reenviar código</a
+                        >
+                        de verificação.
+                    </p>
+                </div>
+            </div>
+
+            <div fxLayout="row center">
+                <div fxFlex="13%">
+                    <i class="pi pi-clock" style="font-size: 1.3rem"></i>
+                </div>
+                <div fxFlex="17%">{{ minutes }}:{{ seconds }}</div>
+                <div fxFlex="70%" style="width: 150px">
+                    <p-progressBar
+                        [value]="progress"
+                        [showValue]="false"
+                    ></p-progressBar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

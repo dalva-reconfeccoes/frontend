@@ -74,7 +74,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "dalvare:build"
+              "browserTarget": "dalvare:build",
+              "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
