@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
-import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators,
-} from '@angular/forms';
 import { Login } from '../../shared/models/login.model';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
 import { AuthService } from '../../auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-login',
@@ -18,7 +12,11 @@ import { AuthService } from '../../auth.service';
 export class LoginComponent {
     login: Login;
 
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private messageService: MessageService
+    ) {}
 
     ngOnInit(): void {}
 
@@ -27,13 +25,33 @@ export class LoginComponent {
             this.login = newLogin;
             this.authService
                 .login(this.login.email, this.login.password)
-                .subscribe((response) => {
-                    this.navigate('dashboard');
-                });
+                .subscribe(
+                    (response) => {
+                        this.navigate('dashboard');
+                    },
+                    (error) => {
+                        console.log('-->', error);
+                        if (error.status == 404) {
+                            this.showMessage(
+                                'error',
+                                'Usuário não encontrato',
+                                'Verifique seu email e senha.'
+                            );
+                        }
+                    }
+                );
         }
     }
 
     navigate(id: string) {
         this.router.navigate(['/', id]);
+    }
+
+    showMessage(type: string, summary: string, detail: string) {
+        this.messageService.add({
+            severity: type,
+            summary: summary,
+            detail: detail,
+        });
     }
 }

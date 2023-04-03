@@ -63,6 +63,7 @@ import { SelectedFreightOptionComponent } from './shared/components/selected-fre
 import { AddressFormComponent } from './shared/components/forms/address-form/address-form.component';
 import { CreditCardFormComponent } from './shared/components/forms/credit-card-form/credit-card-form.component';
 import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
     declarations: [
@@ -130,6 +131,7 @@ import { VerificationCodeComponent } from './pages/verification-code/verificatio
         AvatarModule,
         ProgressSpinnerModule,
         ProgressBarModule,
+        MessagesModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

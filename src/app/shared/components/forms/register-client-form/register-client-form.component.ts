@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RegisterClientModel } from '../../../models/register-client.model';
+import { ClientModel } from '../../../models/client.model';
 import { CustomValidators } from '../../../validators/custom-validators';
 import { RegisterClientFormErrors } from './register-client-form-errors';
 
@@ -12,14 +12,14 @@ import { RegisterClientFormErrors } from './register-client-form-errors';
 export class RegisterClientFormComponent {
     registerClientForm: FormGroup;
     checked: boolean = false;
-    newClient: RegisterClientModel;
+    newClient: ClientModel;
     clientFormErrors: RegisterClientFormErrors;
     submitted = false;
-    @Output() client = new EventEmitter<RegisterClientModel>();
+    @Output() client = new EventEmitter<ClientModel>();
 
     constructor() {}
     ngOnInit(): void {
-        this.newClient = new RegisterClientModel();
+        this.newClient = new ClientModel();
         this.clientFormErrors = new RegisterClientFormErrors();
         this.registerClientForm = this.initRegisterClientForm();
     }

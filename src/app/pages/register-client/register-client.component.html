@@ -2,7 +2,7 @@
     <div
         class="card"
         style="padding: 5%"
-        fxFlex.xl="30%"
+        fxFlex.xl="20%"
         fxFlex.lg="38%"
         fxFlex.sm="65%"
         fxFlex.xs="80%"
@@ -14,6 +14,9 @@
             <app-register-client-form
                 (client)="setNewClientData($event)"
             ></app-register-client-form>
+        </div>
+        <div>
+            <p-messages></p-messages>
         </div>
     </div>
 </div>

@@ -6,9 +6,11 @@ import {
     Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterClientModel } from '../../shared/models/register-client.model';
+import { ClientModel } from '../../shared/models/client.model';
 import { CustomValidators } from '../../shared/validators/custom-validators';
 import { cl } from '@fullcalendar/core/internal-common';
+import { RegisterClientService } from './register-client.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-register-client',
@@ -16,20 +18,55 @@ import { cl } from '@fullcalendar/core/internal-common';
     styleUrls: ['./register-client.component.scss'],
 })
 export class RegisterClientComponent {
-    client: RegisterClientModel;
+    client: ClientModel;
 
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        private registerClientService: RegisterClientService,
+        private messageService: MessageService
+    ) {}
     ngOnInit(): void {}
 
     setNewClientData(newClient) {
         if (newClient) {
             this.client = newClient;
-            console.log(this.client);
-            this.navigate('verification-code');
+            this.registerClient();
         }
     }
 
-    navigate(id: string) {
-        this.router.navigate(['/', id]);
+    private registerClient() {
+        this.registerClientService.newClient(this.client).subscribe(
+            (registeredClient: ClientModel) => {
+                this.navigateToVerificationCode(registeredClient.uuid);
+            },
+            (error) => {
+                this.registerClientErros(error);
+            }
+        );
+    }
+
+    private registerClientErros(error) {
+        if (
+            error.status == 400 &&
+            error.error.detail == 'Email already exists'
+        ) {
+            this.showMessage(
+                'error',
+                'E-mail já cadastrado',
+                'Verifique seu email.'
+            );
+        }
+    }
+
+    navigateToVerificationCode(uuid: string) {
+        this.router.navigate([`/verification-code/`, uuid]);
+    }
+
+    showMessage(type: string, summary: string, detail: string) {
+        this.messageService.add({
+            severity: type,
+            summary: summary,
+            detail: detail,
+        });
     }
 }

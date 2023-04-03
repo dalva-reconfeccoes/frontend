@@ -24,7 +24,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
     { path: 'register-client', component: RegisterClientComponent },
-    { path: 'verification-code', component: VerificationCodeComponent },
+    { path: 'verification-code/:uuid', component: VerificationCodeComponent },
     {
         path: 'purchase-steps',
         component: PurchaseStepsComponent,
