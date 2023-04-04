@@ -2,20 +2,65 @@
     <div
         class="card"
         style="padding: 5%"
-        fxFlex.xl="30%"
+        fxFlex.xl="20%"
         fxFlex.lg="38%"
         fxFlex.sm="65%"
         fxFlex.xs="80%"
         fxLayout="column"
-        fxLayoutGap="20%"
+        fxLayoutGap="10%"
     >
         <div fxLayoutAlign="center"><h3>Verificação de e-mail</h3></div>
-        <div>
-            <p>
-                E-mail com código de verificação enviado para
+        <div fxLayout="column" fxLayoutGap="10%">
+            <p>Código de verificação enviado para:</p>
+            <p fxLayoutAlign="center">
                 <strong>"teste@teste@gmail.com"</strong>
             </p>
         </div>
+        <div
+            fxLayoutGap="10%"
+            fxFlex="100%"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+        >
+            <div>
+                <input class="code-input" maxlength="6" pInputText />
+            </div>
+            <div class="code-input">
+                <button
+                    pButton
+                    type="submit"
+                    label="Verificar"
+                    styleClass="buy-button"
+                ></button>
+            </div>
+            <div>
+                <p>
+                    <a class="resend-code" (click)="resendVerificationCode()"
+                        >Reenviar código</a
+                    >
+                    de verificação.
+                </p>
+            </div>
+            <div
+                fxLayout="column"
+                fxLayoutGap="5%"
+                fxLayoutAlign="center center"
+            >
+                <div fxLayout="row" fxLayoutGap="10%">
+                    <div>
+                        <i class="pi pi-clock" style="font-size: 1.3rem"></i>
+                    </div>
+                    <div>{{ formatMinutes }}:{{ formatSeconds }}</div>
+                </div>
+                <div class="progress-bar-verification-code">
+                    <p-progressBar
+                        [value]="progress"
+                        [showValue]="false"
+                    ></p-progressBar>
+                </div>
+            </div>
+        </div>
+        <!--
         <div
             fxLayoutGap="10%"
             fxFlex="80%"
@@ -59,5 +104,6 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
 </div>

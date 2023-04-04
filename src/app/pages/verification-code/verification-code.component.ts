@@ -36,4 +36,19 @@ export class VerificationCodeComponent {
     get seconds(): number {
         return this.secondsLeft - this.minutes * 60;
     }
+
+    get formatSeconds(): string {
+        let seconds = this.seconds;
+        if (seconds < 10) {
+            return `0${this.seconds}`;
+        }
+        return `${this.seconds}`;
+    }
+    get formatMinutes(): string {
+        let minutes = this.minutes;
+        if (minutes < 10) {
+            return `0${this.minutes}`;
+        }
+        return `${this.minutes}`;
+    }
 }

@@ -2,17 +2,9 @@
     height: 1000px;
 }
 
-
-@media (max-width: 768px) {
-    .verification-code-page{
-        height: 768px;
-    }
-
-}
-
 .code-input{
     font-size: 25px;
-    width: 210px;
+    width: 375px;
     letter-spacing: 0.3em;
     text-align: center;
     text-transform: uppercase;
@@ -23,7 +15,29 @@
     cursor:pointer;
 }
 
+strong{
+    font-size: 19px;
+    text-decoration: underline;
+}
 
-b, strong{
-    font-weight: unset;
+.progress-bar-verification-code{
+    width: 378px
+}
+
+@media (max-width: 768px) {
+    .verification-code-page{
+        height: 768px;
+    }
+
+    .code-input{
+        width: 255px;
+    }
+
+    strong{
+        font-size: 15px;
+    }
+
+    .progress-bar-verification-code{
+        width: 270px
+    }
 }
