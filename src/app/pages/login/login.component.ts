@@ -31,10 +31,10 @@ export class LoginComponent {
                     },
                     (error) => {
                         console.log('-->', error);
-                        if (error.status == 404) {
+                        if (error.status == 404 || error.status == 400) {
                             this.showMessage(
                                 'error',
-                                'Usuário não encontrato',
+                                'Dados inválidos',
                                 'Verifique seu email e senha.'
                             );
                         }
@@ -52,6 +52,7 @@ export class LoginComponent {
             severity: type,
             summary: summary,
             detail: detail,
+            life: 3000,
         });
     }
 }

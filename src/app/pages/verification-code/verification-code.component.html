@@ -13,8 +13,9 @@
         <div fxLayout="column" fxLayoutGap="10%">
             <p>Código de verificação enviado para:</p>
             <p fxLayoutAlign="center">
-                <strong>"teste@teste@gmail.com"</strong>
+                <strong>{{ client.email }}</strong>
             </p>
+            <p>Verifique sua caixa de e-mail ou spam</p>
         </div>
         <div
             fxLayoutGap="10%"
@@ -23,7 +24,12 @@
             fxLayoutAlign="center center"
         >
             <div>
-                <input class="code-input" maxlength="6" pInputText />
+                <input
+                    [(ngModel)]="code"
+                    class="code-input"
+                    maxlength="6"
+                    pInputText
+                />
             </div>
             <div class="code-input">
                 <button
@@ -31,14 +37,18 @@
                     type="submit"
                     label="Verificar"
                     styleClass="buy-button"
+                    (click)="verifyUserCode()"
                 ></button>
+            </div>
+            <div>
+                <p-messages></p-messages>
             </div>
             <div>
                 <p>
                     <a class="resend-code" (click)="resendVerificationCode()"
                         >Reenviar código</a
                     >
-                    de verificação.
+                    de verificação
                 </p>
             </div>
             <div
@@ -60,50 +70,38 @@
                 </div>
             </div>
         </div>
-        <!--
-        <div
-            fxLayoutGap="10%"
-            fxFlex="80%"
-            fxLayout="column"
-            fxLayoutAlign="center center"
-        >
-            <div fxLayout="column" fxLayoutGap="5%">
-                <div>
-                    <input class="code-input" maxlength="6" pInputText />
-                </div>
-                <div class="code-input">
-                    <button
-                        pButton
-                        type="submit"
-                        label="Verificar"
-                        styleClass="buy-button"
-                    ></button>
-                </div>
-                <div>
-                    <p>
-                        <a
-                            class="resend-code"
-                            (click)="resendVerificationCode()"
-                            >Reenviar código</a
-                        >
-                        de verificação.
-                    </p>
-                </div>
-            </div>
-
-            <div fxLayout="row center">
-                <div fxFlex="13%">
-                    <i class="pi pi-clock" style="font-size: 1.3rem"></i>
-                </div>
-                <div fxFlex="17%">{{ minutes }}:{{ seconds }}</div>
-                <div fxFlex="70%" style="width: 150px">
-                    <p-progressBar
-                        [value]="progress"
-                        [showValue]="false"
-                    ></p-progressBar>
-                </div>
-            </div>
-        </div>
-        -->
     </div>
 </div>
+
+<p-dialog
+    [(visible)]="isVerify"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [closable]="false"
+>
+    <div fxLayout="column" fxLayoutGap="15%" fxLayoutAlign="center">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15%">
+            <div>
+                <h3 class="m-0">Conta verificada!</h3>
+            </div>
+            <div>
+                <i
+                    class="pi pi-verified"
+                    style="font-size: 9.3rem; color: #049532"
+                ></i>
+            </div>
+            <div>
+                <h3 class="m-0">Realize seu Login</h3>
+            </div>
+        </div>
+        <div>
+            <button
+                pButton
+                label="Ir para login"
+                styleClass="buy-button"
+                (click)="goToLogin()"
+            ></button>
+        </div>
+    </div>
+</p-dialog>

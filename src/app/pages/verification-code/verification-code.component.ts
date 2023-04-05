@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { ClientModel } from '../../shared/models/client.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VerificationCodeService } from './verification-code.service';
+import { BaseResponseModel } from '../../shared/models/base-response.model';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-verification-code',
@@ -9,21 +14,79 @@ export class VerificationCodeComponent {
     totalMinutes: number = 5;
     totalSeconds: number = this.totalMinutes * 60;
     secondsLeft: number = this.totalSeconds;
-    valueProgress: number;
-    constructor() {
+    uuid: string;
+    code: string;
+    client: ClientModel = new ClientModel();
+    isVerify: boolean = false;
+    resendCode: boolean = false;
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private service: VerificationCodeService,
+        private messageService: MessageService
+    ) {
         setInterval(() => {
             this.countDown();
-        }, 1000); // 1 segundo
+        }, 1000);
+    }
+
+    ngOnInit() {
+        this.uuid = this.route.snapshot.paramMap.get('uuid');
+        this.service.getClient(this.uuid).subscribe(
+            (response: ClientModel) => {
+                this.client = response;
+                this.service.sendCodeVerification(response.email).subscribe();
+            },
+            (error) => {
+                console.log('-->', error);
+            }
+        );
+    }
+
+    verifyUserCode() {
+        if (!this.code || !this.client) {
+            return;
+        }
+        this.service.verifyCode(this.client.email, this.code).subscribe(
+            (response: BaseResponseModel) => {
+                this.isVerify = true;
+            },
+            (error) => {
+                console.log('-->', error);
+                if (error.status == 401) {
+                    this.messageService.clear();
+                    this.showMessage('error', 'Código inválido', '');
+                }
+                if (error.status == 400) {
+                    this.messageService.clear();
+                    this.showMessage('error', 'Código expirado', '');
+                }
+            }
+        );
+    }
+    resendVerificationCode() {
+        if (!this.resendCode) {
+            this.service
+                .sendCodeVerification(this.client.email)
+                .subscribe(() => {
+                    this.messageService.clear();
+                    this.showMessage('success', 'Código reenviado', '');
+                });
+            this.resendCode = true;
+            setInterval(() => {
+                this.resendCode = false;
+            }, 6000);
+        }
+    }
+
+    goToLogin() {
+        this.router.navigate([`/login`]);
     }
 
     countDown() {
         if (this.secondsLeft > 0) {
             this.secondsLeft--;
         }
-    }
-
-    resendVerificationCode() {
-        console.log('Reenviar código de verificação');
     }
 
     get progress(): number {
@@ -50,5 +113,14 @@ export class VerificationCodeComponent {
             return `0${this.minutes}`;
         }
         return `${this.minutes}`;
+    }
+
+    showMessage(type: string, summary: string, detail: string) {
+        this.messageService.add({
+            severity: type,
+            summary: summary,
+            detail: detail,
+            life: 5000,
+        });
     }
 }
