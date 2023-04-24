@@ -22,7 +22,7 @@ export class RegisterClientComponent {
 
     constructor(
         private router: Router,
-        private registerClientService: RegisterClientService,
+        private service: RegisterClientService,
         private messageService: MessageService
     ) {}
     ngOnInit(): void {}
@@ -35,7 +35,7 @@ export class RegisterClientComponent {
     }
 
     private registerClient() {
-        this.registerClientService.newClient(this.client).subscribe(
+        this.service.newClient(this.client).subscribe(
             (registeredClient: ClientModel) => {
                 this.navigateToVerificationCode(registeredClient.uuid);
             },
@@ -59,7 +59,8 @@ export class RegisterClientComponent {
     }
 
     navigateToVerificationCode(uuid: string) {
-        this.router.navigate([`/verification-code/`, uuid]);
+        this.service.sendCodeVerification(this.client.email).subscribe();
+        this.router.navigate([`/verification-code/`, 'new-client', uuid]);
     }
 
     showMessage(type: string, summary: string, detail: string) {

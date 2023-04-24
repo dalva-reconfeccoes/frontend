@@ -15,10 +15,13 @@ export class VerificationCodeComponent {
     totalSeconds: number = this.totalMinutes * 60;
     secondsLeft: number = this.totalSeconds;
     uuid: string;
+    verificationRouter: string;
     code: string;
     client: ClientModel = new ClientModel();
     isVerify: boolean = false;
     resendCode: boolean = false;
+    dialogTextDescription: string;
+    dialogButtonLabel: string;
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -32,10 +35,12 @@ export class VerificationCodeComponent {
 
     ngOnInit() {
         this.uuid = this.route.snapshot.paramMap.get('uuid');
+        this.verificationRouter =
+            this.route.snapshot.paramMap.get('verificationRouter');
         this.service.getClient(this.uuid).subscribe(
             (response: ClientModel) => {
                 this.client = response;
-                this.service.sendCodeVerification(response.email).subscribe();
+                // this.service.sendCodeVerification(response.email).subscribe();
             },
             (error) => {
                 console.log('-->', error);
@@ -49,7 +54,14 @@ export class VerificationCodeComponent {
         }
         this.service.verifyCode(this.client.email, this.code).subscribe(
             (response: BaseResponseModel) => {
-                this.isVerify = true;
+                switch (this.verificationRouter) {
+                    case 'new-client':
+                        this.setTextDialog();
+                        this.isVerify = true;
+                    case 'reset-password':
+                        console.log(this.isVerify);
+                        this.redirectAfterVerify();
+                }
             },
             (error) => {
                 console.log('-->', error);
@@ -64,6 +76,17 @@ export class VerificationCodeComponent {
             }
         );
     }
+
+    setTextDialog() {
+        switch (this.verificationRouter) {
+            case 'new-client':
+                this.dialogTextDescription = 'Realize o acesso em sua conta';
+                this.dialogButtonLabel = 'Ir para login';
+            case 'reset-password':
+                this.dialogTextDescription = 'Cadastre sua nova senha';
+                this.dialogButtonLabel = 'Nova senha';
+        }
+    }
     resendVerificationCode() {
         if (!this.resendCode) {
             this.service
@@ -71,6 +94,9 @@ export class VerificationCodeComponent {
                 .subscribe(() => {
                     this.messageService.clear();
                     this.showMessage('success', 'Código reenviado', '');
+                    this.totalMinutes = 5;
+                    this.totalSeconds = this.totalMinutes * 60;
+                    this.secondsLeft = this.totalSeconds;
                 });
             this.resendCode = true;
             setInterval(() => {
@@ -79,8 +105,17 @@ export class VerificationCodeComponent {
         }
     }
 
-    goToLogin() {
-        this.router.navigate([`/login`]);
+    redirectAfterVerify() {
+        let redirectRouter: string;
+
+        switch (this.verificationRouter) {
+            case 'new-client':
+                redirectRouter = '/login';
+            case 'reset-password':
+                redirectRouter = `/reset-password/${this.code}/${this.client.uuid}`;
+        }
+
+        this.router.navigate([redirectRouter]);
     }
 
     countDown() {

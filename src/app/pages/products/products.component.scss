@@ -19,3 +19,47 @@ button[styleClass="see-product-button"]:hover{
     color: #ff7171c5;
     border: 3px solid #ff7171c5;
 }
+
+button[styleClass="filter-product-button"]{
+    //width: 25%;
+    font-size: 12px;
+    background: #f9f9f9;
+    border: 1px solid #ff7171c5;
+    color: #ff7171c5;
+}
+
+.filter-product-button-selected{
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff7171c5, 0 1px 2px #000;
+
+}
+
+.products-color{
+    cursor: pointer;
+}
+.products-color:hover{
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff7171c5, 0 1px 2px #000;
+    border-radius: 20%;
+}
+
+.filter-product-color-selected{
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff7171c5, 0 1px 2px #000;
+    border-radius: 20%;
+}
+
+button[styleClass="filter-product-size"]{
+    margin-top: 10px;
+    font-size: 8px;
+    background: #f9f9f9;
+    border: 1px solid #ff7171c5;
+    color: #ff7171c5;
+}
+
+:host ::ng-deep {
+    .p-colorpicker-preview{
+        opacity: 1;
+    }
+    .p-element filter-product-button-selected p-button p-component{
+        border: 3px solid #ff7171c5;
+        border-radius: 20%;
+    }
+}

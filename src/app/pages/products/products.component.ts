@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductsService } from './products.service';
+import { Product } from '../../shared/models/product.model';
 
 @Component({
     selector: 'app-products',
@@ -7,143 +9,100 @@ import { Router } from '@angular/router';
     styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-    products: any;
+    products: Array<Product>;
+    page: number = 1;
+    size: number = 12;
+    availableColors = [
+        {
+            color: '#000000',
+            selected: false,
+        },
+        {
+            color: '#706e6b',
+            selected: false,
+        },
+        {
+            color: '#f9f9f9',
+            selected: false,
+        },
+    ];
+    availableTypes = [
+        {
+            type: 'Básica',
+            selected: true,
+        },
+        {
+            type: 'Polo',
+            selected: false,
+        },
+        {
+            type: 'Raglan',
+            selected: false,
+        },
+    ];
+    availableSize = [
+        {
+            size: 'PP',
+            selected: true,
+        },
+        {
+            size: 'P',
+            selected: false,
+        },
+        {
+            size: 'M',
+            selected: false,
+        },
+        {
+            size: 'G',
+            selected: false,
+        },
+        {
+            size: 'GG',
+            selected: false,
+        },
+        {
+            size: 'XG',
+            selected: false,
+        },
+        {
+            size: 'XXG',
+            selected: false,
+        },
+    ];
 
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        private service: ProductsService,
+        private renderer: Renderer2,
+        private el: ElementRef
+    ) {}
 
     ngOnInit() {
-        this.products = [
-            {
-                uuid: '5ccc2df9-107f-4b63-82a4-5c5ae17cf658',
-                header: 'Camiseta Preta',
-                description:
-                    'Produto de alta qualidade, macia ao toque e resistente ao uso diário. A cor preta é elegante e versátil, combinando com diferentes estilos e ocasiões. Além disso, sua modelagem clássica garante um caimento perfeito no corpo.',
-                color: 'Preto',
-                price: 42.42,
-                images: [
-                    'preto/camiseta-preta-frente-masc.png',
-                    'preto/camiseta-preta-costas-masc.png',
-                    'preto/camiseta-preta-modelo-masc.png',
-                    'preto/camiseta-preta-frente-masc.png',
-                    'preto/camiseta-preta-costas-masc.png',
-                    'preto/camiseta-preta-modelo-masc.png',
-                ],
-                knitted: '100% Algodão',
-                type: 'Camiseta',
-                subType: 'Comum',
-                quantity: 77,
-                sex: 'M',
-                inventoryStatus: 'DISPONIVEL',
+        this.service.getAllProducts(this.page, this.size).subscribe(
+            (products: any) => {
+                console.log(products);
+                this.products = products.items;
             },
-
-            {
-                uuid: '95974ea0-c634-4ccb-9b97-d1324ff833cb',
-                header: 'Camiseta Branca',
-                color: 'Branco',
-                price: 22.12,
-                images: [
-                    'branco/camiseta-branca-frente-masc.png',
-                    'branco/camiseta-branca-costas-masc.png',
-                    'branco/camiseta-branca-modelo-masc.png',
-                    'branco/camiseta-branca-frente-masc.png',
-                    'branco/camiseta-branca-costas-masc.png',
-                    'branco/camiseta-branca-modelo-masc.png',
-                ],
-                knitted: '100% Algodão',
-                type: 'Camiseta',
-                subType: 'Comum',
-                quantity: 30,
-                sex: 'M',
-                inventoryStatus: 'DISPONIVEL',
-            },
-
-            {
-                uuid: 'b7c48c9d-48b2-48ee-88e4-ce716946602d',
-                header: 'Camiseta Cinza',
-                color: 'Cinza',
-                price: 35.1,
-                images: [
-                    'cinza/camiseta-cinza-frente-masc.png',
-                    'cinza/camiseta-cinza-costas-masc.png',
-                    'cinza/camiseta-cinza-modelo-masc.png',
-                    'cinza/camiseta-cinza-frente-masc.png',
-                    'cinza/camiseta-cinza-costas-masc.png',
-                    'cinza/camiseta-cinza-modelo-masc.png',
-                ],
-                knitted: '100% Algodão',
-                type: 'Camiseta',
-                subType: 'Comum',
-                quantity: 42,
-                sex: 'M',
-                inventoryStatus: 'DISPONIVEL',
-            },
-            {
-                uuid: '5ccc2df9-107f-4b63-82a4-5c5ae17cf658',
-                header: 'Camiseta Preta',
-                color: 'Preto',
-                price: 25.19,
-                images: [
-                    'preto/camiseta-preta-frente-masc.png',
-                    'preto/camiseta-preta-costas-masc.png',
-                    'preto/camiseta-preta-modelo-masc.png',
-                    'preto/camiseta-preta-frente-masc.png',
-                    'preto/camiseta-preta-costas-masc.png',
-                    'preto/camiseta-preta-modelo-masc.png',
-                ],
-                knitted: '100% Algodão',
-                type: 'Camiseta',
-                subType: 'Comum',
-                quantity: 77,
-                sex: 'M',
-                inventoryStatus: 'DISPONIVEL',
-            },
-
-            {
-                uuid: '95974ea0-c634-4ccb-9b97-d1324ff833cb',
-                header: 'Camiseta Branca',
-                color: 'Branco',
-                price: 31.33,
-                images: [
-                    'branco/camiseta-branca-frente-masc.png',
-                    'branco/camiseta-branca-costas-masc.png',
-                    'branco/camiseta-branca-modelo-masc.png',
-                    'branco/camiseta-branca-frente-masc.png',
-                    'branco/camiseta-branca-costas-masc.png',
-                    'branco/camiseta-branca-modelo-masc.png',
-                ],
-                knitted: '100% Algodão',
-                type: 'Camiseta',
-                subType: 'Comum',
-                quantity: 30,
-                sex: 'M',
-                inventoryStatus: 'DISPONIVEL',
-            },
-
-            {
-                uuid: 'b7c48c9d-48b2-48ee-88e4-ce716946602d',
-                header: 'Camiseta Cinza',
-                color: 'Cinza',
-                price: 55.11,
-                images: [
-                    'cinza/camiseta-cinza-frente-masc.png',
-                    'cinza/camiseta-cinza-costas-masc.png',
-                    'cinza/camiseta-cinza-modelo-masc.png',
-                    'cinza/camiseta-cinza-frente-masc.png',
-                    'cinza/camiseta-cinza-costas-masc.png',
-                    'cinza/camiseta-cinza-modelo-masc.png',
-                ],
-                knitted: '100% Algodão',
-                type: 'Camiseta',
-                subType: 'Comum',
-                quantity: 42,
-                sex: 'M',
-                inventoryStatus: 'DISPONIVEL',
-            },
-        ];
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     navigateToProduct(product) {
         console.log(product);
         this.router.navigate([`/product/`, product.uuid]);
+    }
+    classSelectFilter(avaType: any, index: number, elementId: string) {
+        if (avaType.selected) {
+            avaType.selected = false;
+            let elemento = this.el.nativeElement.querySelector(
+                `${elementId}-${index}`
+            );
+            elemento.blur();
+        } else {
+            avaType.selected = true;
+        }
     }
 }

@@ -76,6 +76,8 @@
 <p-dialog
     [(visible)]="isVerify"
     [modal]="true"
+    [breakpoints]="{ '960px': '75vw' }"
+    [style]="{ width: '30vw' }"
     [draggable]="false"
     [resizable]="false"
     [closable]="false"
@@ -83,7 +85,7 @@
     <div fxLayout="column" fxLayoutGap="15%" fxLayoutAlign="center">
         <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="15%">
             <div>
-                <h3 class="m-0">Conta verificada!</h3>
+                <h3 class="m-0">E-mail verificado!</h3>
             </div>
             <div>
                 <i
@@ -92,15 +94,15 @@
                 ></i>
             </div>
             <div>
-                <h3 class="m-0">Realize seu Login</h3>
+                <p class="m-0">{{ dialogTextDescription }}</p>
             </div>
         </div>
         <div>
             <button
                 pButton
-                label="Ir para login"
+                label="{{ dialogButtonLabel }}"
                 styleClass="buy-button"
-                (click)="goToLogin()"
+                (click)="redirectAfterVerify()"
             ></button>
         </div>
     </div>

@@ -15,11 +15,11 @@ export class VerificationCodeService {
     }
 
     sendCodeVerification(email: string): Observable<any> {
-        const url = `${this.apiUrl}/email-verification`;
+        const url = `${this.apiUrl}/verification`;
         return this.http.post(url, { email: email });
     }
     verifyCode(email: string, code: string): Observable<any> {
-        const url = `${this.apiUrl}/verify-email`;
+        const url = `${this.apiUrl}/verify`;
         return this.http.post(url, { email: email, code: code });
     }
 }

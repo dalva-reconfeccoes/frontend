@@ -5,16 +5,16 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root',
 })
-export class ForgotPasswordService {
-    private apiUrl = '/api/clients/';
+export class ProductsService {
+    private apiUrl = '/api/products/';
 
     constructor(private http: HttpClient) {}
 
-    getClientByEmail(email: string): Observable<any> {
-        const url = `${this.apiUrl}/email/`;
-        return this.http.get(url, {
+    getAllProducts(page: number, size: number): Observable<any> {
+        return this.http.get(this.apiUrl, {
             params: {
-                email: email,
+                page: page,
+                size: size,
             },
         });
     }

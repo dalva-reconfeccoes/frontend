@@ -37,6 +37,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { AvatarModule } from 'primeng/avatar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { TagModule } from 'primeng/tag';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -64,6 +66,7 @@ import { AddressFormComponent } from './shared/components/forms/address-form/add
 import { CreditCardFormComponent } from './shared/components/forms/credit-card-form/credit-card-form.component';
 import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
 import { MessagesModule } from 'primeng/messages';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
     declarations: [
@@ -91,6 +94,7 @@ import { MessagesModule } from 'primeng/messages';
         AddressFormComponent,
         CreditCardFormComponent,
         VerificationCodeComponent,
+        ResetPasswordComponent,
     ],
     imports: [
         BrowserModule,
@@ -132,6 +136,8 @@ import { MessagesModule } from 'primeng/messages';
         ProgressSpinnerModule,
         ProgressBarModule,
         MessagesModule,
+        ColorPickerModule,
+        TagModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

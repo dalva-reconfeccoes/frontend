@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { ClientModel } from '../../shared/models/client.model';
 import { Injectable } from '@angular/core';
 
@@ -14,5 +13,9 @@ export class RegisterClientService {
 
     newClient(client: ClientModel): Observable<any> {
         return this.http.post(this.apiUrl, client);
+    }
+    sendCodeVerification(email: string): Observable<any> {
+        const url = `${this.apiUrl}/verification`;
+        return this.http.post(url, { email: email });
     }
 }

@@ -135,5 +135,12 @@
     .p-progressbar .p-progressbar-value{
         background: #ff7171c5
     }
+
+    .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button, .p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button{
+        background: #ff7171c5
+    }
+    .p-link:focus{
+        box-shadow: 0 0 0 0.2rem #ff86867a;
+    }
 }
 
