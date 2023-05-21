@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { FilterProductsModel } from '../../shared/models/filter-products.model';
 
 @Injectable({
     providedIn: 'root',
@@ -17,5 +18,13 @@ export class ProductsService {
                 size: size,
             },
         });
+    }
+
+    getAvailableFilterProducts(): Observable<any> {
+        return this.http.get(`${this.apiUrl}available/filter`);
+    }
+
+    filterProducts(filter: FilterProductsModel) {
+        return this.http.post(`${this.apiUrl}filter`, filter);
     }
 }

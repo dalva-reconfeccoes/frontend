@@ -16,7 +16,7 @@
             [showItemNavigators]="true"
             [showItemNavigatorsOnHover]="true"
         >
-            <ng-template pTemplate="item" let-item>
+            <ng-template pTemplate="item" let-image>
                 <div
                     fxFlex="80%"
                     fxFlex.md="70%"
@@ -25,8 +25,8 @@
                     fxLayoutAlign="space-around center"
                 >
                     <p-image
-                        src="../../assets/layout/products/{{ item }}"
-                        alt="{{ product.name }}"
+                        src="{{ image.url }}"
+                        alt="{{ product.header }}"
                         width="100%"
                         height="50%"
                         [preview]="true"
@@ -34,7 +34,7 @@
                     </p-image>
                 </div>
             </ng-template>
-            <ng-template pTemplate="thumbnail" let-item>
+            <ng-template pTemplate="thumbnail" let-image>
                 <div
                     fxFlex="60%"
                     fxFlex.sm="60%"
@@ -42,8 +42,8 @@
                     class="grid grid-nogutter justify-content-center"
                 >
                     <p-image
-                        src="../../assets/layout/products/{{ item }}"
-                        alt="{{ product.name }}"
+                        src="{{ image.url }}"
+                        alt="{{ product.header }}"
                         width="100%"
                     >
                     </p-image>
@@ -64,13 +64,13 @@
         style="height: 100%"
     >
         <div fxFlex="15%" class="container" fxLayoutAlign="center">
-            <h3>{{ product.description }}</h3>
+            <h3>{{ product.header }}</h3>
         </div>
         <div fxFlex="10%" fxFlex.xs="80%" fxLayoutAlign="space-around center">
             <p-selectButton
-                [options]="sizes"
+                [options]="product.quantities"
                 [(ngModel)]="selectedSize"
-                optionLabel="name"
+                optionLabel="size"
             >
             </p-selectButton>
         </div>
@@ -79,10 +79,11 @@
                 <div fxLayoutAlign="center">
                     <span>Total disponivel</span>
                 </div>
-                <div>
+                <div fxFlex="100%">
                     <p-knob
-                        [(ngModel)]="product.quantity"
+                        [(ngModel)]="selectedSize.available"
                         valueColor="#ff8686"
+                        max="150"
                         disabled="true"
                     ></p-knob>
                 </div>
@@ -91,7 +92,7 @@
                 <p-inputNumber
                     [(ngModel)]="quantitySelected"
                     [min]="1"
-                    [max]="product.quantity"
+                    [max]="selectedSize.available"
                     [showButtons]="true"
                     buttonLayout="vertical"
                     spinnerMode="vertical"
@@ -125,7 +126,7 @@
                     <p>
                         Item:
                         {{ quantitySelected }}
-                        {{ selectedSize.name }} x
+                        {{ selectedSize.size }} x
                         {{ product.price | currency : "R$ " }}
                     </p>
                 </div>
@@ -159,16 +160,17 @@
     <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="2%">
         <div>
             <h5>CARACTERÍSTICAS</h5>
-            <p>Cor: {{ product.color }}</p>
+            <p>Cor:</p>
+            <p-colorPicker
+                [(ngModel)]="product.color"
+                [disabled]="true"
+            ></p-colorPicker>
             <p>Tecido: {{ product.knitted }}</p>
         </div>
         <div>
             <h5>DESCRIÇÃO</h5>
             <p>
-                Produto de alta qualidade, macia ao toque e resistente ao uso
-                diário. A cor preta é elegante e versátil, combinando com
-                diferentes estilos e ocasiões. Além disso, sua modelagem
-                clássica garante um caimento perfeito no corpo.
+                {{ product.description }}
             </p>
         </div>
         <div>

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
-import { List } from 'postcss/lib/list';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SelectedProductsService } from './selected-product.service';
+import { Product } from '../../shared/models/product.model';
+import { Quantity } from '../../shared/models/quantity.model';
 
 @Component({
     selector: 'app-selected-product',
@@ -9,11 +11,9 @@ import { List } from 'postcss/lib/list';
     styleUrls: ['./selected-product.component.scss'],
 })
 export class SelectedProductComponent {
-    product: any;
+    product: Product;
     image: any;
     cep: string;
-    loadingCep: boolean = false;
-    isValidCep: boolean = false;
     selectedFreight: any;
     quantitySelected: number = 1;
     responsiveOptions: any[] = [
@@ -30,15 +30,7 @@ export class SelectedProductComponent {
             numVisible: 3,
         },
     ];
-    selectedSize: any;
-    sizes: any[] = [
-        { name: 'PP', code: 1 },
-        { name: 'P', code: 2 },
-        { name: 'M', code: 3 },
-        { name: 'G', code: 4 },
-        { name: 'GG', code: 5 },
-        { name: 'XGG', code: 6 },
-    ];
+    selectedSize: Quantity;
 
     displayDialog: boolean = false;
     budget: any;
@@ -46,31 +38,23 @@ export class SelectedProductComponent {
 
     constructor(
         private messageService: MessageService,
-        private router: Router
+        private router: Router,
+        private activateRoute: ActivatedRoute,
+        private service: SelectedProductsService
     ) {}
 
     ngOnInit() {
-        this.product = {
-            uuid: '5ccc2df9-107f-4b63-82a4-5c5ae17cf658',
-            name: 'tst6',
-            description: 'Camiseta Comum Preta',
-            color: 'Preto',
-            price: 42.42,
-            images: [
-                'preto/camiseta-preta-frente-masc.png',
-                'preto/camiseta-preta-costas-masc.png',
-                'preto/camiseta-preta-modelo-masc.png',
-                'preto/camiseta-preta-frente-masc.png',
-                'preto/camiseta-preta-costas-masc.png',
-                'preto/camiseta-preta-modelo-masc.png',
-            ],
-            knitted: '100% Algodão',
-            type: 'Camiseta',
-            subType: 'Comum',
-            quantity: 72,
-            sex: 'M',
-            inventoryStatus: 'DISPONIVEL',
-        };
+        let uuid = this.activateRoute.snapshot.paramMap.get('uuid');
+        this.service.getProduct(uuid).subscribe(
+            (product: Product) => {
+                this.product = product;
+                this.selectedSize = this.product.quantities[0];
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+
         this.calculatePrice();
     }
 

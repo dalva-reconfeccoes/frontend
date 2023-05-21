@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from './products.service';
 import { Product } from '../../shared/models/product.model';
+import { AvailableFilterModel } from '../../shared/models/available-filter.model';
+import { FilterProductsModel } from '../../shared/models/filter-products.model';
 
 @Component({
     selector: 'app-products',
@@ -12,64 +14,8 @@ export class ProductsComponent implements OnInit {
     products: Array<Product>;
     page: number = 1;
     size: number = 12;
-    availableColors = [
-        {
-            color: '#000000',
-            selected: false,
-        },
-        {
-            color: '#706e6b',
-            selected: false,
-        },
-        {
-            color: '#f9f9f9',
-            selected: false,
-        },
-    ];
-    availableTypes = [
-        {
-            type: 'Básica',
-            selected: true,
-        },
-        {
-            type: 'Polo',
-            selected: false,
-        },
-        {
-            type: 'Raglan',
-            selected: false,
-        },
-    ];
-    availableSize = [
-        {
-            size: 'PP',
-            selected: true,
-        },
-        {
-            size: 'P',
-            selected: false,
-        },
-        {
-            size: 'M',
-            selected: false,
-        },
-        {
-            size: 'G',
-            selected: false,
-        },
-        {
-            size: 'GG',
-            selected: false,
-        },
-        {
-            size: 'XG',
-            selected: false,
-        },
-        {
-            size: 'XXG',
-            selected: false,
-        },
-    ];
+    availableFilter: AvailableFilterModel;
+    filterProducts: FilterProductsModel;
 
     constructor(
         private router: Router,
@@ -79,9 +25,17 @@ export class ProductsComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.filterProducts = new FilterProductsModel();
+        this.service.getAvailableFilterProducts().subscribe(
+            (availableFilter: AvailableFilterModel) => {
+                this.availableFilter = availableFilter;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
         this.service.getAllProducts(this.page, this.size).subscribe(
             (products: any) => {
-                console.log(products);
                 this.products = products.items;
             },
             (error) => {
@@ -103,6 +57,37 @@ export class ProductsComponent implements OnInit {
             elemento.blur();
         } else {
             avaType.selected = true;
+        }
+
+        if (avaType?.size) {
+            this.verifyItemInArray(this.filterProducts.sizes, avaType.size);
+        }
+        if (avaType?.type) {
+            this.verifyItemInArray(this.filterProducts.types, avaType.type);
+        }
+        if (avaType?.color) {
+            this.verifyItemInArray(this.filterProducts.colors, avaType.color);
+        }
+        this.updateProducts();
+    }
+
+    updateProducts() {
+        console.log(this.filterProducts);
+        this.service.filterProducts(this.filterProducts).subscribe(
+            (products: any) => {
+                this.products = products.items;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+    verifyItemInArray(array: Array<any>, item: any) {
+        let index: number = array.indexOf(item);
+        if (index == -1) {
+            array.push(item);
+        } else {
+            array.splice(index, 1);
         }
     }
 }

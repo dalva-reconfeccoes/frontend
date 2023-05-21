@@ -1,4 +1,7 @@
 :host ::ng-deep {
+    .p-colorpicker-preview{
+            opacity: 1;
+    }
 	.p-galleria-thumbnail-item{
 		height: 5rem;
 		overflow: hidden;
@@ -31,7 +34,7 @@
 		.p-buttonset .p-button:last-of-type{
 			font-size: 8px
 		}
-		
+
 	}
 
 	@media (max-width: 1200px) {
@@ -44,17 +47,17 @@
 		.p-buttonset .p-button:last-of-type{
 			font-size: 9px
 		}
-		
+
 	}
 
 	.p-datatable .p-datatable-thead>tr>th{
 		text-align: center;
 	}
-	
+
 	.p-datatable .p-datatable-thead>tr>th{
 		background-color: #ff86867a;
 	}
-	
+
 	.p-datatable .p-datatable-tbody>tr:focus{
 		outline: .15rem solid #ff7171c5;
 		outline-offset: unset;
@@ -65,7 +68,7 @@
 	.p-datatable .p-datatable-tbody>tr.p-highlight{
 		background: #ff7171c5;
         border: 1px solid #ff86867a;
-        color: white; 
+        color: white;
 	}
 
 	.p-datatable.p-datatable-hoverable-rows .p-datatable-tbody>tr:not(.p-highlight):hover{
@@ -77,4 +80,3 @@
 
 
 
-  

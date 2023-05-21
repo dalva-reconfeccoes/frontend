@@ -17,7 +17,7 @@
     >
         <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="5%">
             <div fxLayoutAlign="center"><h3>Filtrar</h3></div>
-            <div fxLayoutAlign="center">
+            <div *ngIf="availableFilter" fxLayoutAlign="center">
                 <div
                     fxFlex="100%"
                     fxLayout="row wrap"
@@ -25,7 +25,10 @@
                     fxLayoutAlign="start center"
                 >
                     <div
-                        *ngFor="let avaSize of availableSize; let index = index"
+                        *ngFor="
+                            let avaSize of availableFilter.availableSize;
+                            let index = index
+                        "
                     >
                         <button
                             id="filter-size-{{ index }}"
@@ -48,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div fxLayoutAlign="center">
+            <div *ngIf="availableFilter" fxLayoutAlign="center">
                 <div
                     fxFlex="100%"
                     fxLayout="row wrap"
@@ -57,7 +60,7 @@
                 >
                     <div
                         *ngFor="
-                            let avaType of availableTypes;
+                            let avaType of availableFilter.availableTypes;
                             let index = index
                         "
                     >
@@ -82,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <div fxLayoutAlign="center">
+            <div *ngIf="availableFilter" fxLayoutAlign="center">
                 <div
                     fxFlex="100%"
                     fxLayout="row wrap"
@@ -91,7 +94,7 @@
                 >
                     <div
                         *ngFor="
-                            let avaColor of availableColors;
+                            let avaColor of availableFilter.availableColors;
                             let index = index
                         "
                     >
