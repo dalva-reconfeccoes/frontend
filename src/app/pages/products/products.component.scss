@@ -35,6 +35,8 @@ button[styleClass="filter-product-button"]{
 
 .products-color{
     cursor: pointer;
+    border: 1px solid rgba(255,113,113,.7725490196);
+    border-radius: 20%;
 }
 .products-color:hover{
     box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff7171c5, 0 1px 2px #000;

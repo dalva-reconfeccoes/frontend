@@ -1,182 +1,178 @@
 <div
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxLayoutGap="2%"
-    fxLayoutAlign="space-between start"
-    fxLayoutAlign.xs="space-between start"
-    style="padding: 2%"
+    style="margin-top: 4%"
+    fxFlex="100%"
+    fxLayout="column"
+    fxLayout.md="row"
+    fxLayout.lg="row"
+    fxLayoutGap="4%"
+    fxLayoutGap.md="2%"
+    fxLayoutGap.lg="2%"
+    fxLayoutAlign="center"
 >
-    <div
-        class="card"
-        style="padding: 12px"
-        fxLayout="column"
-        fxFlex.xl="20%"
-        fxFlex.lg="37%"
-        fxFlex.sm="30%"
-        fxFlex.xs="100%"
-    >
-        <div fxLayoutAlign="center" fxLayout="column" fxLayoutGap="5%">
-            <div fxLayoutAlign="center"><h3>Filtrar</h3></div>
-            <div *ngIf="availableFilter" fxLayoutAlign="center">
-                <div
-                    fxFlex="100%"
-                    fxLayout="row wrap"
-                    fxLayoutGap="2%"
-                    fxLayoutAlign="start center"
-                >
+    <div fxLayout="column" fxFlex="100%" fxFlex.md="36%" fxFlex.lg="25%">
+        <div class="card">
+            <div fxLayout="column" fxLayoutGap="4%" style="margin: 5%">
+                <div *ngIf="availableFilter">
                     <div
-                        *ngFor="
-                            let avaSize of availableFilter.availableSize;
-                            let index = index
-                        "
-                    >
-                        <button
-                            id="filter-size-{{ index }}"
-                            pButton
-                            type="button"
-                            label="{{ avaSize.size }}"
-                            [ngClass]="{
-                                'filter-product-button-selected':
-                                    avaSize.selected
-                            }"
-                            (click)="
-                                classSelectFilter(
-                                    avaSize,
-                                    index,
-                                    '#filter-size'
-                                )
-                            "
-                            styleClass="filter-product-size"
-                        ></button>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="availableFilter" fxLayoutAlign="center">
-                <div
-                    fxFlex="100%"
-                    fxLayout="row wrap"
-                    fxLayoutGap="3%"
-                    fxLayoutAlign="start center"
-                >
-                    <div
-                        *ngFor="
-                            let avaType of availableFilter.availableTypes;
-                            let index = index
-                        "
-                    >
-                        <button
-                            id="filter-button-{{ index }}"
-                            pButton
-                            type="button"
-                            label="{{ avaType.type }}"
-                            [ngClass]="{
-                                'filter-product-button-selected':
-                                    avaType.selected
-                            }"
-                            (click)="
-                                classSelectFilter(
-                                    avaType,
-                                    index,
-                                    '#filter-button'
-                                )
-                            "
-                            styleClass="filter-product-button"
-                        ></button>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="availableFilter" fxLayoutAlign="center">
-                <div
-                    fxFlex="100%"
-                    fxLayout="row wrap"
-                    fxLayoutGap="3%"
-                    fxLayoutAlign="start center"
-                >
-                    <div
-                        *ngFor="
-                            let avaColor of availableFilter.availableColors;
-                            let index = index
-                        "
+                        fxFlex="100%"
+                        fxLayout="row wrap"
+                        fxLayoutGap="2%"
+                        fxLayoutAlign="start center"
                     >
                         <div
-                            id="filter-color-{{ index }}"
-                            [ngClass]="{
-                                'filter-product-color-selected':
-                                    avaColor.selected
-                            }"
-                            class="products-color"
-                            (click)="
-                                classSelectFilter(
-                                    avaColor,
-                                    index,
-                                    '#filter-color'
-                                )
+                            *ngFor="
+                                let avaSize of availableFilter.availableSize;
+                                let index = index
                             "
                         >
-                            <p-colorPicker
-                                [(ngModel)]="avaColor.color"
-                                [disabled]="true"
-                            ></p-colorPicker>
+                            <button
+                                id="filter-size-{{ index }}"
+                                pButton
+                                type="button"
+                                label="{{ avaSize.size }}"
+                                [ngClass]="{
+                                    'filter-product-button-selected':
+                                        avaSize.selected
+                                }"
+                                (click)="
+                                    classSelectFilter(
+                                        avaSize,
+                                        index,
+                                        '#filter-size'
+                                    )
+                                "
+                                styleClass="filter-product-size"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="availableFilter">
+                    <div
+                        fxFlex="100%"
+                        fxLayout="row wrap"
+                        fxLayoutGap="3%"
+                        fxLayoutAlign="start center"
+                    >
+                        <div
+                            *ngFor="
+                                let avaType of availableFilter.availableTypes;
+                                let index = index
+                            "
+                        >
+                            <button
+                                id="filter-button-{{ index }}"
+                                pButton
+                                type="button"
+                                label="{{ avaType.type }}"
+                                [ngClass]="{
+                                    'filter-product-button-selected':
+                                        avaType.selected
+                                }"
+                                (click)="
+                                    classSelectFilter(
+                                        avaType,
+                                        index,
+                                        '#filter-button'
+                                    )
+                                "
+                                styleClass="filter-product-button"
+                            ></button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="availableFilter">
+                    <div
+                        fxFlex="100%"
+                        fxLayout="row wrap"
+                        fxLayoutGap="3%"
+                        fxLayoutAlign="start center"
+                    >
+                        <div
+                            *ngFor="
+                                let avaColor of availableFilter.availableColors;
+                                let index = index
+                            "
+                        >
+                            <div
+                                id="filter-color-{{ index }}"
+                                [ngClass]="{
+                                    'filter-product-color-selected':
+                                        avaColor.selected
+                                }"
+                                class="products-color"
+                                (click)="
+                                    classSelectFilter(
+                                        avaColor,
+                                        index,
+                                        '#filter-color'
+                                    )
+                                "
+                            >
+                                <p-colorPicker
+                                    [(ngModel)]="avaColor.color"
+                                    [disabled]="true"
+                                ></p-colorPicker>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div
-        class="card"
-        fxFlex.xl="80%"
-        fxFlex.lg="60%"
-        fxFlex.sm="70%"
-        fxFlex.xs="100%"
-    >
+    <div fxLayout="column" fxFlex="100%" fxFlex.md="64%" fxFlex.lg="75%">
         <div
+            fxFlex="100%"
             fxLayout="row wrap"
             fxLayoutGap="3%"
             fxLayoutAlign="start center"
-            style="margin-left: 5%; margin-top: 3%"
         >
-            <div *ngFor="let product of products">
-                <div class="card" styleClass="card-item">
-                    <p-card
-                        header="{{ product.header }}"
-                        subheader="{{ product.knitted }}"
-                        [style]="{ width: '270px', 'box-shadow': 'none' }"
-                    >
-                        <ng-template pTemplate="header">
-                            <p-galleria
-                                [(value)]="product.images"
-                                [showIndicators]="true"
-                                [showThumbnails]="false"
-                            >
-                                <ng-template pTemplate="item" let-item>
-                                    <img
-                                        [src]="item.url"
-                                        style="width: 100%; display: block"
-                                    />
-                                </ng-template>
-                            </p-galleria>
-                        </ng-template>
+            <div
+                *ngFor="let product of products"
+                fxFlex="100%"
+                fxFlex.md="45%"
+                fxFlex.lg="30%"
+            >
+                <div
+                    class="card"
+                    styleClass="card-item"
+                    style="margin-left: 3%"
+                >
+                    <div>
+                        <p-galleria
+                            [(value)]="product.images"
+                            [showIndicators]="true"
+                            [showThumbnails]="false"
+                        >
+                            <ng-template pTemplate="item" let-image>
+                                <img
+                                    [src]="image.url"
+                                    style="width: 100%; display: block"
+                                />
+                            </ng-template>
+                        </p-galleria>
+                    </div>
+                    <div>
                         <div>
-                            <div>
-                                <p>Total Disponivel: {{ product.quantity }}</p>
-                            </div>
-                            <div>
-                                <p>{{ product.price | currency : "R$ " }}</p>
-                            </div>
+                            <h5>{{ product.header }}</h5>
                         </div>
-                        <ng-template pTemplate="footer">
-                            <button
-                                pButton
-                                type="button"
-                                label="Ver produto"
-                                styleClass="see-product-button"
-                                (click)="navigateToProduct(product)"
-                            ></button>
-                        </ng-template>
-                    </p-card>
+                        <div>
+                            <p>{{ product.price | currency : "R$ " }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button
+                            pButton
+                            type="button"
+                            label="Ver produto"
+                            styleClass="see-product-button"
+                            (click)="navigateToProduct(product)"
+                        ></button>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
+            <div>Página {{ page }} de {{ pages }}</div>
         </div>
     </div>
 </div>

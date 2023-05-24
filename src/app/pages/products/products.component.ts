@@ -13,7 +13,8 @@ import { FilterProductsModel } from '../../shared/models/filter-products.model';
 export class ProductsComponent implements OnInit {
     products: Array<Product>;
     page: number = 1;
-    size: number = 12;
+    pages: number;
+    size: number = 6;
     availableFilter: AvailableFilterModel;
     filterProducts: FilterProductsModel;
 
@@ -36,7 +37,8 @@ export class ProductsComponent implements OnInit {
         );
         this.service.getAllProducts(this.page, this.size).subscribe(
             (products: any) => {
-                this.products = products.items;
+                this.products = products?.items;
+                this.pages = products?.pages;
             },
             (error) => {
                 console.log(error);
@@ -49,7 +51,7 @@ export class ProductsComponent implements OnInit {
         this.router.navigate([`/product/`, product.uuid]);
     }
     classSelectFilter(avaType: any, index: number, elementId: string) {
-        if (avaType.selected) {
+        if (avaType?.selected) {
             avaType.selected = false;
             let elemento = this.el.nativeElement.querySelector(
                 `${elementId}-${index}`
@@ -73,14 +75,16 @@ export class ProductsComponent implements OnInit {
 
     updateProducts() {
         console.log(this.filterProducts);
-        this.service.filterProducts(this.filterProducts).subscribe(
-            (products: any) => {
-                this.products = products.items;
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+        this.service
+            .filterProducts(this.filterProducts, this.page, this.size)
+            .subscribe(
+                (products: any) => {
+                    this.products = products.items;
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
     }
     verifyItemInArray(array: Array<any>, item: any) {
         let index: number = array.indexOf(item);

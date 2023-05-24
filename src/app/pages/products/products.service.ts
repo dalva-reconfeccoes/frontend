@@ -24,7 +24,12 @@ export class ProductsService {
         return this.http.get(`${this.apiUrl}available/filter`);
     }
 
-    filterProducts(filter: FilterProductsModel) {
-        return this.http.post(`${this.apiUrl}filter`, filter);
+    filterProducts(filter: FilterProductsModel, page: number, size: number) {
+        return this.http.post(`${this.apiUrl}filter`, filter, {
+            params: {
+                page: page,
+                size: size,
+            },
+        });
     }
 }
