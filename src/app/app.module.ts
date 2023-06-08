@@ -39,6 +39,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { TagModule } from 'primeng/tag';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { ProductsComponent } from './pages/products/products.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -138,6 +139,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
         MessagesModule,
         ColorPickerModule,
         TagModule,
+        FieldsetModule,
     ],
     providers: [MessageService],
     bootstrap: [AppComponent],

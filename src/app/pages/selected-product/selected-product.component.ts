@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SelectedProductsService } from './selected-product.service';
 import { Product } from '../../shared/models/product.model';
 import { Quantity } from '../../shared/models/quantity.model';
+import { FreightOptionModel } from '../../shared/models/freight-option.model';
 
 @Component({
     selector: 'app-selected-product',
@@ -13,8 +14,9 @@ import { Quantity } from '../../shared/models/quantity.model';
 export class SelectedProductComponent {
     product: Product;
     image: any;
+    submittedCalcFeight: boolean = false;
     cep: string;
-    selectedFreight: any;
+    selectedFreight: FreightOptionModel;
     quantitySelected: number = 1;
     responsiveOptions: any[] = [
         {
@@ -27,7 +29,11 @@ export class SelectedProductComponent {
         },
         {
             breakpoint: '560px',
-            numVisible: 3,
+            numVisible: 2,
+        },
+        {
+            breakpoint: '390px',
+            numVisible: 2,
         },
     ];
     selectedSize: Quantity;
@@ -49,13 +55,18 @@ export class SelectedProductComponent {
             (product: Product) => {
                 this.product = product;
                 this.selectedSize = this.product.quantities[0];
+                this.calculatePrice();
             },
             (error) => {
                 console.log(error);
             }
         );
-
-        this.calculatePrice();
+    }
+    updateQuantitySelected() {
+        this.totalValue = this.product.price * this.quantitySelected;
+        if (this.selectedFreight) {
+            this.selectedFreight = null;
+        }
     }
 
     calculatePrice() {
@@ -65,7 +76,7 @@ export class SelectedProductComponent {
         }
     }
 
-    setSelectedFreight(event) {
+    setSelectedFreight(event: FreightOptionModel) {
         this.selectedFreight = event;
         this.calculatePrice();
     }

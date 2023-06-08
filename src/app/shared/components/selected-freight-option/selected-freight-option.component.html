@@ -53,10 +53,10 @@
             </ng-template>
             <ng-template pTemplate="body" let-option>
                 <tr [pSelectableRow]="option">
-                    <td>{{ option.name }}</td>
+                    <td>{{ option.deliveryType }}</td>
                     <td>
-                        Chegará em {{ option.deliveryTime }} dias,
-                        {{ option.arrivalDay }}
+                        Chegará em {{ option.deadline }} dias,
+                        {{ option.estimatedDeliveryDate | date : "dd/MM" }}
                     </td>
                     <td>{{ option.value | currency : "R$" }}</td>
                 </tr>

@@ -1,227 +1,215 @@
 <p-toast position="top-right"></p-toast>
-
-<div
-    fxLayout="row"
-    fxLayout.sm="column"
-    fxLayout.xs="column"
-    fxLayoutGap="3%"
-    style="padding: 3%"
->
-    <div fxFlex="50%" fxFlex.md="70%" fxFlex.sm="100%" fxFlex.xs="70%">
-        <p-galleria
-            [(value)]="product.images"
-            [responsiveOptions]="responsiveOptions"
-            [numVisible]="5"
-            [circular]="true"
-            [showItemNavigators]="true"
-            [showItemNavigatorsOnHover]="true"
-        >
-            <ng-template pTemplate="item" let-image>
-                <div
-                    fxFlex="80%"
-                    fxFlex.md="70%"
-                    fxFlex.sm="80%"
-                    fxFlex.xs="60%"
-                    fxLayoutAlign="space-around center"
-                >
-                    <p-image
-                        src="{{ image.url }}"
-                        alt="{{ product.header }}"
-                        width="100%"
-                        height="50%"
-                        [preview]="true"
-                    >
-                    </p-image>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="thumbnail" let-image>
-                <div
-                    fxFlex="60%"
-                    fxFlex.sm="60%"
-                    fxFlex.xs="60%"
-                    class="grid grid-nogutter justify-content-center"
-                >
-                    <p-image
-                        src="{{ image.url }}"
-                        alt="{{ product.header }}"
-                        width="100%"
-                    >
-                    </p-image>
-                </div>
-            </ng-template>
-        </p-galleria>
-    </div>
-
+<div style="margin-top: 3%" *ngIf="product" fxLayout="column" fxLayoutGap="3%">
     <div
-        fxFlex.xl="20%"
-        fxFlex.lg="40%"
-        fxFlex.sm="20%"
+        fxLayoutAlign.lg="center center"
+        fxFlex="100%"
         fxLayout="column"
+        fxLayout.md="row"
+        fxLayout.lg="row"
         fxLayoutGap="3%"
-        fxLayoutGap.xs="5%"
-        fxLayoutGap.sm="5%"
-        class="card"
-        style="height: 100%"
+        fxLayoutGap.md="2%"
     >
-        <div fxFlex="15%" class="container" fxLayoutAlign="center">
-            <h3>{{ product.header }}</h3>
-        </div>
-        <div fxFlex="10%" fxFlex.xs="80%" fxLayoutAlign="space-around center">
-            <p-selectButton
-                [options]="product.quantities"
-                [(ngModel)]="selectedSize"
-                optionLabel="size"
+        <div fxFlex="100%" fxFlex.md="60%" fxFlex.lg="35%">
+            <p-galleria
+                [(value)]="product.images"
+                [showIndicators]="false"
+                [showItemNavigatorsOnHover]="true"
+                [showItemNavigators]="true"
+                [circular]="true"
+                [responsiveOptions]="responsiveOptions"
+                [containerStyle]="{ 'max-width': '640px' }"
             >
-            </p-selectButton>
+                <ng-template pTemplate="item" let-item>
+                    <img
+                        [src]="item.url"
+                        alt="{{ product.header }}"
+                        style="width: 100%; display: block"
+                    />
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div
+                        fxFlex="100%"
+                        fxLayout="row"
+                        fxLayoutGap="2%"
+                        fxLayoutAlign="center center"
+                    >
+                        <div fxLayoutAlign="center center">
+                            <img
+                                [src]="item.url"
+                                style="width: 100%; display: block"
+                            />
+                        </div>
+                    </div>
+                </ng-template>
+            </p-galleria>
         </div>
-        <div fxFlex="35%" fxLayout="row" fxLayoutAlign="space-around center">
-            <div fxLayout="column">
-                <div fxLayoutAlign="center">
-                    <span>Total disponivel</span>
+        <div fxFlex="100%" fxFlex.md="40%" fxFlex.lg="25%" fxLayout="column">
+            <div class="card">
+                <div fxLayout="column" fxLayoutGap="4%" style="margin: 5%">
+                    <div fxLayoutAlign="center center">
+                        <h3>{{ product.header }}</h3>
+                    </div>
+                    <div fxFlex="100%" fxLayoutAlign="space-around center">
+                        <p-selectButton
+                            [options]="product.quantities"
+                            [(ngModel)]="selectedSize"
+                            optionLabel="size"
+                        >
+                        </p-selectButton>
+                    </div>
+                    <div
+                        fxFlex="100%"
+                        fxLayoutAlign="space-around center"
+                        fxLayout="row"
+                    >
+                        <div fxLayout="column">
+                            <div fxLayoutAlign="center">
+                                <span>Total disponivel</span>
+                            </div>
+                            <div fxFlex="100%">
+                                <p-knob
+                                    [(ngModel)]="selectedSize.available"
+                                    valueColor="#ff8686"
+                                    max="150"
+                                    disabled="true"
+                                ></p-knob>
+                            </div>
+                        </div>
+                        <div>
+                            <p-inputNumber
+                                [(ngModel)]="quantitySelected"
+                                [min]="1"
+                                [max]="selectedSize.available"
+                                [showButtons]="true"
+                                buttonLayout="vertical"
+                                spinnerMode="vertical"
+                                inputId="vertical"
+                                incrementButtonIcon="pi pi-plus"
+                                decrementButtonIcon="pi pi-minus"
+                                (onInput)="updateQuantitySelected()"
+                                (onBlur)="updateQuantitySelected()"
+                            >
+                            </p-inputNumber>
+                        </div>
+                    </div>
+                    <div fxFlex="100%">
+                        <app-selected-freight-option-component
+                            [submitted]="submittedCalcFeight"
+                            [quantity]="quantitySelected"
+                            [productType]="product.type"
+                            [selected]="selectedFreight"
+                            (onRowSelect)="setSelectedFreight($event)"
+                        ></app-selected-freight-option-component>
+                    </div>
+                    <div fxFlex="100%" fxLayout="column" fxLayoutGap="3%">
+                        <div
+                            fxLayout="column"
+                            fxLayoutAlign="space-between left"
+                            fxLayoutGap="2%"
+                        >
+                            <div *ngIf="selectedSize">
+                                <p>
+                                    Item:
+                                    {{ quantitySelected }}
+                                    {{ selectedSize.size }} x
+                                    {{ product.price | currency : "R$ " }}
+                                </p>
+                            </div>
+                            <div *ngIf="selectedFreight">
+                                <p>
+                                    Entrega:
+                                    {{ selectedFreight.deliveryType }},
+                                    {{
+                                        selectedFreight.estimatedDeliveryDate
+                                            | date : "dd/MM"
+                                    }}
+                                    {{
+                                        selectedFreight.value | currency : "R$ "
+                                    }}
+                                </p>
+                            </div>
+                            <div>
+                                <p>
+                                    Total: {{ totalValue | currency : "R$ " }}
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            fxLayoutAlign="center"
+                            fxLayout="column"
+                            fxLayoutGap="3%"
+                        >
+                            <div>
+                                <button
+                                    pButton
+                                    type="button"
+                                    label="Adicionar"
+                                    styleClass="see-product-button"
+                                    style="width: 100%"
+                                >
+                                    <i class="pi pi-shopping-cart"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <button
+                                    pButton
+                                    type="button"
+                                    label="Comprar"
+                                    styleClass="buy-button"
+                                    (click)="buyProduct()"
+                                ></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div fxFlex="100%">
-                    <p-knob
-                        [(ngModel)]="selectedSize.available"
-                        valueColor="#ff8686"
-                        max="150"
-                        disabled="true"
-                    ></p-knob>
-                </div>
-            </div>
-            <div>
-                <p-inputNumber
-                    [(ngModel)]="quantitySelected"
-                    [min]="1"
-                    [max]="selectedSize.available"
-                    [showButtons]="true"
-                    buttonLayout="vertical"
-                    spinnerMode="vertical"
-                    inputId="vertical"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    (onInput)="calculatePrice()"
-                    (onBlur)="calculatePrice()"
-                >
-                </p-inputNumber>
             </div>
         </div>
-        <div fxFlex="20%" fxLayout="column" style="padding: 1rem">
-            <app-selected-freight-option-component
-                [selected]="selectedFreight"
-                (onRowSelect)="setSelectedFreight($event)"
-            ></app-selected-freight-option-component>
-        </div>
-        <div
-            fxFlex="20%"
-            fxLayout="column"
-            style="padding: 1rem"
-            fxLayoutGap="3%"
-        >
-            <div
-                fxLayout="column"
-                fxLayoutAlign="space-between left"
-                fxLayoutGap="2%"
-            >
-                <div *ngIf="selectedSize">
-                    <p>
-                        Item:
-                        {{ quantitySelected }}
-                        {{ selectedSize.size }} x
-                        {{ product.price | currency : "R$ " }}
-                    </p>
+    </div>
+    <div fxLayoutAlign.lg="center center">
+        <div fxFlex="100%" fxFlex.lg="65%">
+            <p-fieldset [toggleable]="true">
+                <ng-template pTemplate="header">
+                    <div fxLayoutAlign="start center">
+                        <span class="font-bold text-lg">Detalhes</span>
+                    </div>
+                </ng-template>
+                <div fxLayout="column" fxLayoutGap="3%" fxLayoutGap.lg="2%">
+                    <div>
+                        <h6>CARACTERÍSTICAS</h6>
+                        <div
+                            fxLayout="row"
+                            fxLayoutAlign="start center"
+                            fxLayoutGap="3%"
+                            fxLayoutGap.md="1%"
+                        >
+                            <p>Cor:</p>
+                            <p-colorPicker
+                                [(ngModel)]="product.color"
+                                [disabled]="true"
+                            ></p-colorPicker>
+                        </div>
+                        <p>Tecido: {{ product.knitted }}</p>
+                    </div>
+                    <div>
+                        <h6>DESCRIÇÃO</h6>
+                        <p>
+                            {{ product.description }}
+                        </p>
+                    </div>
+                    <div>
+                        <h6>DIMENÇÃO</h6>
+                        <div fxLayoutAlign="center center">
+                            <p-image
+                                src="../../assets/layout/products/tabela-dimencoes.jpg"
+                                alt="Dimenções do produto"
+                                width="100%"
+                                [preview]="true"
+                            >
+                            </p-image>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="selectedFreight">
-                    <p>
-                        Entrega:
-                        {{ selectedFreight.name }}
-                        {{ selectedFreight.value | currency : "R$ " }},
-                        {{ selectedFreight.deliveryTime }} dias,
-                        {{ selectedFreight.arrivalDay }}
-                    </p>
-                </div>
-                <div>
-                    <p>Total: {{ totalValue | currency : "R$ " }}</p>
-                </div>
-            </div>
-            <div fxLayoutAlign="center">
-                <button
-                    pButton
-                    type="button"
-                    label="Comprar"
-                    styleClass="buy-button"
-                    (click)="buyProduct()"
-                ></button>
-            </div>
+            </p-fieldset>
         </div>
     </div>
 </div>
-
-<div class="card container" style="margin-top: 8%">
-    <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="2%">
-        <div>
-            <h5>CARACTERÍSTICAS</h5>
-            <p>Cor:</p>
-            <p-colorPicker
-                [(ngModel)]="product.color"
-                [disabled]="true"
-            ></p-colorPicker>
-            <p>Tecido: {{ product.knitted }}</p>
-        </div>
-        <div>
-            <h5>DESCRIÇÃO</h5>
-            <p>
-                {{ product.description }}
-            </p>
-        </div>
-        <div>
-            <p-image
-                src="../../assets/layout/products/tabela-dimencoes.jpg"
-                alt="Dimenções do produto"
-                width="100%"
-                [preview]="true"
-            >
-            </p-image>
-        </div>
-    </div>
-</div>
-
-<p-dialog
-    [(visible)]="displayDialog"
-    [breakpoints]="{ '960px': '85vw' }"
-    [style]="{ width: '35vw' }"
-    [draggable]="false"
-    [resizable]="false"
->
-    <div fxLayout="column" fxLayoutAlign="space-between" fxLayoutGap="3%">
-        <div fxLayout="row" fxLayoutAlign="center center">
-            <p>Continuar comprando ou ir para o carrinho?</p>
-        </div>
-        <div
-            fxLayout="row"
-            fxLayoutAlign="center center"
-            fxLayoutGap="3%"
-            fxFlex="20%"
-        >
-            <div>
-                <button
-                    pButton
-                    type="button"
-                    label="Continuar"
-                    icon="pi pi-plus-circle"
-                    class="p-button-sm"
-                    (click)="navigateToProducts()"
-                ></button>
-            </div>
-            <div>
-                <button
-                    pButton
-                    type="button"
-                    label="Carrinho"
-                    icon="pi pi-shopping-cart"
-                    class="p-button-sm"
-                    (click)="navigateToCart()"
-                ></button>
-            </div>
-        </div>
-    </div>
-</p-dialog>

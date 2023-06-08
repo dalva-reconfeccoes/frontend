@@ -142,5 +142,12 @@
     .p-link:focus{
         box-shadow: 0 0 0 0.2rem #ff86867a;
     }
+    .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a:focus{
+        box-shadow: 0 0 0 0.2rem #ff86867a;
+    }
+    .p-fieldset.p-fieldset-toggleable .p-fieldset-legend:hover{
+        background: white;
+        border-color: white;
+    }
 }
 

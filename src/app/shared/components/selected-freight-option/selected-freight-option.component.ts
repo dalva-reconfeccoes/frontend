@@ -1,5 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SelectedFreightOptionService } from './selected-freight-option.service';
+import { FreightOptionModel } from '../../models/freight-option.model';
+import { PaginatorModel } from '../../models/paginator.model';
 
 @Component({
     selector: 'app-selected-freight-option-component',
@@ -10,17 +19,27 @@ export class SelectedFreightOptionComponent {
     cepForm: FormGroup;
     loadingCep: boolean = false;
     isValidCep: boolean = false;
-    options: any[];
-    cep: string = '';
+    options: Array<FreightOptionModel>;
+    @Input() cep: string = '';
+    @Input() quantity: number = 1;
+    @Input() productType: string = '';
     @Input() submitted = false;
-    @Input() selected: any;
+    @Input() selected: FreightOptionModel;
     @Output() onRowSelect = new EventEmitter<any>();
     @Output() validCep = new EventEmitter<string>();
 
-    constructor() {}
+    constructor(private service: SelectedFreightOptionService) {}
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.isValidCep && changes['quantity']) {
+            this.getAllFreightOptions();
+        }
+    }
+
     ngOnInit() {
         this.cepForm = this.initCepForm();
         this.setCepValueFromSelected();
+        console.log(this.productType);
     }
 
     initCepForm() {
@@ -36,12 +55,26 @@ export class SelectedFreightOptionComponent {
         if (!this.cepForm.valid) {
             return;
         }
+        this.getAllFreightOptions();
+    }
 
+    private getAllFreightOptions() {
         this.loadingCep = true;
-        setTimeout(() => {
-            this.getFreightOptions();
-            this.loadingCep = false;
-        }, 1000);
+        this.service
+            .getFreightOptions(this.cep, this.quantity, this.productType)
+            .subscribe(
+                (freightOptions: PaginatorModel) => {
+                    console.log(freightOptions);
+                    this.loadingCep = false;
+                    this.isValidCep = true;
+                    this.submitted = false;
+                    this.options = freightOptions?.items;
+                },
+                (error) => {
+                    console.log(error);
+                    this.loadingCep = false;
+                }
+            );
     }
 
     updateCepValue() {
@@ -72,25 +105,5 @@ export class SelectedFreightOptionComponent {
         if (value) {
             this.cep = value;
         }
-    }
-
-    getFreightOptions() {
-        this.options = [
-            {
-                name: 'SEDEX',
-                value: 32.11,
-                deliveryTime: '3',
-                arrivalDay: '17/03',
-                cep: '71982-780',
-            },
-            {
-                name: 'PAC',
-                value: 21.34,
-                deliveryTime: '6',
-                arrivalDay: '20/03',
-                cep: '71982-780',
-            },
-        ];
-        this.isValidCep = true;
     }
 }
